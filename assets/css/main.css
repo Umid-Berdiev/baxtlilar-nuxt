@@ -1,0 +1,43 @@
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.button-group button {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 100%;
+  max-width: 182px;
+}
+
+.block_tab #tabs-content .pret_main .about_user_pret.full {
+  max-width: 100%;
+}
+
+section.enter_site
+  .enter_site_right
+  .radio_male
+  input:checked
+  + label[for='girl'] {
+  background: #ff9593;
+}
+
+section.enter_site
+  .enter_site_right
+  .radio_male
+  input:hover
+  + label[for='girl'] {
+  background: #ff9593;
+}
+
+.block_tab .button-group {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.block_tab .button-group .link_blue {
+  white-space: nowrap;
+  max-width: 250px;
+}
