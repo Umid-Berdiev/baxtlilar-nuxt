@@ -24,99 +24,61 @@ const actions = {
   },
   async fetchMainFilterResult({ commit }, payload) {
     commit("setMainFilterResult", []);
-    const response = await this.$axios.post("main-filter", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("main-filter", payload);
     commit("setMainFilterResult", response.data);
   },
   async fetchMainFilterDefaultForm({ commit }) {
-    const response = await this.$axios.post(
-      "main-filter-default-form",
-      {},
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("main-filter-default-form", {});
     commit("setMainFilterDefaultForm", response.data);
     commit("setSelectedCountry", response.data.country);
     return response.data;
   },
   async fetchFavourites({ commit }) {
     commit("setFavourites", []);
-    const response = await this.$axios.post(
-      "favourites",
-      {},
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("favourites", {});
     commit("setFavourites", response.data);
   },
 
   async fetchUserImages({ commit }, payload) {
-    const response = await this.$axios.post("user-images", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("user-images", payload);
     // commit("setUserImages", response.data);
     return response.data;
   },
   async fetchDeleteImage({ commit }, payload) {
-    const response = await this.$axios.post("delete-image", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("delete-image", payload);
     // commit("setUserImages", response.data);
     // return response.data;
   },
 
   async fetchAnswers({ commit }, payload) {
-    const response = await this.$axios.post(
-      "user-answers-by-user",
-      { user_id: payload },
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("user-answers-by-user", {
+      user_id: payload,
+    });
     return response.data;
   },
 
   async fetchRelatives({ commit }, payload) {
-    const response = await this.$axios.post(
-      "user-relatives-by-user",
-      { user_id: payload },
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("user-relatives-by-user", {
+      user_id: payload,
+    });
     return response.data;
   },
 
   async fetchUserById({ commit }, payload) {
-    const response = await this.$axios.post(
-      "user-by-id",
-      { user_id: payload },
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("user-by-id", { user_id: payload });
     commit("setCurrentUser", response.data);
     return response.data;
   },
 
   async fetchChangePassword({ commit }, payload) {
-    const response = await this.$axios.post(
-      "change-password",
-      { password: payload },
-      {
-        headers: authHeader(),
-      }
-    );
+    const response = await this.$axios.post("change-password", {
+      password: payload,
+    });
     return response.data;
   },
 
   async fetchOffer({ commit }, payload) {
-    const response = await this.$axios.post("offer", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("offer", payload);
 
     try {
       return response.data;
@@ -126,15 +88,11 @@ const actions = {
   },
 
   async fetchRelativesForSetting({ commit }) {
-    const response = await this.$axios.get("relatives", {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.get("relatives");
     return response.data;
   },
   async fetchChatId({ commit }, payload) {
-    const response = await this.$axios.post("chat-id", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("chat-id", payload);
     return response.data;
   },
   async fetchNews({ commit }) {
@@ -150,9 +108,7 @@ const actions = {
     commit("setFaq", response.data);
   },
   async fetchSupportCategoryWithChavos({ commit }) {
-    const response = await this.$axios.get("category-support-chavo", {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.get("category-support-chavo");
     commit("setSupportCategoryWithChavos", response.data);
   },
   async fetchCheckPhone({ commit }, payload) {
@@ -175,29 +131,22 @@ const actions = {
   },
 
   async fetchComplaint({ commit }, payload) {
-    const response = await this.$axios.post("complaint", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("complaint", payload);
     return response.data;
   },
   async fetchTariffList({ commit }, payload) {
     const response = await this.$axios.get("tariff/list", {
       params: { lang: payload },
-      headers: authHeader(),
     });
     commit("setTariffList", response.data);
     return response.data;
   },
   async fetchFreeTariff({ commit }, payload) {
-    const response = await this.$axios.post("free-tariff", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("free-tariff", payload);
     return response.data;
   },
   async fetchCreatePayment({ commit }, payload) {
-    const response = await this.$axios.post("create-payment", payload, {
-      headers: authHeader(),
-    });
+    const response = await this.$axios.post("create-payment", payload);
     return response.data;
   },
 

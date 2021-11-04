@@ -1,16 +1,13 @@
 <template>
   <div>
-    <the-header v-if="user && user.step == 0" />
+    <the-header />
     <section class="card_section">
       <div class="container">
-        <div class="template_main" id="main" v-if="user && user.step == 0">
+        <div class="template_main" id="main">
           <the-left-sidebar />
-          <!-- <nuxt-view v-slot="{ Component }"> -->
           <transition name="component-fade" mode="out-in">
             <Nuxt />
-            <!-- <component :is="Component" /> -->
           </transition>
-          <!-- </nuxt-view> -->
         </div>
       </div>
     </section>
@@ -21,9 +18,9 @@
 </template>
 
 <script>
-import TheHeader from '@/components/blocks/TheHeader.vue'
-import TheLeftSidebar from '@/components/blocks/TheLeftSidebar.vue'
-import SettingModal from '../components/modals/SettingModal.vue'
+import TheHeader from "@/components/blocks/TheHeader.vue";
+import TheLeftSidebar from "@/components/blocks/TheLeftSidebar.vue";
+import SettingModal from "../components/modals/SettingModal.vue";
 
 export default {
   components: {
@@ -33,17 +30,17 @@ export default {
   },
   computed: {
     user() {
-      return this.$auth.user
+      return this.$auth.user;
     },
   },
   watch: {
     user(value) {
       if (value && value.step !== 0) {
-        this.$router.push({ path: '/questionnaire' })
+        this.$router.push({ path: "/questionnaire" });
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>

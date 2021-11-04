@@ -1,9 +1,9 @@
 <template>
   <header>
-    <!-- <div class="container">
+    <div class="container">
       <div class="hdr_main">
         <a href="/" class="logo">
-          <img src="/src/assets/images/logo.png" alt="" />
+          <img src="~/assets/images/logo.png" alt="" />
         </a>
         <a href="#" class="link_blue">
           <svg
@@ -26,7 +26,7 @@
               fill="white"
             />
           </svg>
-          {{ $t('watch_video') }}
+          {{ $t("watch_video") }}
         </a>
       </div>
     </div>
@@ -64,7 +64,7 @@
       <li>
         <nuxt-link
           to="/messages"
-          :data-count-notif="newMessageNotifications?.length"
+          :data-count-notif="newMessageNotifications.length"
         >
           <svg
             width="20"
@@ -88,7 +88,7 @@
       <li>
         <nuxt-link
           to="/notifications"
-          :data-count-notif="otherNotifications?.length"
+          :data-count-notif="otherNotifications.length"
         >
           <svg
             width="20"
@@ -127,16 +127,24 @@
           </svg>
         </nuxt-link>
       </li>
-    </ul> -->
+    </ul>
   </header>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  methods: {
-    gotoAnketa() {
-      this.$router.push('questionnaire')
-    },
+  data() {
+    return {
+      //
+    };
   },
-}
+  computed: {
+    // ...mapGetters(["user/newMessageNotifications", "user/otherNotifications"]),
+    newMessageNotifications: () =>
+      this.$store.getters["user/newMessageNotifications"],
+    otherNotifications: () => this.$store.getters["user/otherNotifications"],
+  },
+};
 </script>
