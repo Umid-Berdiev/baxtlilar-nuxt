@@ -1,13 +1,13 @@
 <template>
   <div class="template_main_right" id="content">
-    <h1>{{ $t('notifications') }}</h1>
+    <h1>{{ $t("notifications") }}</h1>
 
-    <!-- <a
+    <a
       v-for="(item, index) in notifications"
       :key="index"
       href="#"
       class="message_item"
-      :style="{ 'background-color:#337bae;color:white': item.read_at == null }"
+      :class="{ unread: item.read_at === null }"
       @click="handleClick(item.id)"
     >
       <div class="mess_user">
@@ -16,10 +16,10 @@
       <div class="date_message">
         <span v-text="formatDate(item.created_at)" />
       </div>
-    </a> -->
+    </a>
 
     <!-- Modal -->
-    <!-- <div
+    <div
       class="modal fade"
       id="notificationModal"
       tabindex="-1"
@@ -35,71 +35,81 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-            ></button>
+            />
           </div>
           <div class="modal-body">
-            {{ notification.data?.message }}
+            {{ notification.data && notification.data.message }}
           </div>
           <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-            >
-              Close
-            </button>
+              v-text="$t('Close')"
+            />
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-import { Modal } from 'bootstrap'
+import moment from "moment";
+import { Modal } from "bootstrap";
 
 export default {
   data() {
     return {
       notifications: [],
       notification: {},
-    }
+    };
   },
-  async mounted() {
-    await this.fetchNotifications()
+  async asyncData({ $axios }) {
+    const res = await $axios.$get("api/notifications");
+    const notifications = res.filter(
+      (item) => item.type != "App\\Notifications\\MessageCreatedNotification"
+    );
+
+    return { notifications };
   },
   methods: {
     async handleClick(id) {
-      this.notification = await this.notifications.find((item) => item.id == id)
+      this.notification = await this.notifications.find(
+        (item) => item.id == id
+      );
 
-      var myModal = new Modal(document.getElementById('notificationModal'))
-      myModal.show()
+      var myModal = new Modal(document.getElementById("notificationModal"));
+      myModal.show();
 
       if (this.notification.read_at == null) {
         await this.$axios({
-          url: 'mark-as-read',
-          method: 'PUT',
+          url: "api/mark-as-read",
+          method: "PUT",
           data: { id },
-          headers: authHeader(),
-        })
+        });
 
-        await this.fetchNotifications()
+        await this.fetchNotifications();
       }
     },
 
     async fetchNotifications() {
-      const res = await this.$axios.get('notifications', {
-        headers: authHeader(),
-      })
-      this.notifications = res.data?.filter(
-        (item) => item.type != 'App\\Notifications\\MessageCreatedNotification'
-      )
+      const res = await this.$axios.$get("api/notifications");
+      this.notifications = res.filter(
+        (item) => item.type != "App\\Notifications\\MessageCreatedNotification"
+      );
     },
 
     formatDate(date) {
-      return moment(date).calendar()
+      return moment(date).calendar();
     },
   },
-}
+};
 </script>
+
+<style scoped>
+.unread {
+  background-color: #337bae;
+  color: white;
+}
+</style>

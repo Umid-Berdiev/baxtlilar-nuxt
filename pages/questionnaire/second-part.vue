@@ -1,13 +1,13 @@
 <template>
   <div class="anceta_form">
     <div class="steps_form">
-      <div class="active">{{ $t('fill_data') }}</div>
+      <div class="active">{{ $t("fill_data") }}</div>
       <div>2</div>
       <div>3</div>
       <div>4</div>
       <div>5</div>
     </div>
-    <h2 id="education-label">{{ $t('education') }}</h2>
+    <h2 id="education-label">{{ $t("education") }}</h2>
     <form @submit.prevent="submit">
       <div class="row">
         <div class="col-lg-4 col-sm-6">
@@ -20,16 +20,16 @@
               name="education"
             >
               <a-select-option :value="$t('average')">{{
-                $t('average')
+                $t("average")
               }}</a-select-option>
               <a-select-option :value="$t('unfinished_higher')">{{
-                $t('unfinished_higher')
+                $t("unfinished_higher")
               }}</a-select-option>
               <a-select-option :value="$t('higher')">{{
-                $t('higher')
+                $t("higher")
               }}</a-select-option>
               <a-select-option :value="$t('academic_degree')">{{
-                $t('academic_degree')
+                $t("academic_degree")
               }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ educationError }}</span>
@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="" id="specialty-label">{{ $t('profession') }}</label>
+            <label for="" id="specialty-label">{{ $t("profession") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -51,7 +51,7 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="" id="employment-label">{{ $t('employment') }}</label>
+            <label for="" id="employment-label">{{ $t("employment") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -65,7 +65,7 @@
       <div class="row">
         <div class="col-lg-10">
           <div class="form-group">
-            <label for="" id="hobby-label">{{ $t('hobby') }}</label>
+            <label for="" id="hobby-label">{{ $t("hobby") }}</label>
             <textarea
               name="hobby"
               id=""
@@ -80,7 +80,7 @@
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
             <label for="" id="smoking-label">{{
-              $t('relation_smoking')
+              $t("relation_smoking")
             }}</label>
             <a-select
               :placeholder="$t('choose')"
@@ -89,9 +89,9 @@
               @change="selectSmoking"
               name="smoking"
             >
-              <a-select-option value="1">{{ $t('smoking_1') }}</a-select-option>
-              <a-select-option value="2">{{ $t('smoking_2') }}</a-select-option>
-              <a-select-option value="3">{{ $t('smoking_3') }}</a-select-option>
+              <a-select-option value="1">{{ $t("smoking_1") }}</a-select-option>
+              <a-select-option value="2">{{ $t("smoking_2") }}</a-select-option>
+              <a-select-option value="3">{{ $t("smoking_3") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ smokingError }}</span>
           </div>
@@ -99,7 +99,7 @@
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
             <label for="" id="alcohol-label">{{
-              $t('relation_alcohol')
+              $t("relation_alcohol")
             }}</label>
             <a-select
               :placeholder="$t('choose')"
@@ -108,16 +108,16 @@
               @change="selectAlcohol"
               name="alcohol"
             >
-              <a-select-option value="1">{{ $t('smoking_1') }}</a-select-option>
-              <a-select-option value="2">{{ $t('drugs_2') }}</a-select-option>
-              <a-select-option value="3">{{ $t('drugs_3') }}</a-select-option>
+              <a-select-option value="1">{{ $t("smoking_1") }}</a-select-option>
+              <a-select-option value="2">{{ $t("drugs_2") }}</a-select-option>
+              <a-select-option value="3">{{ $t("drugs_3") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ alcoholError }}</span>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="" id="drugs-label">{{ $t('relation_drugs') }}</label>
+            <label for="" id="drugs-label">{{ $t("relation_drugs") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -125,10 +125,10 @@
               @change="selectDrugs"
               name="drugs"
               ><a-select-option value="1">{{
-                $t('smoking_1')
+                $t("smoking_1")
               }}</a-select-option>
-              <a-select-option value="2">{{ $t('drugs_2') }}</a-select-option>
-              <a-select-option value="3">{{ $t('drugs_3') }}</a-select-option>
+              <a-select-option value="2">{{ $t("drugs_2") }}</a-select-option>
+              <a-select-option value="3">{{ $t("drugs_3") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ drugsError }}</span>
           </div>
@@ -138,7 +138,7 @@
         <div class="col-lg-4 col-sm-4 col-6">
           <div class="form-group">
             <label for="" id="financial_status-label">{{
-              $t('financial_status')
+              $t("financial_status")
             }}</label>
             <a-select
               :placeholder="$t('choose')"
@@ -147,11 +147,11 @@
               @change="selectFinancialStatus"
               name="financial_status"
             >
-              <a-select-option value="1">{{ $t('wealthy') }}</a-select-option>
+              <a-select-option value="1">{{ $t("wealthy") }}</a-select-option>
               <a-select-option value="2">{{
-                $t('middle_income')
+                $t("middle_income")
               }}</a-select-option>
-              <a-select-option value="3">{{ $t('no_income') }}</a-select-option>
+              <a-select-option value="3">{{ $t("no_income") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ financial_statusError }}</span>
           </div>
@@ -159,7 +159,7 @@
         <div class="col-lg-4 col-sm-4 col-6">
           <div class="form-group">
             <label for="" id="living_space-label">{{
-              $t('living_space')
+              $t("living_space")
             }}</label>
             <a-select
               :placeholder="$t('choose')"
@@ -168,12 +168,12 @@
               @change="selectLivingSpace"
               name="living_space"
             >
-              <a-select-option value="1">{{ $t('own_home') }}</a-select-option>
+              <a-select-option value="1">{{ $t("own_home") }}</a-select-option>
               <a-select-option value="2">{{
-                $t('rent_apartment')
+                $t("rent_apartment")
               }}</a-select-option>
               <a-select-option value="3">{{
-                $t('live_with_parents')
+                $t("live_with_parents")
               }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ living_spaceError }}</span>
@@ -183,7 +183,7 @@
       <div class="row">
         <div class="col-lg-10">
           <div class="form-group">
-            <label for="">{{ $t('ready_live_together') }}?</label>
+            <label for="">{{ $t("ready_live_together") }}?</label>
             <div class="row big_radio">
               <div class="col-lg-2 col-sm-4 col-6">
                 <input
@@ -192,7 +192,7 @@
                   id="jil1"
                   value="1"
                 />
-                <label for="jil1">Да</label>
+                <label for="jil1">{{ $t("yes") }}</label>
               </div>
               <div class="col-lg-2 col-sm-4 col-6">
                 <input
@@ -202,7 +202,7 @@
                   value="0"
                   checked
                 />
-                <label for="jil2">{{ $t('no') }}</label>
+                <label for="jil2">{{ $t("no") }}</label>
               </div>
             </div>
           </div>
@@ -214,7 +214,7 @@
             v-show="loading"
             class="spinner-border spinner-border-sm text-white"
           ></span>
-          &nbsp; {{ $t('next') }}
+          &nbsp; {{ $t("next") }}
         </button>
       </div>
     </form>
@@ -222,10 +222,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-
 export default {
-  layout: 'questionnaire',
+  layout: "questionnaire",
   data() {
     return {
       loading: false,
@@ -236,114 +234,115 @@ export default {
         financial_status: null,
         living_space: null,
       },
-      educationError: '',
-      specialtyError: '',
-      employmentError: '',
-      hobbyError: '',
-      smokingError: '',
-      alcoholError: '',
-      drugsError: '',
-      financial_statusError: '',
-      living_spaceError: '',
-    }
+      educationError: "",
+      specialtyError: "",
+      employmentError: "",
+      hobbyError: "",
+      smokingError: "",
+      alcoholError: "",
+      drugsError: "",
+      financial_statusError: "",
+      living_spaceError: "",
+    };
+  },
+  computed: {
+    currentUser() {
+      return this.$auth.user;
+    },
   },
   mounted() {
-    this.setQuestionnairePercent(10)
+    this.$store.commit("questionnaire/setQuestionnairePercent", 10);
   },
   methods: {
-    ...mapMutations(['setQuestionnairePercent']),
     async submit(e) {
       if (this.validate(e)) {
-        this.loading = true
-        const formData = new FormData(e.target)
-        let form = Object.fromEntries(formData)
-        form = { ...form, ...this.selects }
+        this.loading = true;
+        const formData = new FormData(e.target);
+        let form = Object.fromEntries(formData);
+        form = { ...form, ...this.selects };
         try {
-          await this.$store.dispatch('saveUserEducaton', form)
-          this.loading = false
-          this.$router.push({ path: '/third-part' })
+          await this.$store.dispatch("questionnaire/saveUserEducaton", form);
+          this.loading = false;
+          this.$router.push(this.localePath("/questionnaire/third-part"));
         } catch (e) {
-          alert(e)
-          // this.$router.push({ path: "/third-part" });
+          alert(e);
         }
       }
     },
     validate(e) {
-      let result = true
+      let result = true;
       if (this.selects.living_space == null) {
-        this.living_spaceError = this.$t('Required field')
-        document.getElementById('living_space-label').scrollIntoView()
-        result = false
+        this.living_spaceError = this.$t("Required field");
+        document.getElementById("living_space-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.financial_status == null) {
-        this.financial_statusError = this.$t('Required field')
-        document.getElementById('financial_status-label').scrollIntoView()
-        result = false
+        this.financial_statusError = this.$t("Required field");
+        document.getElementById("financial_status-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.drugs == null) {
-        this.drugsError = this.$t('Required field')
-        document.getElementById('drugs-label').scrollIntoView()
-        result = false
+        this.drugsError = this.$t("Required field");
+        document.getElementById("drugs-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.alcohol == null) {
-        this.alcoholError = this.$t('Required field')
-        document.getElementById('alcohol-label').scrollIntoView()
-        result = false
+        this.alcoholError = this.$t("Required field");
+        document.getElementById("alcohol-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.smoking == null) {
-        this.smokingError = this.$t('Required field')
-        document.getElementById('smoking-label').scrollIntoView()
-        result = false
+        this.smokingError = this.$t("Required field");
+        document.getElementById("smoking-label").scrollIntoView();
+        result = false;
       }
-      if (e.target.hobby.value == '') {
-        this.hobbyError = this.$t('Required field')
-        document.getElementById('hobby-label').scrollIntoView()
-        result = false
+      if (e.target.hobby.value == "") {
+        this.hobbyError = this.$t("Required field");
+        document.getElementById("hobby-label").scrollIntoView();
+        result = false;
       }
 
-      if (e.target.employment.value == '') {
-        this.employmentError = this.$t('Required field')
-        document.getElementById('employment-label').scrollIntoView()
-        result = false
+      if (e.target.employment.value == "") {
+        this.employmentError = this.$t("Required field");
+        document.getElementById("employment-label").scrollIntoView();
+        result = false;
       }
-      if (e.target.specialty.value == '') {
-        this.specialtyError = this.$t('Required field')
-        document.getElementById('specialty-label').scrollIntoView()
-        result = false
+      if (e.target.specialty.value == "") {
+        this.specialtyError = this.$t("Required field");
+        document.getElementById("specialty-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.education == null) {
-        this.educationError = this.$t('Required field')
-        document.getElementById('education-label').scrollIntoView()
-        result = false
+        this.educationError = this.$t("Required field");
+        document.getElementById("education-label").scrollIntoView();
+        result = false;
       }
-      return result
+      return result;
     },
     selectEducation(value) {
-      this.educationError = ''
-      this.selects.education = value
+      this.educationError = "";
+      this.selects.education = value;
     },
     selectSmoking(value) {
-      this.smokingError = ''
-      this.selects.smoking = value
+      this.smokingError = "";
+      this.selects.smoking = value;
     },
     selectAlcohol(value) {
-      this.alcoholError = ''
-      this.selects.alcohol = value
+      this.alcoholError = "";
+      this.selects.alcohol = value;
     },
     selectDrugs(value) {
-      this.drugsError = ''
-      this.selects.drugs = value
+      this.drugsError = "";
+      this.selects.drugs = value;
     },
     selectFinancialStatus(value) {
-      this.financial_statusError = ''
-      this.selects.financial_status = value
+      this.financial_statusError = "";
+      this.selects.financial_status = value;
     },
     selectLivingSpace(value) {
-      this.living_spaceError = ''
-      this.selects.living_space = value
+      this.living_spaceError = "";
+      this.selects.living_space = value;
     },
   },
-}
+};
 </script>
-
-<style></style>

@@ -14,20 +14,6 @@ import EmptyCard from "@/components/cards/EmptyCard.vue";
 
 export default {
   components: { MainSearch, UsersList, EmptyCard },
-  computed: {
-    ...mapGetters(["getMainFilterResult"]),
-    showEmpty() {
-      if (this.currentUser.status != 1) {
-        this.emptyIndex = 0;
-        return true;
-      }
-      if (this.currentUser.tariff_id == null) {
-        this.emptyIndex = 1;
-        return true;
-      }
-      return false;
-    },
-  },
   data() {
     return {
       emptyIndex: 0,
@@ -37,8 +23,18 @@ export default {
     currentUser() {
       return this.$auth.user;
     },
+    ...mapGetters(["getMainFilterResult"]),
+    showEmpty() {
+      if (this.currentUser && this.currentUser.status != 1) {
+        this.emptyIndex = 0;
+        return true;
+      }
+      if (this.currentUser && this.currentUser.tariff_id == null) {
+        this.emptyIndex = 1;
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>
-
-<style></style>

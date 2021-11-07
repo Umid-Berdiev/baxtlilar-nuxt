@@ -22,7 +22,7 @@
                         :showSearch="false"
                         name="from_height"
                         class="form-control"
-                        v-model:value="form.from_height"
+                        v-model="form.from_height"
                       >
                         <a-select-option
                           v-for="item in 171"
@@ -39,7 +39,7 @@
                         :showSearch="false"
                         name="up_to_height"
                         class="form-control"
-                        v-model:value="form.up_to_height"
+                        v-model="form.up_to_height"
                       >
                         <a-select-option
                           v-for="item in 171"
@@ -63,7 +63,7 @@
                         :showSearch="false"
                         name="from_age"
                         class="form-control"
-                        v-model:value="form.from_age"
+                        v-model="form.from_age"
                       >
                         <a-select-option
                           v-for="item in 100"
@@ -80,7 +80,7 @@
                         :showsearch="false"
                         :name="'up_to_age'"
                         class="form-control"
-                        v-model:value="form.up_to_age"
+                        v-model="form.up_to_age"
                       >
                         <a-select-option
                           v-for="item in 100"
@@ -98,7 +98,11 @@
           </div>
         </div>
         <div class="bottom_search">
-          <a href="#" @click="toSetting" v-text="$t('advanced_search')" />
+          <button
+            class="btn btn-link text-decoration-none"
+            @click="toSetting"
+            v-text="$t('advanced_search')"
+          />
         </div>
         <button type="submit" class="link_blue">
           <span
@@ -181,8 +185,8 @@ export default {
       DOMAnimations.slideToggle(cardElement);
     },
     toSetting() {
-      this.$store.state.activeFilterSection = true;
-      this.$router.push("/setting");
+      this.$store.commit("setActiveFilterSection", true);
+      this.$router.push(this.localePath("/settings"));
     },
   },
   unmounted() {

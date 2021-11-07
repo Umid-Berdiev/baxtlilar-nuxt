@@ -6,7 +6,7 @@
       data-fancybox
       data-src="https://www.youtube.com/watch?v=Jju2POnq7e8"
     >
-      <img src="/src/assets/images/play.svg" alt="" />
+      <img src="~/assets/images/play.svg" alt="" />
       {{ $t("watch_video") }}
     </a>
     <div class="progress_bar">
@@ -31,12 +31,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
+
 export default {
   computed: {
-    ...mapGetters(["getQuestionnairePercent"]),
+    getQuestionnairePercent() {
+      return this.$store.getters["questionnaire/getQuestionnairePercent"];
+    },
   },
 };
 </script>
-
-<style></style>

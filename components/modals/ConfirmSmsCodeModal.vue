@@ -48,7 +48,7 @@
                   class="btn ms-auto"
                   @click="resendSms"
                 >
-                  {{ $t('resend_sms') }}
+                  {{ $t("resend_sms") }}
                 </button>
               </div>
             </div>
@@ -60,71 +60,78 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap'
+import { Modal } from "bootstrap";
 
 export default {
   data() {
     return {
       modal: null,
       codeLoading: false,
-      codeError: '',
+      codeError: "",
       codeSentStatus: false,
-      codeInfo: '',
-    }
+      codeInfo: "",
+    };
   },
   mounted() {
     this.modal = Modal.getInstance(
-      document.getElementById('confirm-sms-code-modal')
-    )
+      document.getElementById("confirm-sms-code-modal")
+    );
     this.$nextTick(() => {
-      this.$refs.smsCode.focus()
-    })
+      this.$refs.smsCode.focus();
+    });
   },
   methods: {
     async submitCode() {
-      this.codeError = ''
-      this.codeLoading = true
+      this.codeError = "";
+      this.codeLoading = true;
 
       try {
-        const res = await this.$axios.post('sms-code-confirmation', {
+        const res = await this.$axios.post("api/sms-code-confirmation", {
           code: this.$refs.smsCode.value,
-          phone: this.$store.getters.getUserPhone,
-        })
+          phone: this.$store.getters.getGuest.phone,
+        });
 
         if (res.data.status) {
+          const res = await this.$auth.loginWith("laravelSanctum", {
+            data: {
+              username: this.$store.getters.getGuest.username,
+              password: this.$store.getters.getGuest.password,
+            },
+          });
           const modal = Modal.getInstance(
-            document.getElementById('confirm-sms-code-modal')
-          )
+            document.getElementById("confirm-sms-code-modal")
+          );
 
-          await this.$store.dispatch('setAccessToken', res.data.accessToken)
-          window.location.href = '/home'
-          modal.hide()
-        } else this.codeError = this.$t('Wrong code')
+          modal.hide();
+          await this.$store.dispatch("setAccessToken", res.data.accessToken);
+          // window.location.href = "/home";
+          this.$router.push(this.localePath("/home"));
+        } else this.codeError = this.$t("Wrong code");
       } catch (error) {
-        this.codeError = error.data
+        this.codeError = error.data;
       }
 
-      this.codeLoading = false
+      this.codeLoading = false;
     },
     async resendSms() {
-      this.codeLoading = true
-      this.codeError = ''
-      this.codeInfo = ''
+      this.codeLoading = true;
+      this.codeError = "";
+      this.codeInfo = "";
 
-      const response = await this.$axios.post('check-phone', {
+      const response = await this.$axios.post("check-phone", {
         phone: this.phone,
-      })
+      });
 
       if (response.data.status) {
-        this.codeSentStatus = true
-        this.codeInfo = this.$t('Code sent')
-        setTimeout(() => (this.codeSentStatus = true), 60000)
+        this.codeSentStatus = true;
+        this.codeInfo = this.$t("Code sent");
+        setTimeout(() => (this.codeSentStatus = true), 60000);
       }
 
-      this.codeLoading = false
+      this.codeLoading = false;
     },
   },
-}
+};
 </script>
 
 <style></style>

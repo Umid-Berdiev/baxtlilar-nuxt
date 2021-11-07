@@ -8,13 +8,13 @@
       <div class="tabs">
         <ul id="tabs-nav">
           <li>
-            <a href="#tab1">{{ $t('about_myself') }}</a>
+            <a href="#tab1">{{ $t("about_myself") }}</a>
           </li>
           <li>
-            <a href="#tab2">{{ $t('family') }}</a>
+            <a href="#tab2">{{ $t("family") }}</a>
           </li>
           <li>
-            <a href="#tab3">{{ $t('answers_for') }} {{ $t('questions') }}</a>
+            <a href="#tab3">{{ $t("answers_for") }} {{ $t("questions") }}</a>
           </li>
         </ul>
         <!-- END tabs-nav -->
@@ -36,12 +36,11 @@
 </template>
 
 <script>
-import UserAnswers from '@/components/cards/UserAnswers.vue'
-import UserData from '@/components/cards/UserData.vue'
-import UserMain from '@/components/cards/UserMain.vue'
-import UserRelatives from '@/components/cards/UserRelatives.vue'
-import UserImagesSlider from '@/components/sliders/UserImagesSlider.vue'
-import { mapActions } from 'vuex'
+import UserAnswers from "@/components/cards/UserAnswers.vue";
+import UserData from "@/components/cards/UserData.vue";
+import UserMain from "@/components/cards/UserMain.vue";
+import UserRelatives from "@/components/cards/UserRelatives.vue";
+import UserImagesSlider from "@/components/sliders/UserImagesSlider.vue";
 
 export default {
   components: {
@@ -56,17 +55,28 @@ export default {
       currentUser: {},
       relatives: [],
       answers: [],
-    }
+    };
   },
-  async created() {
-    const res = await this.$axios.get('user-details')
-    this.currentUser = await res.data
-    this.relatives = await this.fetchRelatives(this.currentUser.id)
-    this.answers = await this.fetchAnswers(this.currentUser.id)
-    console.log('currentUser: ', this.currentUser.id)
+  async asyncData({ $axios, store }) {
+    const res = await $axios.$get("api/user-details");
+    const relatives = await store.dispatch("fetchRelatives", res.id);
+    const answers = await store.dispatch("fetchAnswers", res.id);
+
+    return {
+      currentUser: res,
+      relatives,
+      answers,
+    };
   },
-  methods: {
-    ...mapActions(['fetchRelatives', 'fetchAnswers']),
-  },
-}
+  // async created() {
+  //   const res = await this.$axios.$get("api/user-details");
+  //   this.currentUser = await res;
+  //   this.relatives = await this.fetchRelatives(res.id);
+  //   this.answers = await this.fetchAnswers(res.id);
+  //   console.log("currentUser: ", res.id);
+  // },
+  // methods: {
+  //   ...mapActions(["fetchRelatives", "fetchAnswers"]),
+  // },
+};
 </script>

@@ -10,23 +10,7 @@
       @change="handleChange"
     >
       <div v-if="fileList.length < 5">
-        <svg
-          width="25"
-          height="25"
-          viewBox="0 0 25 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect x="11" width="3" height="25" rx="1.5" fill="#000" />
-          <rect
-            y="14"
-            width="3"
-            height="25"
-            rx="1.5"
-            transform="rotate(-90 0 14)"
-            fill="#000"
-          />
-        </svg>
+        <icon-plus />
       </div>
     </a-upload>
     <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
@@ -37,22 +21,23 @@
 </template>
 
 <script>
+import IconPlus from "./icons/IconPlus.vue";
+
 function getBase64(file) {
   return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-
-    reader.onload = () => resolve(reader.result)
-
-    reader.onerror = (error) => reject(error)
-  })
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
 }
 
 export default {
+  components: { IconPlus },
   props: {
     errorText: {
       type: String,
-      default: '',
+      default: "",
     },
     type: {
       type: String,
@@ -63,68 +48,64 @@ export default {
   data() {
     return {
       previewVisible: false,
-      previewImage: '',
+      previewImage: "",
       // fileList: [],
-    }
+    };
   },
   mounted() {
     if (this.type != null) {
-      this.getOldImages()
+      this.getOldImages();
     }
   },
   computed: {
-    user: () => this.$auth.user,
+    user() {
+      return this.$auth.user;
+    },
   },
   methods: {
     async getOldImages() {
-      const response = await axios.post(
-        'user-images',
-        {
-          user_id: user ? user.id : null,
-          type: props.type,
-        },
-        {
-          headers: authHeader(),
-        }
-      )
-      fileList.value = await response.data
+      const response = await this.$axios.$post("api/user-images", {
+        user_id: this.user ? this.user.id : null,
+        type: this.type,
+      });
+      this.fileList.value = await response.data;
     },
 
     handleRemove(file) {
-      const id = file.id
-      const url = file.url
-      store.dispatch('fetchDeleteImage', { id, url })
-      const index = fileList.value.indexOf(file)
-      const newFileList = fileList.value.slice()
-      newFileList.splice(index, 1)
-      fileList.value = newFileList
+      const id = file.id;
+      const url = file.url;
+      store.dispatch("fetchDeleteImage", { id, url });
+      const index = this.fileList.value.indexOf(file);
+      const newFileList = this.fileList.value.slice();
+      newFileList.splice(index, 1);
+      this.fileList.value = newFileList;
     },
 
     beforeUpload(file) {
-      if (file['size'] < 2111775) {
-        fileList.value = [...fileList.value, file]
+      if (file["size"] < 2111775) {
+        this.fileList.value = [...this.fileList.value, file];
       } else {
-        alert('File size can not be bigger than 2 MB')
+        alert("File size can not be bigger than 2 MB");
       }
-      return false
+      return false;
     },
 
     handleCancel() {
-      previewVisible.value = false
+      previewVisible.value = false;
     },
 
     async handlePreview(file) {
       if (!file.url && !file.preview) {
-        file.preview = await getBase64(file.originFileObj)
+        file.preview = await getBase64(file.originFileObj);
       }
 
-      previewImage.value = file.url || file.preview
-      previewVisible.value = true
+      previewImage.value = file.url || file.preview;
+      previewVisible.value = true;
     },
 
     async handleChange({ file, fileList: newFileList }) {
-      fileList.value = newFileList
+      this.fileList.value = newFileList;
     },
   },
-}
+};
 </script>

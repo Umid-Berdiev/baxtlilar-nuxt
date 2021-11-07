@@ -1,84 +1,93 @@
+import userService from "~/plugins/services/user.service";
+
 const lang = localStorage.getItem("language");
 
 const actions = {
   async fetchCountries({ commit }) {
     commit("setLoadingState", true);
-    const response = await this.$axios.post("countries", { lang });
+    const response = await this.$axios.post("api/countries", { lang });
     commit("setСountries", response.data);
     commit("setLoadingState", false);
   },
   async fetchRegions({ commit }, payload) {
-    const response = await this.$axios.post("regions", {
+    const response = await this.$axios.post("api/regions", {
       country_id: payload,
       lang,
     });
     commit("setRegions", response.data);
   },
   async fetchReligions({ commit }) {
-    const response = await this.$axios.post("religions", { lang });
+    const response = await this.$axios.post("api/religions", { lang });
     commit("setReligions", response.data);
   },
   async fetchLanguages({ commit }) {
-    const response = await this.$axios.post("languages");
+    const response = await this.$axios.post("api/languages");
     commit("setLanguages", response.data);
   },
   async fetchMainFilterResult({ commit }, payload) {
     commit("setMainFilterResult", []);
-    const response = await this.$axios.post("main-filter", payload);
+    const response = await this.$axios.post("api/main-filter", payload);
     commit("setMainFilterResult", response.data);
   },
   async fetchMainFilterDefaultForm({ commit }) {
-    const response = await this.$axios.post("main-filter-default-form", {});
-    commit("setMainFilterDefaultForm", response.data);
-    commit("setSelectedCountry", response.data.country);
-    return response.data;
+    try {
+      const response = await this.$axios.$post("api/main-filter-default-form");
+      commit("setMainFilterDefaultForm", response);
+      commit("setSelectedCountry", response.country);
+
+      return response;
+    } catch (error) {
+      this.$toast.error("Error while fetching data: ", error);
+    }
   },
   async fetchFavourites({ commit }) {
     commit("setFavourites", []);
-    const response = await this.$axios.post("favourites", {});
+    const response = await this.$axios.$post("api/favourites");
     commit("setFavourites", response.data);
   },
 
   async fetchUserImages({ commit }, payload) {
-    const response = await this.$axios.post("user-images", payload);
+    const response = await this.$axios.post("api/user-images", payload);
     // commit("setUserImages", response.data);
     return response.data;
   },
   async fetchDeleteImage({ commit }, payload) {
-    const response = await this.$axios.post("delete-image", payload);
+    const response = await this.$axios.post("api/delete-image", payload);
     // commit("setUserImages", response.data);
     // return response.data;
   },
 
   async fetchAnswers({ commit }, payload) {
-    const response = await this.$axios.post("user-answers-by-user", {
+    const response = await this.$axios.post("api/user-answers-by-user", {
       user_id: payload,
     });
     return response.data;
   },
 
   async fetchRelatives({ commit }, payload) {
-    const response = await this.$axios.post("user-relatives-by-user", {
+    const response = await this.$axios.post("api/user-relatives-by-user", {
       user_id: payload,
     });
     return response.data;
   },
 
   async fetchUserById({ commit }, payload) {
-    const response = await this.$axios.post("user-by-id", { user_id: payload });
+    const response = await this.$axios.post("api/user-by-id", {
+      user_id: payload,
+    });
     commit("setCurrentUser", response.data);
     return response.data;
   },
 
   async fetchChangePassword({ commit }, payload) {
-    const response = await this.$axios.post("change-password", {
+    const response = await this.$axios.post("api/change-password", {
       password: payload,
     });
     return response.data;
   },
 
   async fetchOffer({ commit }, payload) {
-    const response = await this.$axios.post("offer", payload);
+    const response = await this.$axios.post("api/offer", payload);
 
     try {
       return response.data;
@@ -88,11 +97,11 @@ const actions = {
   },
 
   async fetchRelativesForSetting({ commit }) {
-    const response = await this.$axios.get("relatives");
+    const response = await this.$axios.get("api/relatives");
     return response.data;
   },
   async fetchChatId({ commit }, payload) {
-    const response = await this.$axios.post("chat-id", payload);
+    const response = await this.$axios.post("api/chat-id", payload);
     return response.data;
   },
   async fetchNews({ commit }) {
@@ -100,7 +109,7 @@ const actions = {
     commit("setNews", response.data);
   },
   async fetchNewsDetail({ commit }, payload) {
-    const response = await this.$axios.get("news-detail/" + payload);
+    const response = await this.$axios.get("api/news-detail/" + payload);
     commit("setNewsDetail", response.data);
   },
   async fetchFaq({ commit }) {
@@ -108,15 +117,17 @@ const actions = {
     commit("setFaq", response.data);
   },
   async fetchSupportCategoryWithChavos({ commit }) {
-    const response = await this.$axios.get("category-support-chavo");
+    const response = await this.$axios.get("api/category-support-chavo");
     commit("setSupportCategoryWithChavos", response.data);
   },
   async fetchCheckPhone({ commit }, payload) {
-    const response = await this.$axios.post("check-phone", { phone: payload });
+    const response = await this.$axios.post("api/check-phone", {
+      phone: payload,
+    });
     return response.data;
   },
   async fetchCheckSmsCode({ commit }, payload) {
-    const response = await this.$axios.post("check-sms-code", payload);
+    const response = await this.$axios.post("api/check-sms-code", payload);
     return response.data;
   },
   async fetchFooterList({ commit }, payload) {
@@ -124,34 +135,34 @@ const actions = {
     commit("setFooterList", response.data);
   },
   async fetchFooterListOne({ commit }, payload) {
-    const response = await this.$axios.get("pages/one", {
+    const response = await this.$axios.get("api/pages/one", {
       params: payload,
     });
     commit("setFooterListOne", response.data);
   },
 
   async fetchComplaint({ commit }, payload) {
-    const response = await this.$axios.post("complaint", payload);
+    const response = await this.$axios.post("api/complaint", payload);
     return response.data;
   },
   async fetchTariffList({ commit }, payload) {
-    const response = await this.$axios.get("tariff/list", {
+    const response = await this.$axios.get("api/tariff/list", {
       params: { lang: payload },
     });
     commit("setTariffList", response.data);
     return response.data;
   },
   async fetchFreeTariff({ commit }, payload) {
-    const response = await this.$axios.post("free-tariff", payload);
+    const response = await this.$axios.post("api/free-tariff", payload);
     return response.data;
   },
   async fetchCreatePayment({ commit }, payload) {
-    const response = await this.$axios.post("create-payment", payload);
+    const response = await this.$axios.post("api/create-payment", payload);
     return response.data;
   },
 
   fetchUserInfo({ commit }) {
-    return UserService.getCurrentUserInfo().then(
+    return userService.getCurrentUserInfo().then(
       (data) => {
         commit("setUser", data);
         return Promise.resolve(data);
@@ -164,28 +175,25 @@ const actions = {
   },
 
   async register({ commit }, user) {
-    const res = await this.$axios
-      .post("auth/register", {
-        username: user.username,
-        gender: user.gender,
-        phone: user.phone,
-        password: user.password,
-        lang: user.lang,
-      })
-      .then(
-        (response) => {
-          if (response.data.message == "Success") {
-            return Promise.resolve(response.data);
-          } else {
-            // commit("registerFailure");
-            return Promise.reject(response.data.errors);
-          }
-        },
-        (error) => {
-          // commit("registerFailure");
-          return Promise.reject(error);
-        }
-      );
+    try {
+      const res = await this.$axios.post("api/auth/register", {
+        ...user,
+        // username: user.username,
+        // gender: user.gender,
+        // phone: user.phone,
+        // password: user.password,
+        // lang: user.lang,
+      });
+
+      if (res.data.message == "Success") {
+        return Promise.resolve(res);
+      } else {
+        // commit("registerFailure");
+        return Promise.reject(res.data.errors);
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
 };
 

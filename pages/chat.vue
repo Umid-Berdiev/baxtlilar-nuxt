@@ -9,7 +9,7 @@
           <img :src="user.profile_photo_url" alt="" />
           <h2 v-text="user.username"></h2>
         </div>
-        <a href="#" class="link_blue red">{{ $t('choosing_user') }}</a>
+        <a href="#" class="link_blue red">{{ $t("choosing_user") }}</a>
         <div class="dropdown">
           <div class="dropdown_top">
             <svg
@@ -41,10 +41,10 @@
           </div>
           <div class="dropdown_body">
             <a href="#" data-fancybox data-src="#deleteMsg">{{
-              $t('delete')
+              $t("delete")
             }}</a>
-            <a href="#">{{ $t('settings') }}</a>
-            <a href="#">{{ $t('logout') }}</a>
+            <a href="#">{{ $t("settings") }}</a>
+            <a href="#">{{ $t("logout") }}</a>
           </div>
         </div>
       </div>
@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import ChatForm from '@/components/chat/ChatForm.vue'
-import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
-import MessageItem from '@/components/chat/MessageItem.vue'
-import { mapActions, mapGetters } from 'vuex'
+import ChatForm from "@/components/chat/ChatForm.vue";
+import IconArrowLeft from "@/components/icons/IconArrowLeft.vue";
+import MessageItem from "@/components/chat/MessageItem.vue";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { IconArrowLeft, ChatForm, MessageItem },
@@ -72,43 +72,44 @@ export default {
     return {
       messages: [],
       user: {},
-    }
+    };
   },
   async created() {
-    await this.fetchRelatedUsers()
+    await this.fetchRelatedUsers();
     this.user = await this.getRelatedUsers.find(
       (user) => user.id == this.$route.params.id
-    )
+    );
   },
   async mounted() {
-    this.$emit('added_message', (message) => {
-      this.user.messages.unshift(message)
+    this.$emit("added_message", (message) => {
+      this.user.messages.unshift(message);
       if (message.selfMessage) {
-        this.$refs.message.scrollTop = 0
+        this.$refs.message.scrollTop = 0;
       }
-    })
+    });
 
-    Echo.join('chat')
+    this.$echo
+      .join("chat")
       .here((users) => {
-        this.$emit('users.here', users)
+        this.$emit("users.here", users);
       })
       .joining((user) => {
-        this.$emit('users.joined', user)
+        this.$emit("users.joined", user);
       })
       .leaving((user) => {
-        this.$emit('users.left', user)
+        this.$emit("users.left", user);
       })
-      .listen('MessageSent', (data) => {
-        this.$emit('added_message', data.message)
-      })
+      .listen("MessageSent", (data) => {
+        this.$emit("added_message", data.message);
+      });
   },
   computed: {
-    ...mapGetters(['getRelatedUsers']),
+    ...mapGetters(["getRelatedUsers"]),
   },
   methods: {
-    ...mapActions(['fetchRelatedUsers']),
+    ...mapActions(["fetchRelatedUsers"]),
   },
-}
+};
 </script>
 
 <style></style>

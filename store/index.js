@@ -7,6 +7,7 @@ import actions from "./actions";
 
 export const state = () => ({
   user: null,
+  guest: null,
   isLoading: false,
   regions: [],
   languages: [],
@@ -52,6 +53,7 @@ export const getters = {
   getFooterList: (state) => state.footerList,
   getFooterListOne: (state) => state.footerListOne,
   getTariffList: (state) => state.tariffList,
+  getGuest: (state) => state.guest,
 };
 
 export { mutations, actions };

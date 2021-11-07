@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>{{ $t('family') }}</h1>
+    <h1>{{ $t("family") }}</h1>
     <loader v-if="loading" />
     <h3 v-else-if="relatives.length == 0" class="text-center">
-      {{ $t('empty_data') }}
+      {{ $t("empty_data") }}
     </h3>
     <div class="pret_main" v-else>
       <div
@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Loader from '../Loader.vue'
+import Loader from "../Loader.vue";
 
 export default {
   components: { Loader },
@@ -32,16 +31,7 @@ export default {
   data() {
     return {
       loading: false,
-      // relatives: [],
-    }
+    };
   },
-  // async mounted() {
-  //   this.loading = true;
-  //   console.log("from UserRelatives: ", this.user_id);
-  //   this.loading = false;
-  // },
-  methods: {
-    ...mapActions(['fetchRelatives']),
-  },
-}
+};
 </script>

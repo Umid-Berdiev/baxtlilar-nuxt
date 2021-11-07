@@ -68,12 +68,12 @@
 </template>
 
 <script>
-import ChatForm from '@/components/chat/ChatForm.vue'
-import IconArrowLeft from '@/components/icons/IconArrowLeft.vue'
-import { mapActions } from 'vuex'
+import ChatForm from "@/components/chat/ChatForm.vue";
+import IconArrowLeft from "@/components/icons/IconArrowLeft.vue";
+import { mapActions } from "vuex";
 // import { defineAsyncComponent } from 'vue'
-import Loader from '@/components/Loader.vue'
-import ChatWindow from '@/components/chat/ChatWindow.vue'
+import Loader from "@/components/Loader.vue";
+import ChatWindow from "@/components/chat/ChatWindow.vue";
 
 // const ChatWindow = defineAsyncComponent(() =>
 //   import('@/components/chat/ChatWindow.vue')
@@ -92,92 +92,88 @@ export default {
       otherUser: {},
       chatData: [],
       loading: false,
-    }
+    };
   },
   watch: {
     currentRoom(val, oldVal) {
       if (oldVal.id) {
-        this.disconnect(oldVal.id)
+        this.disconnect(oldVal.id);
       }
-      this.connect()
+      this.connect();
     },
     chatData(value) {
       this.$nextTick(() => {
-        this.scrollToBottom()
-      })
+        this.scrollToBottom();
+      });
     },
   },
   async created() {
-    await this.fetchChatRoom()
-    await this.allMarkAsRead()
+    await this.fetchChatRoom();
+    await this.allMarkAsRead();
   },
   updated() {
     // This will be called when the component updates
     this.$nextTick(() => {
-      this.scrollToBottom()
-    })
+      this.scrollToBottom();
+    });
   },
   methods: {
-    ...mapActions(['fetchUnreadNotifications']),
+    ...mapActions(["fetchUnreadNotifications"]),
     connect() {
       if (this.currentRoom.id) {
-        let vm = this
-        this.getChatData()
+        let vm = this;
+        this.getChatData();
 
-        Echo.private(`chat.${this.currentRoom.id}`)
-          .listen('.message.created', (e) => {
-            vm.getChatData()
-            vm.allMarkAsRead()
+        this.$echo
+          .private(`chat.${this.currentRoom.id}`)
+          .listen(".message.created", (e) => {
+            vm.getChatData();
+            vm.allMarkAsRead();
           })
-          .listen('NewChatPhoto', (e) => {
-            vm.getChatData()
-            vm.allMarkAsRead()
-          })
+          .listen("NewChatPhoto", (e) => {
+            vm.getChatData();
+            vm.allMarkAsRead();
+          });
       }
     },
     disconnect(roomId) {
-      Echo.leave(`chat${roomId}`)
+      this.$echo.leave(`chat${roomId}`);
     },
     async fetchChatRoom() {
-      const res = await axios.get('chat/rooms/' + this.$route.params.id, {
-        headers: authHeader(),
-      })
+      const res = await axios.get("api/chat/rooms/" + this.$route.params.id);
 
-      this.currentRoom = await res.data.chat_room
+      this.currentRoom = await res.data.chat_room;
       this.otherUser = this.currentRoom?.users?.find(
-        (user) => user.id != this.$store.state.auth.user.id
-      )
+        (user) => user.id != this.$auth.user.id
+      );
     },
     getChatData() {
       axios
-        .get(`chat/rooms/${this.currentRoom.id}/data`, {
-          headers: authHeader(),
-        })
+        .get(`api/chat/rooms/${this.currentRoom.id}/data`)
         .then((res) => {
-          this.chatData = res.data
+          this.chatData = res.data;
         })
-        .catch((err) => console.log(err))
+        .catch((err) => console.log(err));
     },
     async allMarkAsRead() {
       await axios({
-        url: 'all-mark-as-read',
-        method: 'PUT',
+        url: "all-mark-as-read",
+        method: "PUT",
         data: { chat_room_id: this.currentRoom.id },
-        headers: authHeader(),
       }).then((res) => {
-        this.fetchUnreadNotifications()
-      })
+        this.fetchUnreadNotifications();
+      });
     },
     formatDate(date) {
-      return moment(date).calendar()
+      return moment(date).calendar();
     },
     scrollToBottom() {
-      const chatBody = this.$refs.chat_body
+      const chatBody = this.$refs.chat_body;
 
       if (chatBody) {
-        chatBody.scrollTop = chatBody.scrollHeight
+        chatBody.scrollTop = chatBody.scrollHeight;
       }
     },
   },
-}
+};
 </script>

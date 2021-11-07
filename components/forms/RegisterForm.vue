@@ -1,103 +1,99 @@
 <template>
-  <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-    <form
-      @submit.prevent="handleSubmit(handleRegister)"
-      class="enter_site_right"
-      ref="form"
-    >
-      <div v-if="!successful">
-        <div class="form-group">
-          <div class="radio_male">
-            <input
-              type="radio"
-              name="gender"
-              id="boy"
-              :value="1"
-              v-model="form.gender"
-            />
-            <label for="boy">
-              <img src="@/assets/images/boy.svg" alt="" />
-              {{ $t("male") }}
-            </label>
-            <input
-              type="radio"
-              name="gender"
-              id="girl"
-              :value="2"
-              v-model="form.gender"
-            />
-            <label for="girl">
-              <img src="@/assets/images/girl.svg" alt="" />
-              {{ $t("female") }}
-            </label>
-          </div>
-          <span name="gender" class="error-feedback" />
+  <ValidationObserver v-slot="{ invalid }">
+    <form @submit.prevent="handleRegister" class="enter_site_right" ref="form">
+      <!-- <div v-if="!successful"> -->
+      <div class="form-group">
+        <div class="radio_male">
+          <input
+            type="radio"
+            name="gender"
+            id="boy"
+            :value="1"
+            v-model="form.gender"
+          />
+          <label for="boy">
+            <img src="@/assets/images/boy.svg" alt="" />
+            {{ $t("male") }}
+          </label>
+          <input
+            type="radio"
+            name="gender"
+            id="girl"
+            :value="2"
+            v-model="form.gender"
+          />
+          <label for="girl">
+            <img src="@/assets/images/girl.svg" alt="" />
+            {{ $t("female") }}
+          </label>
         </div>
-        <div class="form-group">
-          <ValidationProvider v-slot="{ errors }">
-            <input
-              ref="username"
-              v-model="form.username"
-              name="username"
-              type="text"
-              class="form-control"
-              :placeholder="$t('create_login')"
-            />
-            <span name="username" class="error-feedback" v-text="errors[0]" />
-            <div
-              class="invalid-feedback d-block"
-              v-if="backendErrors.username.length > 0"
-              v-text="backendErrors.username[0]"
-            />
-          </ValidationProvider>
-        </div>
-        <div class="form-group">
-          <ValidationProvider v-slot="{ errors }">
-            <input
-              type="tel"
-              name="phone"
-              class="form-control"
-              pattern="^[\+][0-9]"
-              :placeholder="$t('Enter your phone number')"
-              v-model="form.phone"
-            />
-            <span name="phone" class="error-feedback" v-text="errors[0]" />
-            <div
-              class="invalid-feedback d-block"
-              v-if="backendErrors.phone.length > 0"
-              v-text="backendErrors.phone[0]"
-            />
-          </ValidationProvider>
-        </div>
-
-        <div class="form-group">
-          <ValidationProvider v-slot="{ errors }">
-            <input
-              v-model="form.password"
-              name="password"
-              type="password"
-              class="form-control"
-              :placeholder="$t('create_password')"
-            />
-            <span name="password" class="error-feedback" v-text="errors[0]" />
-          </ValidationProvider>
-        </div>
-
-        <div class="form-group">
-          <button
-            type="submit"
-            class="btn btn-primary btn-block"
-            :disabled="loading"
-          >
-            <span
-              v-show="loading"
-              class="spinner-border spinner-border-sm"
-            ></span>
-            &nbsp;
-            {{ $t("signup") }}
-          </button>
-        </div>
+        <span name="gender" class="error-feedback" />
       </div>
+      <div class="form-group">
+        <ValidationProvider rules="required" v-slot="{ errors }">
+          <input
+            ref="username"
+            v-model="form.username"
+            name="username"
+            type="text"
+            class="form-control"
+            :placeholder="$t('create_login')"
+          />
+          <span class="error-feedback" v-text="errors[0]" />
+          <div
+            class="invalid-feedback d-block"
+            v-if="backendErrors.username && backendErrors.username.length > 0"
+            v-text="backendErrors.username[0]"
+          />
+        </ValidationProvider>
+      </div>
+      <div class="form-group">
+        <ValidationProvider rules="required" v-slot="{ errors }">
+          <input
+            type="tel"
+            name="phone"
+            class="form-control"
+            pattern="^[\+][\d]{1,15}$"
+            :placeholder="$t('Enter your phone number')"
+            v-model="form.phone"
+          />
+          <span class="error-feedback">{{ errors[0] }}</span>
+          <div
+            class="invalid-feedback d-block"
+            v-if="backendErrors.phone && backendErrors.phone.length > 0"
+            v-text="backendErrors.phone[0]"
+          />
+        </ValidationProvider>
+      </div>
+
+      <div class="form-group">
+        <ValidationProvider rules="required" v-slot="{ errors }">
+          <input
+            v-model="form.password"
+            name="password"
+            type="password"
+            class="form-control"
+            :placeholder="$t('create_password')"
+          />
+          <span class="error-feedback" v-text="errors[0]" />
+        </ValidationProvider>
+      </div>
+
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          :disabled="loading || invalid"
+        >
+          <span
+            v-show="loading"
+            class="spinner-border spinner-border-sm"
+          ></span>
+          &nbsp;
+          {{ $t("signup") }}
+        </button>
+      </div>
+      <!-- </div> -->
     </form>
   </ValidationObserver>
 </template>
@@ -135,8 +131,8 @@ export default {
       successful: false,
       loading: false,
       message: "",
-      // schema,
-      gender: 1,
+      schema,
+      // gender: 1,
       backendErrors: {
         username: [],
         phone: [],
@@ -144,11 +140,11 @@ export default {
       phone: "",
       phoneVerified: false,
       error: "",
-      form: {},
+      form: { gender: 1 },
     };
   },
   methods: {
-    handleRegister() {
+    async handleRegister() {
       this.backendErrors = {
         username: [],
         phone: [],
@@ -157,23 +153,40 @@ export default {
       // this.successful = false;
       this.loading = true;
       this.form.lang = this.$i18n.locale;
-      this.$store.dispatch("auth/register", this.form).then(
-        (data) => {
-          this.message = data.message;
 
-          this.$store.commit("setUserPhone", this.phone);
+      try {
+        const res = await this.$axios.$post("api/auth/register", this.form);
+        if (res.message == "Success") {
+          this.message = res.message;
 
-          const smsConfirmModal = new Modal(
+          this.$store.commit("setGuest", {
+            username: this.form.username,
+            password: this.form.password,
+            phone: this.form.phone,
+          });
+
+          const smsConfirmModal = Modal.getInstance(
             document.getElementById("confirm-sms-code-modal")
           );
 
           smsConfirmModal.show();
-        },
-        (error) => {
-          this.backendErrors = { ...error };
-          this.loading = false;
+        } else {
+          this.backendErrors = { ...res.errors };
         }
-      );
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        this.$toast.error(
+          this.$t("error_while_fetching_data") + ": " + message
+        );
+      }
+
+      this.loading = false;
     },
   },
 };

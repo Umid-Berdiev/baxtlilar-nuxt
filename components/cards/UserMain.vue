@@ -20,8 +20,15 @@
             </svg>
           </div>
           <div class="dropdown_body">
-            <nuxt-link to="/settings">{{ $t('settings') }}</nuxt-link>
-            <a href="#" @click="logOut">{{ $t('logout') }}</a>
+            <button
+              class="btn btn-link text-decoration-none"
+              @click="gotoSettings"
+            >
+              {{ $t("settings") }}
+            </button>
+            <button class="btn btn-link text-decoration-none" @click="logOut">
+              {{ $t("logout") }}
+            </button>
           </div>
         </div>
         <div class="dropdown" v-else>
@@ -54,7 +61,7 @@
             </svg>
           </div>
           <div class="dropdown_body">
-            <a href="#" @click="showComplaintModal">{{ $t('complain') }}</a>
+            <a href="#" @click="showComplaintModal">{{ $t("complain") }}</a>
           </div>
         </div>
         <h2>{{ user.username }}</h2>
@@ -74,14 +81,14 @@
 </template>
 
 <script>
-import IconStatus from '../icons/IconStatus.vue'
-import Loader from '../Loader.vue'
-import ComplaintModal from '../modals/ComplaintModal.vue'
+import IconStatus from "../icons/IconStatus.vue";
+import Loader from "../Loader.vue";
+import ComplaintModal from "../modals/ComplaintModal.vue";
 export default {
   data() {
     return {
       // currentUser: {}
-    }
+    };
   },
   components: { Loader, IconStatus, ComplaintModal },
   props: {
@@ -89,17 +96,20 @@ export default {
   },
   computed: {
     currentUser() {
-      return this.$auth.user
+      return this.$auth.user;
     },
   },
   methods: {
-    logOut() {
-      this.$store.dispatch('auth/logout')
-      // .then(() => (window.location.href = "/"));
+    async logOut() {
+      await this.$auth.logout();
+      this.$router.push("/");
     },
     showComplaintModal() {
-      this.$refs.complaintModal.showModal()
+      this.$refs.complaintModal.showModal();
+    },
+    gotoSettings() {
+      this.$router.push(this.localePath("/settings"));
     },
   },
-}
+};
 </script>

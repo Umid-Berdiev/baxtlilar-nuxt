@@ -53,6 +53,12 @@ const mutations = {
   setTariffList(state, payload) {
     state.tariffList = payload;
   },
+  setGuest(state, payload) {
+    state.guest = payload;
+  },
+  setActiveFilterSection(state, payload) {
+    state.activeFilterSection = payload;
+  },
 };
 
 export default mutations;

@@ -17,7 +17,7 @@
                   type="tel"
                   name="phone"
                   class="form-control"
-                  pattern="^[\+][0-9]"
+                  pattern="^[\+][\d]{1,15}$"
                   :title="$t('should_start_with_plus')"
                   v-model="phone"
                   :placeholder="$t('Enter your phone number')"
@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import { Modal } from 'bootstrap'
-import { mapActions } from 'vuex'
+import { Modal } from "bootstrap";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -97,69 +97,69 @@ export default {
       phoneVerified: false,
       phoneLoading: false,
       codeLoading: false,
-      message: '',
-      phone: '',
-      code: '',
-      realCode: '',
-      password: '',
+      message: "",
+      phone: "",
+      code: "",
+      realCode: "",
+      password: "",
       showModal: false,
       resetPasswordModal: {},
-      phoneError: '',
-      codeError: '',
-    }
+      phoneError: "",
+      codeError: "",
+    };
   },
   mounted() {
-    this.resetPasswordModal = new Modal(this.$refs.resetPasswordModal)
+    this.resetPasswordModal = new Modal(this.$refs.resetPasswordModal);
   },
   methods: {
-    ...mapActions(['fetchCheckPhone', 'fetchCheckSmsCode']),
+    ...mapActions(["fetchCheckPhone", "fetchCheckSmsCode"]),
     async phoneSubmit() {
-      this.phoneError = ''
+      this.phoneError = "";
       if (this.phone.length != 17) {
-        this.phoneError = this.$t('Wrong number')
+        this.phoneError = this.$t("Wrong number");
       } else {
-        this.phoneLoading = true
-        const res = await this.fetchCheckPhone(this.phone)
+        this.phoneLoading = true;
+        const res = await this.fetchCheckPhone(this.phone);
         if (res.status) {
-          this.phoneVerified = true
+          this.phoneVerified = true;
         } else {
-          this.phoneError = this.$t('Wrong number')
+          this.phoneError = this.$t("Wrong number");
         }
-        this.phoneLoading = false
+        this.phoneLoading = false;
       }
     },
     async submitCode() {
-      this.codeError = ''
-      this.codeLoading = true
+      this.codeError = "";
+      this.codeLoading = true;
       const res = await this.fetchCheckSmsCode({
         code: this.code,
         phone: this.phone,
         password: this.password,
-      })
+      });
       if (res.status) {
-        this.$store.dispatch('auth/login', res).then(
+        this.$store.dispatch("auth/login", res).then(
           () => {
             // console.log("RESPONSE2");
-            this.resetPasswordModal.hide()
-            this.$router.push('/home')
+            this.resetPasswordModal.hide();
+            this.$router.push("/home");
           },
           (error) => {
             // console.log("ERROR2");
-            this.loading = false
-            this.message = 'Credentials not match'
+            this.loading = false;
+            this.message = "Credentials not match";
           }
-        )
+        );
       } else {
-        this.codeError = this.$t('Wrong code')
+        this.codeError = this.$t("Wrong code");
       }
-      this.codeLoading = false
+      this.codeLoading = false;
     },
     showModalFunc() {
-      const vm = this
-      vm.resetPasswordModal.show()
+      const vm = this;
+      vm.resetPasswordModal.show();
     },
   },
-}
+};
 </script>
 
 <style></style>

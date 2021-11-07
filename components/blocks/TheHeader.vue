@@ -132,8 +132,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   data() {
     return {
@@ -142,9 +140,12 @@ export default {
   },
   computed: {
     // ...mapGetters(["user/newMessageNotifications", "user/otherNotifications"]),
-    newMessageNotifications: () =>
-      this.$store.getters["user/newMessageNotifications"],
-    otherNotifications: () => this.$store.getters["user/otherNotifications"],
+    newMessageNotifications() {
+      return this.$store.getters["user/newMessageNotifications"];
+    },
+    otherNotifications() {
+      return this.$store.getters["user/otherNotifications"];
+    },
   },
 };
 </script>

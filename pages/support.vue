@@ -8,7 +8,7 @@
         :key="index"
       >
         <a class="support_top_item" @click="setChavos(item.support_chavos)">
-          <img src="/src/assets/images/request.svg" alt="" />
+          <img src="~/assets/images/request.svg" alt="" />
           <h2>{{ item.name }}</h2>
         </a>
       </div>

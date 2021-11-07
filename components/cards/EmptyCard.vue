@@ -1,6 +1,6 @@
 <template>
   <div class="empty_card">
-    <img src="../../assets/images/und.svg" alt="" />
+    <img src="~/assets/images/und.svg" alt="" />
     <h4>
       {{ texts[textIndex] }}
     </h4>

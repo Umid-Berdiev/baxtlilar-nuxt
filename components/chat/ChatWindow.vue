@@ -4,7 +4,7 @@
       v-for="(item, index) in chatData"
       :key="index"
       class="chat_msg_item"
-      :class="{ user1: item.user.id == $store.state.auth.user.id }"
+      :class="{ user1: item.user.id == $auth.user.id }"
     >
       <p v-if="item.message" class="text" v-text="item.message" />
       <img
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   props: {
@@ -31,14 +31,14 @@ export default {
   data() {
     return {
       APP_URL: process.env.API_URL,
-    }
+    };
   },
   methods: {
     formatDate(date) {
-      return moment(date).calendar()
+      return moment(date).calendar();
     },
   },
-}
+};
 </script>
 
 <style></style>

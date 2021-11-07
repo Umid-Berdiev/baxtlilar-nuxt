@@ -1,7 +1,7 @@
 <template>
   <div
     class="chat_msg_item"
-    :class="{ user1: message.user.id == $store.state.auth.user.id }"
+    :class="{ user1: message.user.id == $auth.user.id }"
   >
     <p class="text" v-text="message.message" />
     <small v-text="formatDate(message.created_at)" />

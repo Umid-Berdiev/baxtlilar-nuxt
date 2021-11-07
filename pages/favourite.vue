@@ -6,16 +6,13 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import UsersList from "@/components/lists/UsersList.vue";
 
 export default {
   components: { UsersList },
-  created() {
-    this.fetchFavourites();
-  },
-  methods: {
-    ...mapActions(["fetchFavourites"]),
+  async asyncData({ store }) {
+    store.dispatch("fetchFavourites");
   },
   computed: {
     ...mapGetters(["getFavourites"]),

@@ -2,14 +2,14 @@
   <div class="anceta_form">
     <div class="steps_form">
       <div>1</div>
-      <div class="active">{{ $t('additional') }} {{ $t('questions') }}</div>
+      <div class="active">{{ $t("additional") }} {{ $t("questions") }}</div>
       <div>3</div>
       <div>4</div>
       <div>5</div>
     </div>
-    <h2>{{ $t('questions_and_answers') }}</h2>
+    <h2>{{ $t("questions_and_answers") }}</h2>
     <h2 class="text-center" v-if="getBlistQuestions.length == 0">
-      {{ $t('no_questions') }}
+      {{ $t("no_questions") }}
     </h2>
     <form @submit.prevent="submit">
       <div class="row">
@@ -30,7 +30,7 @@
             v-show="loading"
             class="spinner-border spinner-border-sm text-white"
           ></span>
-          &nbsp; {{ $t('next') }}
+          &nbsp; {{ $t("next") }}
         </button>
       </div>
     </form>
@@ -38,43 +38,48 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
-  layout: 'questionnaire',
+  layout: "questionnaire",
   mounted() {
-    this.setQuestionnairePercent(20)
+    this.setQuestionnairePercent(20);
   },
   data() {
     return {
       loading: false,
       answers: [],
-    }
+    };
   },
   computed: {
-    ...mapGetters(['getBlistQuestions']),
+    ...mapGetters({ getBlistQuestions: "questionnaire/getBlistQuestions" }),
   },
   created() {
-    this.fetchBlistQuestions()
+    this.fetchBlistQuestions();
   },
   methods: {
-    ...mapActions(['fetchBlistQuestions', 'saveUserAnswers']),
-    ...mapMutations(['setQuestionnairePercent']),
+    ...mapActions({
+      fetchBlistQuestions: "questionnaire/fetchBlistQuestions",
+      saveUserAnswers: "questionnaire/saveUserAnswers",
+    }),
+    ...mapMutations({
+      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+    }),
     async submit(e) {
-      this.loading = true
-      const formData = new FormData(e.target)
-      let form = Object.fromEntries(formData)
-      const questionIds = this.getBlistQuestions.map((item) => item.id)
-      form.answers = this.answers
-      form.questionIds = questionIds
+      this.loading = true;
+      const formData = new FormData(e.target);
+      let form = Object.fromEntries(formData);
+      const questionIds = this.getBlistQuestions.map((item) => item.id);
+      form.answers = this.answers;
+      form.questionIds = questionIds;
       try {
-        await this.saveUserAnswers(form)
-        this.loading = false
-        this.$router.push({ path: '/fifth-part' })
+        await this.saveUserAnswers(form);
+        this.loading = false;
+        this.$router.push(this.localePath("/questionnaire/fifth-part"));
       } catch (e) {
-        alert(e)
+        alert(e);
       }
     },
   },
-}
+};
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="anceta_form">
     <div class="steps_form">
-      <div class="active">{{ $t('fill_data') }}</div>
+      <div class="active">{{ $t("fill_data") }}</div>
       <div>2</div>
       <div>3</div>
       <div>4</div>
@@ -12,7 +12,7 @@
         <div class="col-lg-5">
           <div class="form-group">
             <label for="#" id="family_status-label">{{
-              $t('family_status')
+              $t("family_status")
             }}</label>
             <a-select
               :placeholder="$t('choose')"
@@ -22,15 +22,15 @@
               name="family_status"
             >
               <a-select-option value="single">{{
-                $t('single')
+                $t("single")
               }}</a-select-option>
               <a-select-option value="relationship">{{
-                $t('in_relationship')
+                $t("in_relationship")
               }}</a-select-option>
               <a-select-option value="divorced">{{
-                $t('divorced')
+                $t("divorced")
               }}</a-select-option>
-              <a-select-option value="widow">{{ $t('widow') }}</a-select-option>
+              <a-select-option value="widow">{{ $t("widow") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ family_statusError }}</span>
           </div>
@@ -39,7 +39,7 @@
       <div class="row">
         <div class="col-lg-5 col-sm-6 col-8">
           <div class="form-group">
-            <label for="">{{ $t('having_children') }}</label>
+            <label for="">{{ $t("having_children") }}</label>
             <div class="row big_radio">
               <div class="col-6">
                 <input
@@ -60,14 +60,14 @@
                   value="0"
                   @change="children"
                 />
-                <label for="child2">{{ $t('no') }}</label>
+                <label for="child2">{{ $t("no") }}</label>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-5 col-sm-6 col-4">
           <div class="form-group" v-if="hasChildren">
-            <label>{{ $t('count_chilldren') }}</label>
+            <label>{{ $t("count_chilldren") }}</label>
             <a-select
               :showSearch="false"
               name="childrenCount"
@@ -85,23 +85,23 @@
       <div class="row" v-for="index in parseInt(childrenCount)" :key="index">
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t('sex') }}</label>
+            <label for="">{{ $t("sex") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
               @change="(value) => selectChildGender(value, index - 1)"
               class="form-control"
             >
-              <a-select-option value="son">{{ $t('boy') }}</a-select-option>
+              <a-select-option value="son">{{ $t("boy") }}</a-select-option>
               <a-select-option value="daughter">{{
-                $t('girl')
+                $t("girl")
               }}</a-select-option>
             </a-select>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t('age') }}</label>
+            <label for="">{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
@@ -114,7 +114,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group">
-            <label for="" id="health-label">{{ $t('health_text') }}?</label>
+            <label for="" id="health-label">{{ $t("health_text") }}?</label>
             <textarea
               name="health"
               id=""
@@ -128,7 +128,7 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="form-group">
-            <label for="">{{ $t('have_criminal') }}</label>
+            <label for="">{{ $t("have_criminal") }}</label>
             <div class="row big_radio">
               <div class="col-lg-4 col-sm-4 col-6">
                 <input
@@ -149,14 +149,14 @@
                   checked
                   @change="crime"
                 />
-                <label for="mf2">{{ $t('no') }}</label>
+                <label for="mf2">{{ $t("no") }}</label>
               </div>
             </div>
           </div>
         </div>
         <div class="col-lg-5">
           <div class="form-group" v-if="hasCrime">
-            <label for="">{{ $t('which_criminal') }}?</label>
+            <label for="">{{ $t("which_criminal") }}?</label>
             <input type="text" name="criminal_article" v-model="crimeArticle" />
           </div>
         </div>
@@ -167,7 +167,7 @@
             v-show="loading"
             class="spinner-border spinner-border-sm text-white"
           ></span>
-          &nbsp; {{ $t('next') }}
+          &nbsp; {{ $t("next") }}
         </button>
       </div>
     </form>
@@ -175,12 +175,12 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from "vuex";
 
 export default {
-  layout: 'questionnaire',
+  layout: "questionnaire",
   mounted() {
-    this.setQuestionnairePercent(15)
+    this.setQuestionnairePercent(15);
   },
   data() {
     return {
@@ -194,73 +194,77 @@ export default {
         childGender: [],
         childAge: [],
       },
-      family_statusError: '',
-      healthError: '',
-    }
+      family_statusError: "",
+      healthError: "",
+    };
   },
   methods: {
-    ...mapActions(['saveUserFamilyStatus']),
-    ...mapMutations(['setQuestionnairePercent']),
+    ...mapActions({
+      saveUserFamilyStatus: "questionnaire/saveUserFamilyStatus",
+    }),
+    ...mapMutations({
+      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+    }),
     children(e) {
       if (e.target.value == 1) {
-        this.hasChildren = true
-        this.childrenCount = 1
+        this.hasChildren = true;
+        this.childrenCount = 1;
       } else {
-        this.hasChildren = false
-        this.childrenCount = 0
+        this.hasChildren = false;
+        this.childrenCount = 0;
       }
     },
     crime(e) {
       if (e.target.value == 1) {
-        this.hasCrime = true
+        this.hasCrime = true;
       } else {
-        this.hasCrime = false
-        this.crimeArticle = null
+        this.hasCrime = false;
+        this.crimeArticle = null;
       }
     },
     async submit(e) {
       if (this.validate(e)) {
-        this.loading = true
-        const formData = new FormData(e.target)
-        let form = Object.fromEntries(formData)
-        form = { ...form, ...this.selects }
-        console.log(form)
+        this.loading = true;
+        const formData = new FormData(e.target);
+        let form = Object.fromEntries(formData);
+        form = { ...form, ...this.selects };
+        console.log(form);
         try {
-          await this.saveUserFamilyStatus(form)
-          this.loading = false
-          this.$router.push({ path: '/fourth-part' })
+          await this.saveUserFamilyStatus(form);
+          this.loading = false;
+          this.$router.push(this.localePath("/questionnaire/fourth-part"));
         } catch (e) {
-          alert(e)
+          alert(e);
           // this.$router.push({ path: "/fourth-part" });
         }
       }
     },
     validate(e) {
-      let result = true
-      if (e.target.health.value == '') {
-        this.healthError = this.$t('Required field')
-        document.getElementById('health-label').scrollIntoView()
-        result = false
+      let result = true;
+      if (e.target.health.value == "") {
+        this.healthError = this.$t("Required field");
+        document.getElementById("health-label").scrollIntoView();
+        result = false;
       }
       if (this.selects.family_status == null) {
-        this.family_statusError = this.$t('Required field')
-        document.getElementById('family_status-label').scrollIntoView()
-        result = false
+        this.family_statusError = this.$t("Required field");
+        document.getElementById("family_status-label").scrollIntoView();
+        result = false;
       }
-      return result
+      return result;
     },
     selectChildGender(value, index) {
-      this.selects.childGender[index] = value
+      this.selects.childGender[index] = value;
     },
     selectFamilyStatus(value) {
-      this.family_statusError = ''
-      this.selects.family_status = value
+      this.family_statusError = "";
+      this.selects.family_status = value;
     },
     selectChildrenCount(value) {
-      this.childrenCount = value
+      this.childrenCount = value;
     },
   },
-}
+};
 </script>
 
 <style></style>

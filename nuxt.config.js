@@ -30,16 +30,16 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "~/node_modules/bootstrap/dist/css/bootstrap.min.css",
-    "~/node_modules/ant-design-vue/dist/antd.min.css",
     "~/assets/css/style.css",
     "~/assets/css/main.css",
+    // "~/assets/variables.sass",
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/axios",
-    "@/plugins/antd-ui",
-    "~plugins/validate.js",
+    "~/plugins/axios.js",
+    "~/plugins/antd-ui.js",
+    "~/plugins/validate.js",
     // "@/plugins/jivosite.js",
   ],
 
@@ -47,7 +47,21 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/dotenv"],
+  buildModules: [
+    "@nuxtjs/dotenv",
+    [
+      "@nuxtjs/laravel-echo",
+      {
+        broadcaster: "pusher",
+        cluster: process.env.PUSHER_APP_CLUSTER,
+        forceTLS: true,
+        key: process.env.PUSHER_APP_KEY,
+        // authModule: true,
+        connectOnLogin: true,
+        disconnectOnLogout: true,
+      },
+    ],
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -68,7 +82,7 @@ export default {
     defaultLocale: "uz",
     vueI18nLoader: true,
     vueI18n: i18nConfig,
-    // strategy: 'no_prefix',
+    // strategy: "prefix",
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -103,14 +117,22 @@ export default {
     redirect: {
       login: "/",
       logout: "/",
-      callback: false,
+      callback: "/",
       home: false,
     },
+    plugins: [{ src: "~/plugins/axios", ssr: true }],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ["vee-validate/dist/rules "],
+    loaders: {
+      less: {
+        lessOptions: {
+          javascriptEnabled: true,
+        },
+      },
+    },
   },
 
   router: {

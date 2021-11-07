@@ -7,7 +7,7 @@ const state = () => ({
   newMessageNotifications: [],
   otherNotifications: [],
   userPhone: null,
-})
+});
 
 const getters = {
   getMessages: (state) => state.messages,
@@ -18,105 +18,95 @@ const getters = {
   newMessageNotifications: (state) => state.newMessageNotifications,
   otherNotifications: (state) => state.otherNotifications,
   getUserPhone: (state) => state.userPhone,
-}
+};
 
 const mutations = {
   setMessages(state, payload) {
-    state.messages = payload
+    state.messages = payload;
   },
 
   setUserSentOffers(state, payload) {
-    state.sentOffers = payload
+    state.sentOffers = payload;
   },
 
   setUserReceivedOffers(state, payload) {
-    state.receivedOffers = payload
+    state.receivedOffers = payload;
   },
 
   setUserAllOffers(state, payload) {
-    state.allOffers = payload
+    state.allOffers = payload;
   },
 
   setRelatedUsers(state, payload) {
-    state.relatedUsers = payload
+    state.relatedUsers = payload;
   },
 
   newMessageNotifications(state, payload) {
-    state.newMessageNotifications = payload
+    state.newMessageNotifications = payload;
   },
 
   otherNotifications(state, payload) {
-    state.otherNotifications = payload
+    state.otherNotifications = payload;
   },
 
   setUserPhone(state, payload) {
-    state.userPhone = payload
+    state.userPhone = payload;
   },
-}
+};
 
 const actions = {
   async fetchMessages({ commit }) {
-    const response = await this.$axios.get('messages', {
-      headers: authHeader(),
-    })
-    commit('setMessages', response.data)
+    const response = await this.$axios.get("api/messages");
+    commit("setMessages", response.data);
   },
 
   async fetchAddFavourite({ commit }, payload) {
-    const response = await this.$axios.post(
-      'add-favourite',
-      { user_id: payload },
-      { headers: authHeader() }
-    )
+    const response = await this.$axios.post("api/add-favourite", {
+      user_id: payload,
+    });
   },
   async fetchAddBlock({ commit }, payload) {
-    const response = await this.$axios.post(
-      'add-block',
-      { user_id: payload },
-      { headers: authHeader() }
-    )
+    const response = await this.$axios.post("api/add-block", {
+      user_id: payload,
+    });
   },
 
   async fetchUserOffers({ commit }) {
-    const response = await this.$axios.get('offers')
-    commit('setUserSentOffers', response.data.sent_offers)
-    commit('setUserReceivedOffers', response.data.received_offers)
-    commit('setUserAllOffers', response.data.all_offers)
+    const response = await this.$axios.get("api/offers");
+    commit("setUserSentOffers", response.data.sent_offers);
+    commit("setUserReceivedOffers", response.data.received_offers);
+    commit("setUserAllOffers", response.data.all_offers);
   },
 
   async fetchRelatedUsers({ commit }) {
-    const response = await this.$axios.get('related-users', {
-      headers: authHeader(),
-    })
-    commit('setRelatedUsers', response.data)
+    const response = await this.$axios.get("api/related-users");
+    commit("setRelatedUsers", response.data);
   },
 
   async fetchUnreadNotifications({ commit }) {
-    const res = await this.$axios.get('unread-notifications', {
-      headers: authHeader(),
-    })
+    const res = await this.$axios.get("api/unread-notifications");
 
-    const newMessageNotifications = []
-    const otherNotifications = []
+    const newMessageNotifications = [];
+    const otherNotifications = [];
 
     await res.data.forEach((notification) => {
-      if (notification.type == 'App\\Notifications\\MessageCreatedNotification')
-        newMessageNotifications.push(notification)
-      else otherNotifications.push(notification)
-    })
+      if (notification.type == "App\\Notifications\\MessageCreatedNotification")
+        newMessageNotifications.push(notification);
+      else otherNotifications.push(notification);
+    });
 
-    commit('newMessageNotifications', newMessageNotifications)
-    commit('otherNotifications', otherNotifications)
+    commit("newMessageNotifications", newMessageNotifications);
+    commit("otherNotifications", otherNotifications);
   },
 
   setAccessToken({ commit }, payload) {
-    localStorage.setItem('accessToken', JSON.stringify(payload))
+    localStorage.setItem("accessToken", JSON.stringify(payload));
   },
-}
+};
 
 export default {
   state,
   getters,
   mutations,
   actions,
-}
+};

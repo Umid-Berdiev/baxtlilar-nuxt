@@ -1,31 +1,31 @@
 <template>
   <div class="template_main_right" id="content">
-    <h1>{{ $t('settings') }}</h1>
+    <h1>{{ $t("settings") }}</h1>
     <div class="tab_description sett">
       <ul class="nav nav-tabs">
         <li>
           <a href="#tab1" class="active" data-bs-toggle="tab">{{
-            $t('questionnaire')
+            $t("questionnaire")
           }}</a>
         </li>
         <li>
-          <a href="#tab2" data-bs-toggle="tab">{{ $t('family') }}</a>
+          <a href="#tab2" data-bs-toggle="tab">{{ $t("family") }}</a>
         </li>
         <li>
           <a href="#tab3" data-bs-toggle="tab" id="filter-section">{{
-            $t('preferences')
+            $t("preferences")
           }}</a>
         </li>
         <li>
-          <a href="#tab4" data-bs-toggle="tab">{{ $t('confirmation') }}</a>
+          <a href="#tab4" data-bs-toggle="tab">{{ $t("confirmation") }}</a>
         </li>
         <li>
-          <a href="#tab5" data-bs-toggle="tab">{{ $t('safety') }}</a>
+          <a href="#tab5" data-bs-toggle="tab">{{ $t("safety") }}</a>
         </li>
       </ul>
       <div class="tab-content setting_main">
         <div class="tab-pane fade show active" id="tab1">
-          <h2>{{ $t('modify_questionnaire') }}</h2>
+          <h2>{{ $t("modify_questionnaire") }}</h2>
           <self-form :user="currentUser" />
           <education-form :user="currentUser" />
         </div>
@@ -47,12 +47,12 @@
 </template>
 
 <script>
-import EducationForm from '@/components/forms/EducationForm.vue'
-import FamilyForm from '@/components/forms/FamilyForm.vue'
-import FilterForm from '@/components/forms/FilterForm.vue'
-import PassportForm from '@/components/forms/PassportForm.vue'
-import SecurityForm from '@/components/forms/SecurityForm.vue'
-import SelfForm from '@/components/forms/SelfForm.vue'
+import EducationForm from "@/components/forms/EducationForm.vue";
+import FamilyForm from "@/components/forms/FamilyForm.vue";
+import FilterForm from "@/components/forms/FilterForm.vue";
+import PassportForm from "@/components/forms/PassportForm.vue";
+import SecurityForm from "@/components/forms/SecurityForm.vue";
+import SelfForm from "@/components/forms/SelfForm.vue";
 
 export default {
   components: {
@@ -66,17 +66,20 @@ export default {
   data() {
     return {
       currentUser: {},
-    }
+    };
   },
-  async created() {
-    const res = await this.$axios.get('user-details')
-    this.currentUser = res.data
+  async asyncData({ $axios }) {
+    const currentUser = await $axios.$get("api/user-details");
+
+    return {
+      currentUser,
+    };
   },
   mounted() {
     if (this.$store.state.activeFilterSection) {
-      document.getElementById('filter-section').click()
+      document.getElementById("filter-section").click();
     }
-    this.$store.state.activeFilterSection = false
+    this.$store.commit("setActiveFilterSection", false);
   },
-}
+};
 </script>

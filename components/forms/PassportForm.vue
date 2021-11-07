@@ -31,7 +31,7 @@
     <div class="confirm_for">
       <h2>{{ $t("confirmation_personal_data") }}</h2>
       <div class="item_con">
-        <img src="/src/assets/images/con2.svg" alt="" />
+        <img src="~/assets/images/con2.svg" alt="" />
         {{ $t("confirmation_personal_data_fewer_response") }}
       </div>
       <h3>
@@ -120,7 +120,7 @@ export default {
   props: { user: Object },
   data() {
     return {
-      user: {},
+      // user: {},
       loading: false,
       modal: null,
       passportPhoto: null,

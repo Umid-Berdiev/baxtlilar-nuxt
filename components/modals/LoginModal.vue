@@ -82,6 +82,7 @@
         </div>
       </div>
     </div>
+
     <reset-pasword-modal ref="resetPasswordModal" id="resetPasswordModal" />
   </div>
 </template>
@@ -126,15 +127,13 @@ export default {
       this.form.lang = this.$i18n.locale;
 
       try {
-        await this.$auth.loginWith("laravelSanctum", {
+        const res = await this.$auth.loginWith("laravelSanctum", {
           data: this.form,
         });
 
         this.loginModal.hide();
-        if (data.message == "phone_number_not_verified") {
-          this.$store.commit("setUserPhone", data.phone);
-
-          // this.loginModal.hide();
+        if (res.data.message == "phone_number_not_verified") {
+          this.$store.commit("setUserPhone", res.data.phone);
 
           const smsConfirmModal = new Modal(
             document.getElementById("confirm-sms-code-modal")
