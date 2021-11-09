@@ -26,9 +26,10 @@
     "nuxt": "^2.15.7",
     "nuxt-validate": "^1.0.1",
     "pusher-js": "^7.0.3",
-    "swiper": "^7.2.0",
+    "swiper": "5.x",
     "vee-validate": "^3.4.13",
     "vue": "^2.6.14",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-template-compiler": "^2.6.14",
     "yup": "^0.32.11"
   },

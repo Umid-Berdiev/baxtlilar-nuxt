@@ -1,7 +1,7 @@
 <template>
   <div class="template_main_right personal" id="content">
     <div class="block_top_about">
-      <user-images-slider />
+      <user-images-slider :user_id="currentUser.id" />
       <user-main :user="currentUser" />
     </div>
     <div class="block_tab">
@@ -68,15 +68,5 @@ export default {
       answers,
     };
   },
-  // async created() {
-  //   const res = await this.$axios.$get("api/user-details");
-  //   this.currentUser = await res;
-  //   this.relatives = await this.fetchRelatives(res.id);
-  //   this.answers = await this.fetchAnswers(res.id);
-  //   console.log("currentUser: ", res.id);
-  // },
-  // methods: {
-  //   ...mapActions(["fetchRelatives", "fetchAnswers"]),
-  // },
 };
 </script>
