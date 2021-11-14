@@ -1,47 +1,26 @@
 <template>
   <div class="template_main_right" id="content">
     <h1>{{ $t("settings") }}</h1>
-    <div class="tab_description sett">
-      <ul class="nav nav-tabs">
-        <li>
-          <a href="#tab1" class="active" data-bs-toggle="tab">{{
-            $t("questionnaire")
-          }}</a>
-        </li>
-        <li>
-          <a href="#tab2" data-bs-toggle="tab">{{ $t("family") }}</a>
-        </li>
-        <li>
-          <a href="#tab3" data-bs-toggle="tab" id="filter-section">{{
-            $t("preferences")
-          }}</a>
-        </li>
-        <li>
-          <a href="#tab4" data-bs-toggle="tab">{{ $t("confirmation") }}</a>
-        </li>
-        <li>
-          <a href="#tab5" data-bs-toggle="tab">{{ $t("safety") }}</a>
-        </li>
-      </ul>
-      <div class="tab-content setting_main">
-        <div class="tab-pane fade show active" id="tab1">
+    <div class="sett">
+      <b-tabs v-model="tabIndex">
+        <b-tab :title="$t('questionnaire')">
           <h2>{{ $t("modify_questionnaire") }}</h2>
           <self-form :user="currentUser" />
           <education-form :user="currentUser" />
-        </div>
-        <div class="tab-pane fade" id="tab2">
+        </b-tab>
+        <b-tab :title="$t('family')">
           <family-form />
-        </div>
-        <div class="tab-pane fade" id="tab3">
+        </b-tab>
+        <b-tab :title="$t('preferences')">
           <filter-form />
-        </div>
-        <div class="tab-pane fade" id="tab4">
+        </b-tab>
+        <b-tab :title="$t('confirmation')">
           <passport-form :user="currentUser" />
-        </div>
-        <div class="tab-pane fade" id="tab5">
+        </b-tab>
+        <b-tab :title="$t('safety')">
           <security-form :user="currentUser" />
-        </div>
-      </div>
+        </b-tab>
+      </b-tabs>
     </div>
   </div>
 </template>
@@ -66,20 +45,18 @@ export default {
   data() {
     return {
       currentUser: {},
+      tabIndex: null,
     };
   },
-  async asyncData({ $axios }) {
+  async asyncData({ $axios, route }) {
     const currentUser = await $axios.$get("api/user-details");
+    console.log(route);
+    const tabIndex = Number(route.query.tab) || 0;
 
     return {
       currentUser,
+      tabIndex,
     };
-  },
-  mounted() {
-    if (this.$store.state.activeFilterSection) {
-      document.getElementById("filter-section").click();
-    }
-    this.$store.commit("setActiveFilterSection", false);
   },
 };
 </script>

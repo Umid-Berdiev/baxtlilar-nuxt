@@ -4,15 +4,15 @@
     <div class="tab_description">
       <ul class="nav nav_descr">
         <li>
-          <a href="#tab1" class="active" data-bs-toggle="tab">{{
+          <a href="#tab1" class="active" data-toggle="tab">{{
             $t("all_offers")
           }}</a>
         </li>
         <li>
-          <a href="#tab2" data-bs-toggle="tab">{{ $t("recived") }}</a>
+          <a href="#tab2" data-toggle="tab">{{ $t("recived") }}</a>
         </li>
         <li>
-          <a href="#tab3" data-bs-toggle="tab">{{ $t("sent") }}</a>
+          <a href="#tab3" data-toggle="tab">{{ $t("sent") }}</a>
         </li>
       </ul>
       <br />

@@ -10,7 +10,6 @@
 
     <div
       class="modal fade language_popup_style"
-      id="staticBackdrop"
       data-bs-keyboard="false"
       tabindex="-1"
       aria-labelledby="staticBackdropLabel"
@@ -38,8 +37,8 @@
 </template>
 
 <script>
-import { Modal } from "bootstrap";
 import { mapActions } from "vuex";
+
 export default {
   props: {
     user_id: Number,
@@ -47,23 +46,19 @@ export default {
   data() {
     return {
       loading: false,
-      modal: {},
       buttonClass: "link_blue",
     };
-  },
-  mounted() {
-    this.modal = new Modal(this.$refs.offerModal);
   },
   methods: {
     ...mapActions(["fetchOffer"]),
     showModal() {
-      this.modal.show();
+      this.$refs.offerModal.show();
     },
     closeModal() {
-      this.modal.hide();
+      this.$refs.offerModal.hide();
     },
     async offer() {
-      this.modal.hide();
+      this.$refs.offerModal.hide();
       this.loading = true;
       this.buttonClass = "link_disabled";
       const to_id = this.user_id * 1;

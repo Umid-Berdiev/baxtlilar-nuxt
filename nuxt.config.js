@@ -2,7 +2,7 @@ import i18nConfig from "./plugins/i18n/index";
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: false,
+  // ssr: false,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -22,14 +22,14 @@ export default {
       {
         src: "//code-ya.jivosite.com/widget/GyXBzOKWA2",
         // body: true,
-        async: true,
+        defer: true,
       },
     ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "~/node_modules/bootstrap/dist/css/bootstrap.min.css",
+    // "~/node_modules/bootstrap/dist/css/bootstrap.min.css",
     "~/assets/css/style.css",
     "~/assets/css/main.css",
     // "~/assets/variables.sass",
@@ -39,7 +39,8 @@ export default {
   plugins: [
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
-    "~/plugins/validate.js",
+    { src: "~/plugins/validate.js", mode: "client" },
+    // { src: "~/plugins/bootstrap.js", mode: "client" },
     // "@/plugins/jivosite.js",
   ],
 
@@ -56,9 +57,9 @@ export default {
         cluster: process.env.PUSHER_APP_CLUSTER,
         forceTLS: true,
         key: process.env.PUSHER_APP_KEY,
-        // authModule: true,
         connectOnLogin: true,
         disconnectOnLogout: true,
+        // authModule: true,
       },
     ],
   ],
@@ -71,18 +72,19 @@ export default {
     "@nuxtjs/i18n",
     "@nuxtjs/proxy",
     "@nuxtjs/toast",
+    "bootstrap-vue/nuxt",
   ],
 
   i18n: {
     locales: [
+      { code: "en", name: "English" },
       { code: "ru", name: "Russian" },
       { code: "uz", name: "Uzbek" },
-      // { code: 'en', name: 'English' },
     ],
     defaultLocale: "uz",
     vueI18nLoader: true,
     vueI18n: i18nConfig,
-    // strategy: "prefix",
+    strategy: "prefix",
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -162,5 +164,5 @@ export default {
   pageTransition: "page",
 
   target: "static",
-  devtools: true,
+  // devtools: true,
 };

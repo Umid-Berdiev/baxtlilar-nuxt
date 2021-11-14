@@ -10,6 +10,7 @@
 
 <script>
 import { mapActions } from "vuex";
+
 export default {
   props: {
     user_id: Number,

@@ -13,47 +13,47 @@
         VIP
       </div>
     </div>
-    <nuxt-link to="/home" class="link_svg">
+    <nuxt-link :to="localePath('/home')" class="link_svg">
       <icon-home />
       {{ $t("main") }}
     </nuxt-link>
-    <nuxt-link to="/personal-blog" class="link_svg">
+    <nuxt-link :to="localePath('/personal-blog')" class="link_svg">
       <icon-person />
       {{ $t("self_cabinet") }}
     </nuxt-link>
     <nuxt-link
-      to="/messages"
+      :to="localePath('/messages')"
       class="link_svg has_notification"
       :data-count-notif="newMessageNotifications.length"
     >
       <icon-chat />
       {{ $t("chats") }}
     </nuxt-link>
-    <nuxt-link to="/recipt" class="link_svg">
+    <nuxt-link :to="localePath('/recipt')" class="link_svg">
       <icon-users />
       {{ $t("offers") }}
     </nuxt-link>
-    <nuxt-link to="/favourite" class="link_svg">
+    <nuxt-link :to="localePath('/favourite')" class="link_svg">
       <icon-star />
       {{ $t("favourites") }}
     </nuxt-link>
     <nuxt-link
-      to="/notifications"
+      :to="localePath('/notifications')"
       class="link_svg has_notification"
       :data-count-notif="otherNotifications.length"
     >
       <icon-bell />
       {{ $t("notifications") }}
     </nuxt-link>
-    <nuxt-link to="/tariffs" class="link_svg">
+    <nuxt-link :to="localePath('/tariffs')" class="link_svg">
       <icon-currency-dollar-circle />
       {{ $t("tariffs") }}
     </nuxt-link>
-    <nuxt-link to="/settings" class="link_svg">
+    <nuxt-link :to="localePath('/settings')" class="link_svg">
       <icon-gear />
       {{ $t("settings") }}
     </nuxt-link>
-    <nuxt-link to="/support" class="link_svg">
+    <nuxt-link :to="localePath('/support')" class="link_svg">
       <icon-question-circle />
       {{ $t("support") }}
     </nuxt-link>

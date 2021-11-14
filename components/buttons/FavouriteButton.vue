@@ -18,23 +18,22 @@
     </a>
     <div
       class="modal fade language_popup_style"
-      id="staticBackdrop"
       data-bs-keyboard="false"
       tabindex="-1"
       aria-labelledby="staticBackdropLabel"
-      ref="offerModal"
+      ref="favouriteModal"
     >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header"></div>
           <div class="modal-body" style="max-width: 700px">
-            <h2>{{ $t('Are you sure block this user') }}</h2>
+            <h2>{{ $t("Are you sure block this user") }}</h2>
             <div class="button-group">
               <button @click="blockUser" class="link_blue">
-                {{ $t('yes') }}
+                {{ $t("yes") }}
               </button>
               <button @click="closeModal" class="link_blue red">
-                {{ $t('no') }}
+                {{ $t("no") }}
               </button>
             </div>
           </div>
@@ -45,13 +44,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { Modal } from 'bootstrap'
+import { mapActions } from "vuex";
 
 export default {
-  mounted() {
-    this.modal = new Modal(this.$refs.offerModal)
-  },
   props: {
     showX: {
       type: Boolean,
@@ -62,28 +57,27 @@ export default {
   },
   data() {
     return {
-      modal: {},
       favourite: this.isFavourite,
-    }
+    };
   },
 
   methods: {
-    ...mapActions(['fetchAddFavourite', 'fetchAddBlock']),
+    ...mapActions(["fetchAddFavourite", "fetchAddBlock"]),
     addFavourite() {
-      this.fetchAddFavourite(this.user_id)
-      this.favourite = !this.favourite
+      this.fetchAddFavourite(this.user_id);
+      this.favourite = !this.favourite;
     },
     blockUser() {
-      this.modal.hide()
-      this.fetchAddBlock(this.user_id)
-      this.$emit('hideUser', true)
+      this.$refs.favouriteModal.hide();
+      this.fetchAddBlock(this.user_id);
+      this.$emit("hideUser", true);
     },
     showModal() {
-      this.modal.show()
+      this.$refs.favouriteModal.show();
     },
     closeModal() {
-      this.modal.hide()
+      this.$refs.favouriteModal.hide();
     },
   },
-}
+};
 </script>

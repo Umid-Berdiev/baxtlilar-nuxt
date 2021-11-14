@@ -104,7 +104,7 @@
             v-text="$t('advanced_search')"
           />
         </div>
-        <button type="submit" class="link_blue">
+        <button type="su + '?tab=2'bmit" class="link_blue">
           <span
             v-show="loading"
             class="spinner-border spinner-border-sm text-white"
@@ -186,7 +186,7 @@ export default {
     },
     toSetting() {
       this.$store.commit("setActiveFilterSection", true);
-      this.$router.push(this.localePath("/settings"));
+      this.$router.push(this.localePath("/settings") + "?tab=2");
     },
   },
   unmounted() {

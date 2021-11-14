@@ -48,14 +48,9 @@
       :success="isSuccess"
       :text="modalText ? $t(modalText) : ''"
       :loading="modalLoading"
-      ref="successModal"
     />
 
-    <payment-modal
-      ref="paymentModal"
-      :type="type"
-      @paymentFailed="paymentError($event)"
-    />
+    <payment-modal :type="type" @paymentFailed="paymentError($event)" />
   </div>
 </template>
 
@@ -82,7 +77,7 @@ export default {
     async freeTariff(tariff_id) {
       this.modalLoading = true;
       const user = this.$auth.user;
-      this.$refs.successModal.showModal();
+      this.$bvModal.show("success-modal");
       const res = await this.fetchFreeTariff({
         user_id: user.id,
         tariff_id,
@@ -94,7 +89,7 @@ export default {
     },
     payTariff(tariff_id) {
       this.type = tariff_id;
-      this.$refs.paymentModal.showModal();
+      this.$bvModal.show("payment-modal");
     },
     paymentError(payload) {
       this.isSuccess = payload.isSuccess;

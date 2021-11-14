@@ -19,7 +19,13 @@
             </li>
           </ul>
         </div>
-        <LoginModal />
+        <button
+          type="button"
+          class="link_blue text-capitalize only_hdr"
+          v-text="$t('signin')"
+          @click="showModalFunc"
+        />
+
         <a href="#" class="hamburger" @click="openMobileHeaderMenu"
           ><img src="@/assets/images/hamburger.svg" alt=""
         /></a>
@@ -33,18 +39,15 @@ import LoginModal from "@/components/modals/LoginModal.vue";
 
 export default {
   components: { LoginModal },
-  computed: {
-    loggedIn() {
-      const loggedIn = this.$store.state.auth.status.loggedIn;
-      return loggedIn;
-    },
-  },
   methods: {
     openMobileHeaderMenu() {
       document.getElementById("header")?.classList.add("opened");
     },
     closeMobileHeaderMenu() {
       document.getElementById("header")?.classList.remove("opened");
+    },
+    showModalFunc() {
+      this.$bvModal.show("login-modal");
     },
   },
 };

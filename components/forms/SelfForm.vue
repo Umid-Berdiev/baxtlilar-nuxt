@@ -4,12 +4,12 @@
     class="anceta_form"
     enctype="multipart/form-data"
   >
-    <!-- <input type="hidden" name="update" :value="true" />
+    <input type="hidden" name="update" :value="true" />
     <div class="row">
       <div class="col-sm-8">
         <div class="form-group">
           <label for="fullname" id="fullname-label">
-            {{ $t('fio') }}
+            {{ $t("fio") }}
           </label>
           <input
             type="text"
@@ -24,7 +24,7 @@
       <div class="col-sm-4">
         <div class="form-group">
           <label for="username">
-            {{ $t('nikname') }}
+            {{ $t("nikname") }}
           </label>
           <input
             type="text"
@@ -40,13 +40,13 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="#">{{ $t('country_residence') }} </label>
+          <label for="#">{{ $t("country_residence") }} </label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
             name="place_of_residence"
             @change="selectCountry"
-            :value="user.country?.id"
+            :value="user.country && user.country.id"
             class="form-control"
           >
             <a-select-option
@@ -61,7 +61,7 @@
       </div>
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="#">{{ $t('city_residence') }} </label>
+          <label for="#">{{ $t("city_residence") }} </label>
           <a-select
             :showSearch="false"
             :placeholder="$t('choose')"
@@ -82,7 +82,7 @@
       <div class="col-lg-4">
         <div class="form-group">
           <label for="birthday">
-            {{ $t('birth_date') }}
+            {{ $t("birth_date") }}
           </label>
           <a-date-picker
             :placeholder="$t('select_date')"
@@ -99,13 +99,13 @@
       <div class="col-sm-4">
         <div class="form-group">
           <label>
-            {{ $t('citizenship') }}
+            {{ $t("citizenship") }}
           </label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
             name="citizenship_country_id"
-            :value="user.citizenship?.id"
+            :value="user.citizenship && user.citizenship.id"
             @change="selectCitizen"
             class="form-control"
           >
@@ -121,7 +121,7 @@
       </div>
       <div class="col-sm-4">
         <div class="form-group">
-          <label for="">{{ $t('religion') }}</label>
+          <label for="">{{ $t("religion") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -142,7 +142,7 @@
       </div>
       <div class="col-sm-4">
         <div class="form-group">
-          <label for="#">{{ $t('relation_religion') }}</label>
+          <label for="#">{{ $t("relation_religion") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -152,13 +152,13 @@
             class="form-control"
           >
             <a-select-option value="high">
-              {{ $t('high') }}
+              {{ $t("high") }}
             </a-select-option>
             <a-select-option value="medium">
-              {{ $t('medium') }}
+              {{ $t("medium") }}
             </a-select-option>
             <a-select-option value="not">
-              {{ $t('not') }}
+              {{ $t("not") }}
             </a-select-option>
           </a-select>
         </div>
@@ -167,7 +167,7 @@
     <div class="row">
       <div class="col-lg-3 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t('height') }}</label>
+          <label for="">{{ $t("height") }}</label>
           <div class="row">
             <div class="col-6">
               <a-select
@@ -192,7 +192,7 @@
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t('weight') }}</label>
+          <label for="">{{ $t("weight") }}</label>
           <div class="row">
             <div class="col-6">
               <a-select
@@ -217,7 +217,7 @@
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="form-group">
-          <label for="zodiac-sign">{{ $t('zodiac_sign') }}</label>
+          <label for="zodiac-sign">{{ $t("zodiac_sign") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -227,52 +227,51 @@
             class="form-control"
           >
             <a-select-option value="Aquarius">
-              {{ $t('Aquarius') }}
+              {{ $t("Aquarius") }}
             </a-select-option>
             <a-select-option value="Sagittarius">
-              {{ $t('Sagittarius') }}
+              {{ $t("Sagittarius") }}
             </a-select-option>
             <a-select-option value="Leo">
-              {{ $t('Leo') }}
+              {{ $t("Leo") }}
             </a-select-option>
             <a-select-option value="Aries">
-              {{ $t('Aries') }}
+              {{ $t("Aries") }}
             </a-select-option>
             <a-select-option value="Taurus">
-              {{ $t('Taurus') }}
+              {{ $t("Taurus") }}
             </a-select-option>
             <a-select-option value="Virgo">
-              {{ $t('Virgo') }}
+              {{ $t("Virgo") }}
             </a-select-option>
             <a-select-option value="Capricorn">
-              {{ $t('Capricorn') }}
+              {{ $t("Capricorn") }}
             </a-select-option>
             <a-select-option value="Gemini">
-              {{ $t('Gemini') }}
+              {{ $t("Gemini") }}
             </a-select-option>
             <a-select-option value="Libra">
-              {{ $t('Libra') }}
+              {{ $t("Libra") }}
             </a-select-option>
             <a-select-option value="Cancer">
-              {{ $t('Cancer') }}
+              {{ $t("Cancer") }}
             </a-select-option>
             <a-select-option value="Scorpio">
-              {{ $t('Scorpio') }}
+              {{ $t("Scorpio") }}
             </a-select-option>
             <a-select-option value="Pisces">
-              {{ $t('Pisces') }}
+              {{ $t("Pisces") }}
             </a-select-option>
           </a-select>
         </div>
       </div>
       <div class="col-lg-3 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t('eye_color') }}</label>
+          <label for="">{{ $t("eye_color") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
             name="eye_color"
-            v-model="eye_color"
             :value="user.eye_color"
             @change="selectEyeColor"
             class="form-control"
@@ -287,7 +286,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="form-group">
-          <label for="">{{ $t('about_yourself') }}</label>
+          <label for="">{{ $t("about_yourself") }}</label>
           <textarea
             name="about_myself"
             :placeholder="$t('about_yourself')"
@@ -296,16 +295,16 @@
         </div>
       </div>
     </div>
-    <h2>{{ $t('photos_count') }}</h2>
+    <h2>{{ $t("photos_count") }}</h2>
     <upload-image :fileList="images" :type="'personal'" />
     <br />
     <div class="is_photo_visible">
       <div class="radio_button allget">
         <input name="image_status" value="1" type="checkbox" id="ada1" />
-        <label for="ada1">{{ $t('blur_photos') }}</label>
+        <label for="ada1">{{ $t("blur_photos") }}</label>
       </div>
       <p>
-        {{ $t('blur_photo_less') }}
+        {{ $t("blur_photo_less") }}
       </p>
     </div>
     <div class="new_add_l">
@@ -315,21 +314,21 @@
           class="spinner-border spinner-border-sm text-white"
         ></span>
         &nbsp;
-        <span class="text-white">{{ $t('save') }}</span>
+        <span class="text-white">{{ $t("save") }}</span>
       </button>
-    </div> -->
+    </div>
   </form>
 </template>
 
 <script>
-import _ from 'lodash'
-import { mapActions, mapGetters } from 'vuex'
-import countrySelect from '@/components/selects/countrySelect.vue'
-import ReligionSelect from '@/components/selects/religionSelect.vue'
-import UploadImage from '@/components/UploadImage.vue'
-import moment from 'moment'
-import UserImagesSlider from '../sliders/UserImagesSlider.vue'
-import { Modal } from 'bootstrap'
+import _ from "lodash";
+import { mapActions, mapGetters } from "vuex";
+import countrySelect from "@/components/selects/countrySelect.vue";
+import ReligionSelect from "@/components/selects/religionSelect.vue";
+import UploadImage from "@/components/UploadImage.vue";
+import moment from "moment";
+import UserImagesSlider from "../sliders/UserImagesSlider.vue";
+// import { Modal } from 'bootstrap'
 
 export default {
   props: { user: Object },
@@ -339,17 +338,18 @@ export default {
       urls: [],
       images: [],
       colors: [
-        'Синий',
-        'Голубой',
-        'Серый',
-        'Зелёный',
-        'Буро-жёлто-зелёный',
-        'Жёлтые',
-        'Карий',
+        "Синий",
+        "Голубой",
+        "Серый",
+        "Зелёный",
+        "Буро-жёлто-зелёный",
+        "Жёлтые",
+        "Карий",
       ],
-      fullnameError: '',
+      eye_color: null,
+      fullnameError: "",
       selects: {},
-    }
+    };
   },
   components: {
     countrySelect,
@@ -359,19 +359,19 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getSelectedCountry',
-      'getCountries',
-      'getReligions',
-      'getRegions',
+      "getSelectedCountry",
+      "getCountries",
+      "getReligions",
+      "getRegions",
     ]),
     userBirthdate() {
-      const formatedBirthDate = moment(this.user.birthday)
+      const formatedBirthDate = moment(this.user.birthday);
 
-      return formatedBirthDate.format('YYYY-MM-DD') || null
+      return formatedBirthDate.format("YYYY-MM-DD") || null;
     },
   },
   async mounted() {
-    if (_.isEmpty(this.getCountries)) await this.fetchCountries()
+    if (_.isEmpty(this.getCountries)) await this.fetchCountries();
     if (this.user) {
       this.selects = {
         citizenship_country_id: this.user.citizenship_country_id,
@@ -383,69 +383,69 @@ export default {
         weight: this.user.weight,
         znak_zodiak: this.user.znak_zodiak,
         eye_color: this.user.eye_color,
-      }
-      await this.fetchReligions()
-      await this.fetchRegions(this.user.place_of_residence)
+      };
+      await this.fetchReligions();
+      await this.fetchRegions(this.user.place_of_residence);
     }
   },
   methods: {
-    ...mapActions(['fetchReligions', 'fetchRegions', 'fetchCountries']),
+    ...mapActions(["fetchReligions", "fetchRegions", "fetchCountries"]),
     async submit(e) {
-      if (e.target.fullname.value == '') {
-        this.fullnameError = "To'ldirish shart"
-        document.getElementById('fullname-label').scrollIntoView()
+      if (e.target.fullname.value == "") {
+        this.fullnameError = "To'ldirish shart";
+        document.getElementById("fullname-label").scrollIntoView();
       } else {
-        this.loading = true
-        const formData = new FormData(e.target)
-        let values = Object.fromEntries(formData)
+        this.loading = true;
+        const formData = new FormData(e.target);
+        let values = Object.fromEntries(formData);
         if (!values.image_status) {
-          values.image_status = 0
+          values.image_status = 0;
         }
-        values.place_of_residence = this.place_of_residence
-        values.place_of_birth_region_id = this.place_of_birth_region_id
-        values.images = this.images.map((image) => image.thumbUrl)
-        values = { ...values, ...this.selects }
+        values.place_of_residence = this.place_of_residence;
+        values.place_of_birth_region_id = this.place_of_birth_region_id;
+        values.images = this.images.map((image) => image.thumbUrl);
+        values = { ...values, ...this.selects };
 
-        const res = await this.$store.dispatch('saveUserQuestionnaire', values)
+        const res = await this.$store.dispatch("saveUserQuestionnaire", values);
 
-        if (res.message == 'Success') {
-          const modal = Modal.getInstance(
-            document.getElementById('setting-modal')
-          )
-          modal.show()
-        } else alert(res.message)
+        if (res.message == "Success") {
+          const modal = this.$Modal.getInstance(
+            document.getElementById("setting-modal")
+          );
+          modal.show();
+        } else alert(res.message);
 
-        this.loading = false
+        this.loading = false;
       }
     },
     selectCitizen(value) {
-      this.selects.citizenship_country_id = value
+      this.selects.citizenship_country_id = value;
     },
     selectRelegion(value) {
-      this.selects.religion_id = value
+      this.selects.religion_id = value;
     },
     selectRelegiousAttitude(value) {
-      this.selects.religious_attitude = value
+      this.selects.religious_attitude = value;
     },
     selectHeight(value) {
-      this.selects.height = value
+      this.selects.height = value;
     },
     selectWeight(value) {
-      this.selects.weight = value
+      this.selects.weight = value;
     },
     selectZnakZodiak(value) {
-      this.selects.znak_zodiak = value
+      this.selects.znak_zodiak = value;
     },
     selectEyeColor(value) {
-      this.selects.eye_color = value
+      this.selects.eye_color = value;
     },
     selectCountry(value) {
-      this.fetchRegions(value)
-      this.selects.place_of_residence = value
+      this.fetchRegions(value);
+      this.selects.place_of_residence = value;
     },
     selectRegion(value) {
-      this.selects.place_of_birth_region_id = value
+      this.selects.place_of_birth_region_id = value;
     },
   },
-}
+};
 </script>

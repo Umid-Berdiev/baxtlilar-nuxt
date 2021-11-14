@@ -101,7 +101,7 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import * as yup from "yup";
-import { Modal } from "bootstrap";
+// import { Modal } from "bootstrap";
 
 export default {
   components: {
@@ -165,7 +165,7 @@ export default {
             phone: this.form.phone,
           });
 
-          const smsConfirmModal = Modal.getInstance(
+          const smsConfirmModal = this.$Modal.getInstance(
             document.getElementById("confirm-sms-code-modal")
           );
 

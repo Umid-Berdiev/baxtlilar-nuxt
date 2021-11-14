@@ -1,67 +1,54 @@
 <template>
-  <div
-    class="modal fade"
-    ref="confirmSmsCodeModal"
+  <b-modal
     id="confirm-sms-code-modal"
-    tabindex="-1"
-    aria-hidden="true"
+    ref="confirmSmsCodeModal"
+    centered
+    hide-header
+    hide-footer
   >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
-        <div class="modal-body">
-          <div id="enter_site_popup" class="popup_register_style">
-            <form @submit.prevent="submitCode">
-              <h5
-                v-text="$t('We sent the code to your number. Enter the code')"
-                class="text-center text-muted"
-              ></h5>
-              <div class="form-group">
-                <input name="code" ref="smsCode" :placeholder="$t('Code')" />
-                <span class="text-danger">{{ codeError }}</span>
-              </div>
-              <div class="form-group text-center">
-                <button class="link_blue" :disabled="codeLoading">
-                  <span
-                    v-show="codeLoading"
-                    class="spinner-border spinner-border-sm"
-                  ></span>
-                  &nbsp;
-                  <span
-                    v-text="$t('Confirm code')"
-                    class="text-capitalize text-white"
-                  ></span>
-                </button>
-              </div>
-              <!-- <div class="form-group">
-                <div v-if="message" class="alert alert-danger" role="alert">
-                  {{ message }}
-                </div>
-              </div> -->
-            </form>
-            <div class="row">
-              <div class="col-auto">
-                <span class="text-success">{{ codeInfo }}</span>
-              </div>
-              <div class="col-auto ms-auto">
-                <button
-                  :disabled="codeSentStatus"
-                  class="btn ms-auto"
-                  @click="resendSms"
-                >
-                  {{ $t("resend_sms") }}
-                </button>
-              </div>
-            </div>
-          </div>
+    <div id="enter_site_popup" class="popup_register_style">
+      <form @submit.prevent="submitCode">
+        <h5
+          v-text="$t('We sent the code to your number. Enter the code')"
+          class="text-center text-muted"
+        ></h5>
+        <div class="form-group">
+          <input name="code" ref="smsCode" :placeholder="$t('Code')" />
+          <span class="text-danger">{{ codeError }}</span>
+        </div>
+        <div class="form-group text-center">
+          <button class="link_blue" :disabled="codeLoading">
+            <span
+              v-show="codeLoading"
+              class="spinner-border spinner-border-sm"
+            ></span>
+            &nbsp;
+            <span
+              v-text="$t('Confirm code')"
+              class="text-capitalize text-white"
+            ></span>
+          </button>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-auto">
+          <span class="text-success">{{ codeInfo }}</span>
+        </div>
+        <div class="col-auto ms-auto">
+          <button
+            :disabled="codeSentStatus"
+            class="btn ms-auto"
+            @click="resendSms"
+          >
+            {{ $t("resend_sms") }}
+          </button>
         </div>
       </div>
     </div>
-  </div>
+  </b-modal>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
-
 export default {
   data() {
     return {
@@ -71,14 +58,6 @@ export default {
       codeSentStatus: false,
       codeInfo: "",
     };
-  },
-  mounted() {
-    this.modal = Modal.getInstance(
-      document.getElementById("confirm-sms-code-modal")
-    );
-    this.$nextTick(() => {
-      this.$refs.smsCode.focus();
-    });
   },
   methods: {
     async submitCode() {
@@ -98,11 +77,8 @@ export default {
               password: this.$store.getters.getGuest.password,
             },
           });
-          const modal = Modal.getInstance(
-            document.getElementById("confirm-sms-code-modal")
-          );
 
-          modal.hide();
+          this.$refs.confirmSmsCodeModal.hide();
           await this.$store.dispatch("setAccessToken", res.data.accessToken);
           // window.location.href = "/home";
           this.$router.push(this.localePath("/home"));

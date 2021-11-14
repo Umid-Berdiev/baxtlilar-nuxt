@@ -1,6 +1,6 @@
 <template>
   <div class="anceta_form" v-if="!pageLoading">
-    <!-- <form @submit.prevent="submitForm">
+    <form @submit.prevent="submitForm">
       <input type="hidden" name="update" :value="true" />
       <div class="row">
         <div class="col-lg-4">
@@ -13,7 +13,8 @@
                   :placeholder="$t('fill')"
                   name="from_age"
                   v-model="getMainFilterDefaultForm.from_age"
-                  v-maska="'##'"
+                  min="18"
+                  max="100"
                 />
               </div>
               <div class="col-6">
@@ -22,7 +23,8 @@
                   :placeholder="$t('fill')"
                   name="up_to_age"
                   v-model="getMainFilterDefaultForm.up_to_age"
-                  v-maska="'##'"
+                  min="18"
+                  max="100"
                 />
               </div>
             </div>
@@ -36,7 +38,7 @@
               :showSearch="false"
               name="country_id"
               @change="selectCountry"
-              :default-value="getMainFilterDefaultForm?.country_id"
+              :default-value="getMainFilterDefaultForm.country_id"
               class="form-control"
             >
               <a-select-option
@@ -56,7 +58,7 @@
               :showSearch="false"
               :placeholder="$t('choose')"
               @change="selectRegion"
-              :default-value="getMainFilterDefaultForm?.region_id"
+              :default-value="getMainFilterDefaultForm.region_id"
               class="form-control"
             >
               <a-select-option
@@ -379,7 +381,8 @@
                   :placeholder="$t('fill')"
                   name="from_height"
                   v-model="getMainFilterDefaultForm.from_height"
-                  v-maska="'###'"
+                  min="100"
+                  max="250"
                 />
               </div>
               <div class="col-6">
@@ -388,7 +391,8 @@
                   :placeholder="$t('fill')"
                   name="up_to_height"
                   v-model="getMainFilterDefaultForm.up_to_height"
-                  v-maska="'###'"
+                  min="100"
+                  max="250"
                 />
               </div>
             </div>
@@ -404,7 +408,8 @@
                   :placeholder="$t('fill')"
                   name="from_weight"
                   v-model="getMainFilterDefaultForm.from_weight"
-                  v-maska="'###'"
+                  min="30"
+                  max="150"
                 />
               </div>
               <div class="col-6">
@@ -413,7 +418,8 @@
                   :placeholder="$t('fill')"
                   name="up_to_weight"
                   v-model="getMainFilterDefaultForm.up_to_weight"
-                  v-maska="'###'"
+                  min="30"
+                  max="150"
                 />
               </div>
             </div>
@@ -482,14 +488,14 @@
           &nbsp; {{ $t("save") }}
         </button>
       </div>
-    </form> -->
+    </form>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
-import _ from 'lodash'
-import { Modal } from 'bootstrap'
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import _ from "lodash";
+// import { Modal } from 'bootstrap'
 
 export default {
   data() {
@@ -498,60 +504,62 @@ export default {
       loading: false,
       country_id: null,
       region_id: null,
-    }
+    };
   },
   computed: {
     ...mapGetters([
-      'getReligions',
-      'getCountries',
-      'getRegions',
-      'getMainFilterDefaultForm',
+      "getReligions",
+      "getCountries",
+      "getRegions",
+      "getMainFilterDefaultForm",
     ]),
   },
   async created() {
     // await this.fetchCountries();
     // await this.fetchReligions();
     if (_.isEmpty(this.getMainFilterDefaultForm))
-      await this.fetchMainFilterDefaultForm()
+      await this.fetchMainFilterDefaultForm();
 
     // await this.fetchRegions(this.getMainFilterDefaultForm.country_id);
-    this.country_id = this.getMainFilterDefaultForm.country_id
-    this.region_id = this.getMainFilterDefaultForm.region_id
-    this.pageLoading = false
+    this.country_id = this.getMainFilterDefaultForm.country_id;
+    this.region_id = this.getMainFilterDefaultForm.region_id;
+    this.pageLoading = false;
   },
   methods: {
-    ...mapMutations(['setQuestionnairePercent']),
+    ...mapMutations(["setQuestionnairePercent"]),
     ...mapActions([
-      'fetchReligions',
-      'fetchCountries',
-      'fetchRegions',
-      'fetchMainFilterDefaultForm',
-      'saveFilterData',
+      "fetchReligions",
+      "fetchCountries",
+      "fetchRegions",
+      "fetchMainFilterDefaultForm",
+      "saveFilterData",
     ]),
     selectCountry(value) {
-      this.fetchRegions(value)
-      this.country_id = value
+      this.fetchRegions(value);
+      this.country_id = value;
     },
     selectRegion(value) {
-      this.region_id = value
+      this.region_id = value;
     },
     async submitForm(e) {
-      this.loading = true
-      const formData = new FormData(e.target)
-      let form = Object.fromEntries(formData)
-      form.country_id = this.country_id
-      form.region_id = this.region_id
+      this.loading = true;
+      const formData = new FormData(e.target);
+      let form = Object.fromEntries(formData);
+      form.country_id = this.country_id;
+      form.region_id = this.region_id;
 
       try {
-        await this.saveFilterData(form)
-        this.loading = false
+        await this.saveFilterData(form);
+        this.loading = false;
       } catch (e) {
-        alert(e)
+        alert(e);
       }
 
-      const modal = Modal.getInstance(document.getElementById('setting-modal'))
-      modal.show()
+      const modal = this.$Modal.getInstance(
+        document.getElementById("setting-modal")
+      );
+      modal.show();
     },
   },
-}
+};
 </script>

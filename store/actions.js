@@ -1,23 +1,27 @@
 import userService from "~/plugins/services/user.service";
 
-const lang = localStorage.getItem("language");
+// const lang = this.$i18n.locale;
 
 const actions = {
   async fetchCountries({ commit }) {
     commit("setLoadingState", true);
-    const response = await this.$axios.post("api/countries", { lang });
+    const response = await this.$axios.post("api/countries", {
+      lang: this.$i18n.locale,
+    });
     commit("setСountries", response.data);
     commit("setLoadingState", false);
   },
   async fetchRegions({ commit }, payload) {
     const response = await this.$axios.post("api/regions", {
       country_id: payload,
-      lang,
+      lang: this.$i18n.locale,
     });
     commit("setRegions", response.data);
   },
   async fetchReligions({ commit }) {
-    const response = await this.$axios.post("api/religions", { lang });
+    const response = await this.$axios.post("api/religions", {
+      lang: this.$i18n.locale,
+    });
     commit("setReligions", response.data);
   },
   async fetchLanguages({ commit }) {

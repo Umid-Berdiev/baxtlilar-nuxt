@@ -104,7 +104,6 @@
 
     <div
       class="modal fade language_popup_style"
-      id="staticBackdrop"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"

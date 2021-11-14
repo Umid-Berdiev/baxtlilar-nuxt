@@ -4,35 +4,18 @@
       <h2 class="title">{{ $t("how_it_works") }}</h2>
       <br />
       <div class="video_block">
-        <img src="../../assets/images/jigitali.svg" alt="" />
+        <img src="~/assets/images/jigitali.svg" alt="" />
         <div class="btn_open_modal iframe-container">
           <iframe class="responsive-iframe" :src="iframeUrl"></iframe>
         </div>
-        <img src="../../assets/images/lady.svg" alt="" />
+        <img src="~/assets/images/lady.svg" alt="" />
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
-
 export default {
-  data() {
-    return {
-      howItWorks: null,
-    };
-  },
-  mounted() {
-    // this.howItWorks = new Modal(this.$refs.howItWorks);
-    // if (localStorage.getItem("how-it-work") === null) {
-    //   if (localStorage.getItem("language") === null) {
-    //   } else {
-    //     this.howItWorks.show();
-    //     localStorage.setItem("how-it-work", true);
-    //   }
-    // }
-  },
   computed: {
     iframeUrl() {
       if (this.$i18n.locale == "uz") {
@@ -42,11 +25,6 @@ export default {
         return "https://www.youtube.com/embed/0fRQyDt8rlc";
       }
       return "https://www.youtube.com/embed/0fRQyDt8rlc";
-    },
-  },
-  methods: {
-    showModal() {
-      this.howItWorks.show();
     },
   },
 };

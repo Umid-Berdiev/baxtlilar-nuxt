@@ -6,6 +6,7 @@
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
     id="setting-modal"
+    ref="settingModal"
   >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -27,20 +28,10 @@
 </template>
 
 <script>
-import { Modal } from "bootstrap";
-
 export default {
-  data() {
-    return {
-      modal: {},
-    };
-  },
-  mounted() {
-    this.modal = new Modal(document.getElementById("setting-modal"));
-  },
   methods: {
     showModal() {
-      this.modal.show();
+      this.$refs.settingModal.show();
     },
   },
 };

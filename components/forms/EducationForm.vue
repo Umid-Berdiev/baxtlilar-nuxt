@@ -203,7 +203,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { Modal } from "bootstrap";
+// import { Modal } from "bootstrap";
 
 export default {
   props: { user: Object },
@@ -236,7 +236,7 @@ export default {
 
       try {
         await this.$store.dispatch("saveUserEducaton", form);
-        const modal = Modal.getInstance(
+        const modal = this.$Modal.getInstance(
           document.getElementById("setting-modal")
         );
         modal.show();

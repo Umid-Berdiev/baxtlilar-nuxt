@@ -20,7 +20,7 @@ section.enter_site
   .enter_site_right
   .radio_male
   input:checked
-  + label[for='girl'] {
+  + label[for="girl"] {
   background: #ff9593;
 }
 
@@ -28,7 +28,7 @@ section.enter_site
   .enter_site_right
   .radio_male
   input:hover
-  + label[for='girl'] {
+  + label[for="girl"] {
   background: #ff9593;
 }
 
@@ -40,4 +40,9 @@ section.enter_site
 .block_tab .button-group .link_blue {
   white-space: nowrap;
   max-width: 250px;
+}
+
+.modal-content {
+  background: transparent;
+  border: 0;
 }

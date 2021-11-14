@@ -3,7 +3,7 @@
     <div class="container">
       <h2 class="title">{{ $t("frequent_questions") }}</h2>
       <loader v-if="loading" />
-      <div class="accordion" id="accordionExample" v-else>
+      <div class="accordion" id="faq-accordion" v-else>
         <faq-card v-for="(item, index) in getFaq" :key="index" :item="item" />
       </div>
     </div>

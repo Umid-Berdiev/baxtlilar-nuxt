@@ -8,14 +8,14 @@
     <template v-else-if="offer_status == 'proccess'">
       <div class="button-group">
         <button class="link_disabled" disabled>
-          {{ $t('offer sent') }}
+          {{ $t("offer sent") }}
         </button>
       </div>
     </template>
     <template v-else-if="offer_status == 'cancelled_by_him_or_her'">
       <!-- <h2>{{ $t("Offer cancelled by him/her") }}</h2> -->
       <div class="button-group">
-        <button class="link_disabled" disabled>{{ $t('closed') }}</button>
+        <button class="link_disabled" disabled>{{ $t("closed") }}</button>
       </div>
     </template>
     <template v-else-if="offer_status == 'accepted'">
@@ -31,21 +31,22 @@
     </template>
     <template v-else>
       <!-- <h2>{{ $t("Offer cancelled by you") }}</h2> -->
-      <button class="link_disabled" disabled>{{ $t('offer closed') }}</button>
+      <button class="link_disabled" disabled>{{ $t("offer closed") }}</button>
     </template>
   </div>
 </template>
 
 <script>
-import AcceptButton from './AcceptButton.vue'
-import CancelButton from './CancelButton.vue'
-import OfferButton from './OfferButton.vue'
-import ToChatButton from './ToChatButton.vue'
+import AcceptButton from "./AcceptButton.vue";
+import CancelButton from "./CancelButton.vue";
+import OfferButton from "./OfferButton.vue";
+import ToChatButton from "./ToChatButton.vue";
+
 export default {
   components: { OfferButton, AcceptButton, CancelButton, ToChatButton },
   props: {
     user_id: Number,
     offer_status: String,
   },
-}
+};
 </script>
