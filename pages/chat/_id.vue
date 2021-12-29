@@ -1,13 +1,13 @@
 <template>
   <div class="template_main_right" id="content">
-    <!-- <div class="chat_main">
+    <div class="chat_main">
       <div class="chat_top">
         <nuxt-link to="/messages" class="back">
           <icon-arrow-left />
         </nuxt-link>
         <div class="user_chat">
-          <img :src="otherUser?.profile_photo_url" />
-          <h2 v-text="otherUser?.username"></h2>
+          <img :src="otherUser.profile_photo_url" />
+          <h2 v-text="otherUser.username"></h2>
         </div>
         <a href="#" class="link_blue red">{{ $t('choosing_user') }}</a>
         <div class="dropdown">
@@ -40,30 +40,32 @@
             </svg>
           </div>
           <div class="dropdown_body">
-            <a href="#" data-fancybox data-src="#deleteMsg">{{
-              $t('delete')
-            }}</a>
+            <a href="#" data-fancybox data-src="#deleteMsg">
+              {{
+                $t('delete')
+              }}
+            </a>
             <a href="#">{{ $t('settings') }}</a>
             <a href="#">{{ $t('logout') }}</a>
           </div>
         </div>
       </div>
       <div class="chat_body" ref="chat_body">
-        <Suspense>
-          <template #default>
-            <chat-window :chatData="chatData" />
-          </template>
-          <template #fallback>
-            <loader />
-          </template>
-        </Suspense>
+        <!-- <Suspense> -->
+        <template v-if="chatData">
+          <chat-window :chatData="chatData" />
+        </template>
+        <template v-else>
+          <loader />
+        </template>
+        <!-- </Suspense> -->
       </div>
       <chat-form
         :room="currentRoom"
         @messageSent="getChatData"
         @fileSent="getChatData"
       />
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -118,7 +120,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["fetchUnreadNotifications"]),
+    ...mapActions({ fetchUnreadNotifications: "user/fetchUnreadNotifications" }),
     connect() {
       if (this.currentRoom.id) {
         let vm = this;
@@ -140,7 +142,7 @@ export default {
       this.$echo.leave(`chat${roomId}`);
     },
     async fetchChatRoom() {
-      const res = await axios.get("api/chat/rooms/" + this.$route.params.id);
+      const res = await this.$axios.get("api/chat/rooms/" + this.$route.params.id);
 
       this.currentRoom = await res.data.chat_room;
       this.otherUser = this.currentRoom?.users?.find(
@@ -148,7 +150,7 @@ export default {
       );
     },
     getChatData() {
-      axios
+      this.$axios
         .get(`api/chat/rooms/${this.currentRoom.id}/data`)
         .then((res) => {
           this.chatData = res.data;
@@ -156,8 +158,8 @@ export default {
         .catch((err) => console.log(err));
     },
     async allMarkAsRead() {
-      await axios({
-        url: "all-mark-as-read",
+      await this.$axios({
+        url: "api/all-mark-as-read",
         method: "PUT",
         data: { chat_room_id: this.currentRoom.id },
       }).then((res) => {

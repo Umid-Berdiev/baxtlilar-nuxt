@@ -13,7 +13,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="form-group">
-              <label for="" id="issued-by-label">{{ $t("issued_by") }}</label>
+              <label for id="issued-by-label">{{ $t("issued_by") }}</label>
               <input type="text" name="issued_by" @input="issuedByError = ''" />
               <span class="text-danger">{{ issuedByError }}</span>
             </div>
@@ -22,18 +22,16 @@
         <div class="confirm_for">
           <h2>{{ $t("confirmation_personal_data") }}</h2>
           <div class="item_con">
-            <img src="~/assets/images/con2.svg" alt="" />
+            <img src="~/assets/images/con2.svg" alt />
             {{ $t("confirmation_personal_data_fewer_response") }}
           </div>
-          <h3>
-            {{ $t("attach_passwort_text") }}
-          </h3>
+          <h3>{{ $t("attach_passwort_text") }}</h3>
         </div>
         <h3>{{ $t("passport_data") }}</h3>
         <div class="row">
           <div class="col-sm-2 col-3">
             <div class="form-group">
-              <label for="" id="series-label">{{ $t("serie") }}</label>
+              <label for id="series-label">{{ $t("serie") }}</label>
               <input
                 type="text"
                 style="text-transform: uppercase"
@@ -46,7 +44,7 @@
           </div>
           <div class="col-sm-4 col-3">
             <div class="form-group">
-              <label for="" id="number-label">{{ $t("number") }}</label>
+              <label for id="number-label">{{ $t("number") }}</label>
               <input
                 type="number"
                 placeholder="1234567"
@@ -58,9 +56,11 @@
           </div>
           <div class="col-sm-4 col-6">
             <div class="form-group">
-              <label for="" id="when_issued-label">{{
-                $t("when_given")
-              }}</label>
+              <label for id="when_issued-label">
+                {{
+                  $t("when_given")
+                }}
+              </label>
               <a-date-picker
                 :placeholder="$t('select_date')"
                 format="YYYY-MM-DD"
@@ -87,9 +87,10 @@
           ref="thanks_filling"
         />
         <div class="anc_link_bottom" id="passport_image-label">
-          <button @click="$refs.fileInput.click()" class="link_blue mb-2">
-            {{ $t("passport_image") }}{{ file_name }}
-          </button>
+          <button
+            @click="$refs.fileInput.click()"
+            class="link_blue mb-2"
+          >{{ $t("passport_image") }}{{ file_name }}</button>
           <span class="text-danger mb-5">{{ passport_imageError }}</span>
           <button type="submit" class="link_blue red">
             <span
@@ -102,38 +103,24 @@
       </form>
     </div>
 
-    <div
-      class="modal fade language_popup_style"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-      ref="thanksFillingModal"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header"></div>
-          <div class="modal-body">
-            <h2>{{ $t("thanks_fill_questionnaire") }}</h2>
-            <h4>{{ $t("Your profile is pending") }}</h4>
-            <a href="/" class="link_blue red">{{ $t("next") }}</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <b-modal class="language_popup_style" id="thanksFillingModal">
+      <h2>{{ $t("thanks_fill_questionnaire") }}</h2>
+      <h4>{{ $t("Your profile is pending") }}</h4>
+      <nuxt-link
+        :to="localePath('/home')"
+        class="link_blue red"
+      >{{ $t("next") }}</nuxt-link>
+    </b-modal>
   </div>
 </template>
 
 <script>
-import { Modal } from "bootstrap";
 import { mapActions, mapMutations } from "vuex";
 
 export default {
   layout: "questionnaire",
   mounted() {
     this.setQuestionnairePercent(80);
-    this.modal = new Modal(this.$refs.thanksFillingModal);
   },
   data() {
     return {
@@ -175,7 +162,7 @@ export default {
         let form = Object.fromEntries(formData);
         await this.savePassportData(form);
         this.loading = false;
-        this.modal.show();
+        this.$bvModal.show('thanksFillingModal');
       }
     },
     validate(e) {

@@ -20,7 +20,7 @@ export default {
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     scripts: [
       {
-        src: "//code-ya.jivosite.com/widget/GyXBzOKWA2",
+        src: "https://code-ya.jivosite.com/widget/GyXBzOKWA2",
         // body: true,
         defer: true,
       },
@@ -28,20 +28,13 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    // "~/node_modules/bootstrap/dist/css/bootstrap.min.css",
-    "~/assets/css/style.css",
-    "~/assets/css/main.css",
-    // "~/assets/variables.sass",
-  ],
+  css: ["~/assets/css/style.css", "~/assets/css/main.css"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
     { src: "~/plugins/validate.js", mode: "client" },
-    // { src: "~/plugins/bootstrap.js", mode: "client" },
-    // "@/plugins/jivosite.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -67,12 +60,12 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    "bootstrap-vue/nuxt",
     "@nuxtjs/axios",
     "@nuxtjs/auth-next",
     "@nuxtjs/i18n",
     "@nuxtjs/proxy",
     "@nuxtjs/toast",
-    "bootstrap-vue/nuxt",
   ],
 
   i18n: {
@@ -90,7 +83,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials: true,
-    prefix: process.env.API_URL,
+    // prefix: process.env.API_URL,
     proxy: true,
   },
 
@@ -164,5 +157,4 @@ export default {
   pageTransition: "page",
 
   target: "static",
-  // devtools: true,
 };

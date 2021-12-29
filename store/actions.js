@@ -62,47 +62,108 @@ const actions = {
   },
 
   async fetchAnswers({ commit }, payload) {
-    const response = await this.$axios.post("api/user-answers-by-user", {
-      user_id: payload,
-    });
-    return response.data;
+    try {
+      const response = await this.$axios.post("api/user-answers-by-user", {
+        user_id: payload,
+      });
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
+    }
   },
 
   async fetchRelatives({ commit }, payload) {
-    const response = await this.$axios.post("api/user-relatives-by-user", {
-      user_id: payload,
-    });
-    return response.data;
+    try {
+      const response = await this.$axios.post("api/user-relatives-by-user", {
+        user_id: payload,
+      });
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
+    }
   },
 
   async fetchUserById({ commit }, payload) {
-    const response = await this.$axios.post("api/user-by-id", {
-      user_id: payload,
-    });
-    commit("setCurrentUser", response.data);
-    return response.data;
+    try {
+      const response = await this.$axios.post("api/user-by-id", {
+        user_id: payload,
+      });
+      commit("setCurrentUser", response.data);
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
+    }
   },
 
   async fetchChangePassword({ commit }, payload) {
-    const response = await this.$axios.post("api/change-password", {
-      password: payload,
-    });
-    return response.data;
+    try {
+      const response = await this.$axios.post("api/change-password", {
+        password: payload,
+      });
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
+    }
   },
 
   async fetchOffer({ commit }, payload) {
-    const response = await this.$axios.post("api/offer", payload);
-
     try {
+      const response = await this.$axios.post("api/offer", payload);
       return response.data;
     } catch (error) {
-      console.log(error);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchRelativesForSetting({ commit }) {
-    const response = await this.$axios.get("api/relatives");
-    return response.data;
+    try {
+      const response = await this.$axios.get("api/relatives");
+      return response.data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      this.$toast.error("Error while fetching data: ", message);
+    }
   },
   async fetchChatId({ commit }, payload) {
     const response = await this.$axios.post("api/chat-id", payload);

@@ -18,10 +18,7 @@
         </div>
         <div class="form-group text-center">
           <button class="link_blue" :disabled="codeLoading">
-            <span
-              v-show="codeLoading"
-              class="spinner-border spinner-border-sm"
-            ></span>
+            <span v-show="codeLoading" class="spinner-border spinner-border-sm"></span>
             &nbsp;
             <span
               v-text="$t('Confirm code')"
@@ -39,9 +36,7 @@
             :disabled="codeSentStatus"
             class="btn ms-auto"
             @click="resendSms"
-          >
-            {{ $t("resend_sms") }}
-          </button>
+          >{{ $t("resend_sms") }}</button>
         </div>
       </div>
     </div>
@@ -71,17 +66,17 @@ export default {
         });
 
         if (res.data.status) {
-          const res = await this.$auth.loginWith("laravelSanctum", {
+          const res2 = await this.$auth.loginWith("laravelSanctum", {
             data: {
               username: this.$store.getters.getGuest.username,
               password: this.$store.getters.getGuest.password,
             },
           });
 
+          await this.$store.dispatch("user/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
-          await this.$store.dispatch("setAccessToken", res.data.accessToken);
-          // window.location.href = "/home";
-          this.$router.push(this.localePath("/home"));
+          window.location.href = "/home";
+          // this.$router.push(this.localePath("/home"));
         } else this.codeError = this.$t("Wrong code");
       } catch (error) {
         this.codeError = error.data;

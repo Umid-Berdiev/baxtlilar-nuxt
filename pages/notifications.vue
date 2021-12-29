@@ -19,44 +19,27 @@
     </a>
 
     <!-- Modal -->
-    <div
-      class="modal fade"
-      id="notificationModal"
-      tabindex="-1"
-      aria-labelledby="notificationModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="notificationModalLabel"></h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            />
-          </div>
-          <div class="modal-body">
-            {{ notification.data && notification.data.message }}
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              v-text="$t('Close')"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    <b-modal id="notificationModal">
+      <template #modal-header="{ close }">
+        <h5 class="modal-title" id="notificationModalLabel"></h5>
+        <b-button size="sm" variant="outline-danger" @click="close()">X</b-button>
+      </template>
+      <template #default>{{ notification.data && notification.data.message }}</template>
+      <template #modal-footer="{ cancel }">
+        <b-button
+          size="sm"
+          variant="danger"
+          @click="cancel()"
+          v-text="$t('Close')"
+          class="btn btn-secondary"
+        />
+      </template>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import moment from "moment";
-import { Modal } from "bootstrap";
 
 export default {
   data() {
@@ -79,8 +62,7 @@ export default {
         (item) => item.id == id
       );
 
-      var myModal = new Modal(document.getElementById("notificationModal"));
-      myModal.show();
+      this.$bvModal.show('notificationModal');
 
       if (this.notification.read_at == null) {
         await this.$axios({

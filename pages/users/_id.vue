@@ -48,9 +48,9 @@ export default {
       tabIndex: null,
     };
   },
-  async asyncData({ $axios, route, $auth, app }) {
+  async asyncData({ $axios, route, params, app }) {
     try {
-      const currentUser = await $axios.$get(`api/user-details/${$auth.user.id}`);
+      const currentUser = await $axios.$get(`api/user-details/${params.id}`);
       const tabIndex = Number(route.query.tab) || 0;
 
       return {
@@ -66,9 +66,6 @@ export default {
         error.message ||
         error.toString();
 
-      console.log(
-        app.i18n.t("error_while_fetching_data") + ": " + message
-      );
       app.toast.error(
         app.i18n.t("error_while_fetching_data") + ": " + message
       );

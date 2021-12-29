@@ -11,9 +11,11 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="form-group">
-            <label for="#" id="family_status-label">{{
-              $t("family_status")
-            }}</label>
+            <label for="#" id="family_status-label">
+              {{
+                $t("family_status")
+              }}
+            </label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -21,15 +23,21 @@
               @change="selectFamilyStatus"
               name="family_status"
             >
-              <a-select-option value="single">{{
-                $t("single")
-              }}</a-select-option>
-              <a-select-option value="relationship">{{
-                $t("in_relationship")
-              }}</a-select-option>
-              <a-select-option value="divorced">{{
-                $t("divorced")
-              }}</a-select-option>
+              <a-select-option value="single">
+                {{
+                  $t("single")
+                }}
+              </a-select-option>
+              <a-select-option value="relationship">
+                {{
+                  $t("in_relationship")
+                }}
+              </a-select-option>
+              <a-select-option value="divorced">
+                {{
+                  $t("divorced")
+                }}
+              </a-select-option>
               <a-select-option value="widow">{{ $t("widow") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ family_statusError }}</span>
@@ -39,7 +47,7 @@
       <div class="row">
         <div class="col-lg-5 col-sm-6 col-8">
           <div class="form-group">
-            <label for="">{{ $t("having_children") }}</label>
+            <label for>{{ $t("having_children") }}</label>
             <div class="row big_radio">
               <div class="col-6">
                 <input
@@ -56,7 +64,7 @@
                   type="radio"
                   name="child"
                   id="child2"
-                  checked=""
+                  checked
                   value="0"
                   @change="children"
                 />
@@ -75,9 +83,11 @@
               :default-value="1"
               class="form-control"
             >
-              <a-select-option v-for="item in 10" :key="item" :value="item">
-                {{ item }}
-              </a-select-option>
+              <a-select-option
+                v-for="item in 10"
+                :key="item"
+                :value="item"
+              >{{ item }}</a-select-option>
             </a-select>
           </div>
         </div>
@@ -85,7 +95,7 @@
       <div class="row" v-for="index in parseInt(childrenCount)" :key="index">
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t("sex") }}</label>
+            <label for>{{ $t("sex") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -93,20 +103,23 @@
               class="form-control"
             >
               <a-select-option value="son">{{ $t("boy") }}</a-select-option>
-              <a-select-option value="daughter">{{
-                $t("girl")
-              }}</a-select-option>
+              <a-select-option value="daughter">
+                {{
+                  $t("girl")
+                }}
+              </a-select-option>
             </a-select>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t("age") }}</label>
+            <label for>{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
               v-model="selects.childAge[index - 1]"
-              v-maska="'##'"
+              min="0"
+              max="99"
             />
           </div>
         </div>
@@ -114,10 +127,10 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group">
-            <label for="" id="health-label">{{ $t("health_text") }}?</label>
+            <label for id="health-label">{{ $t("health_text") }}?</label>
             <textarea
               name="health"
-              id=""
+              id
               :placeholder="$t('fill')"
               @input="healthError = ''"
             ></textarea>
@@ -128,7 +141,7 @@
       <div class="row">
         <div class="col-lg-5">
           <div class="form-group">
-            <label for="">{{ $t("have_criminal") }}</label>
+            <label for>{{ $t("have_criminal") }}</label>
             <div class="row big_radio">
               <div class="col-lg-4 col-sm-4 col-6">
                 <input
@@ -156,7 +169,7 @@
         </div>
         <div class="col-lg-5">
           <div class="form-group" v-if="hasCrime">
-            <label for="">{{ $t("which_criminal") }}?</label>
+            <label for>{{ $t("which_criminal") }}?</label>
             <input type="text" name="criminal_article" v-model="crimeArticle" />
           </div>
         </div>

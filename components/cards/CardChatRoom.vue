@@ -21,11 +21,13 @@
         v-text="
           formatDate(
             chatRoom.messages &&
-              chatRoom.messages[chatRoom.messages.length - 1].created_at
+            chatRoom.messages[chatRoom.messages.length - 1].created_at
           )
         "
       />
-      <span><img src="~/assets/images/readen.svg" /></span>
+      <span>
+        <img src="~/assets/images/readen.svg" />
+      </span>
     </div>
   </nuxt-link>
 </template>
@@ -37,11 +39,11 @@ export default {
   props: {
     chatRoom: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     otherUser: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     unreadNotificationsCount: {
       type: Number,

@@ -12,7 +12,7 @@
             v-model="form.gender"
           />
           <label for="boy">
-            <img src="@/assets/images/boy.svg" alt="" />
+            <img src="@/assets/images/boy.svg" alt />
             {{ $t("male") }}
           </label>
           <input
@@ -23,7 +23,7 @@
             v-model="form.gender"
           />
           <label for="girl">
-            <img src="@/assets/images/girl.svg" alt="" />
+            <img src="@/assets/images/girl.svg" alt />
             {{ $t("female") }}
           </label>
         </div>
@@ -85,10 +85,7 @@
           class="btn btn-primary btn-block"
           :disabled="loading || invalid"
         >
-          <span
-            v-show="loading"
-            class="spinner-border spinner-border-sm"
-          ></span>
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
           &nbsp;
           {{ $t("signup") }}
         </button>
@@ -165,11 +162,7 @@ export default {
             phone: this.form.phone,
           });
 
-          const smsConfirmModal = this.$Modal.getInstance(
-            document.getElementById("confirm-sms-code-modal")
-          );
-
-          smsConfirmModal.show();
+          this.$bvModal.show('confirm-sms-code-modal');
         } else {
           this.backendErrors = { ...res.errors };
         }

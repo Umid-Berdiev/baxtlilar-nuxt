@@ -4,7 +4,7 @@
       <div class="template_main" id="main">
         <div class="sidebar_template" id="left-sidebar">
           <user-menu />
-          <forum />
+          <!-- <forum /> -->
         </div>
       </div>
     </div>
@@ -12,8 +12,9 @@
 </template>
 
 <script>
-import Forum from "../cards/Forum.vue";
-import UserMenu from "../cards/UserMenu.vue";
+import Forum from "../components/cards/Forum.vue";
+import UserMenu from "../components/cards/UserMenu.vue";
+
 export default {
   components: { UserMenu, Forum },
 };

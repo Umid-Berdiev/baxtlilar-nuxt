@@ -4,7 +4,7 @@
       <h2 class="title">{{ $t("news") }}</h2>
       <loader v-if="loading" />
       <div class="row" v-else>
-        <div class="col-sm-4" v-for="(item, index) in getNews" :key="index">
+        <div class="col-sm-4" v-for="(item, index) in news" :key="index">
           <news-card :item="item" />
         </div>
         <div class="col-auto mx-auto mt-3">
@@ -18,31 +18,41 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 import NewsCard from "../cards/NewsCard.vue";
 import Loader from "../Loader.vue";
 import moment from "moment";
 
 export default {
   components: { NewsCard, Loader },
-  async created() {
-    this.loading = true;
-    await this.fetchNews();
-    this.loading = false;
+  async fetch() {
+    this.loading = true
+    try {
+      const response = await this.$axios.$get("api/news-list");
+      this.news = response
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      console.log(
+        this.$i18n.t("error_while_fetching_data") + ": " + message
+      );
+    }
+    this.loading = false
   },
   data() {
     return {
       loading: false,
+      news: []
     };
   },
   methods: {
-    ...mapActions(["fetchNews"]),
     formatDate(value) {
       return moment(value).format("H:i dd.mm.YYYY");
     },
-  },
-  computed: {
-    ...mapGetters(["getNews"]),
   },
 };
 </script>

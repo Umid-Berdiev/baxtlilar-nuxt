@@ -44,14 +44,14 @@
           </div>
           <div class="forget_title">
             {{ $t("forget_password") }}
-            <a href="#" @click="showResetPasswordModal">{{ $t("restore") }}</a>
+            <a
+              href="#"
+              @click="showResetPasswordModal"
+            >{{ $t("restore") }}</a>
           </div>
           <div class="form-group text-center">
             <button class="link_blue" :disabled="loading">
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span>
+              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               &nbsp;
               <span
                 v-text="$t('signin')"
@@ -60,9 +60,11 @@
             </button>
           </div>
           <div class="form-group">
-            <div v-if="message" class="alert alert-danger" role="alert">
-              {{ message }}
-            </div>
+            <div
+              v-if="message"
+              class="alert alert-danger"
+              role="alert"
+            >{{ message }}</div>
           </div>
         </form>
       </ValidationObserver>
@@ -72,13 +74,11 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import ResetPaswordModal from "./ResetPaswordModal.vue";
 
 export default {
   components: {
     ValidationObserver,
     ValidationProvider,
-    ResetPaswordModal,
   },
   data() {
     return {
@@ -107,12 +107,13 @@ export default {
         if (res.data.message == "phone_number_not_verified") {
           this.$store.commit("setUserPhone", res.data.phone);
 
-          const smsConfirmModal = new Modal(
-            document.getElementById("confirm-sms-code-modal")
-          );
+          this.$bvModal.show('confirm-sms-code-modal');
+        } else {
+          this.$auth.strategy.token.set(res.data.accessToken);
+          // window.location.href = "/home";
+          this.$router.push(this.localePath("/home"));
+        }
 
-          smsConfirmModal.show();
-        } else this.$router.push(this.localePath("/home"));
       } catch (error) {
         this.message = this.$t("Credentials not match");
       }

@@ -57,16 +57,34 @@ export default {
       answers: [],
     };
   },
-  async asyncData({ $axios, store }) {
-    const res = await $axios.$get("api/user-details");
-    const relatives = await store.dispatch("fetchRelatives", res.id);
-    const answers = await store.dispatch("fetchAnswers", res.id);
+  async asyncData({ $axios, store, $auth, app }) {
+    try {
+      const res = await $axios.$get(`api/user-details/${$auth.user.id}`);
+      const relatives = store.dispatch("fetchRelatives", res.id);
+      const answers = store.dispatch("fetchAnswers", res.id);
 
-    return {
-      currentUser: res,
-      relatives,
-      answers,
-    };
+      return {
+        currentUser: res,
+        relatives,
+        answers,
+      };
+
+
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      console.log(
+        app.i18n.t("error_while_fetching_data") + ": " + message
+      );
+      // app.toast.error(
+      //   app.i18n.t("error_while_fetching_data") + ": " + message
+      // );
+    }
   },
 };
 </script>
