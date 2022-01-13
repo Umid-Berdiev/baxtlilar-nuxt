@@ -59,6 +59,9 @@ const mutations = {
   setActiveFilterSection(state, payload) {
     state.activeFilterSection = payload;
   },
+  isTermsReading(state, payload) {
+    state.isTermsReading = payload;
+  },
 };
 
 export default mutations;

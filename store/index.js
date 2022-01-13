@@ -33,6 +33,7 @@ export const state = () => ({
   footerList: [],
   footerListOne: {},
   tariffList: [],
+  isTermsReading: false,
 });
 
 export const getters = {

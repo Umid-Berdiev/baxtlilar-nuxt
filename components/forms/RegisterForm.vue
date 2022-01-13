@@ -1,6 +1,10 @@
 <template>
-  <ValidationObserver v-slot="{ invalid }">
-    <form @submit.prevent="handleRegister" class="enter_site_right" ref="form">
+  <ValidationObserver v-slot="{ handleSubmit, invalid }">
+    <form
+      @submit.prevent="handleSubmit(handleRegister)"
+      class="enter_site_right"
+      ref="form"
+    >
       <!-- <div v-if="!successful"> -->
       <div class="form-group">
         <div class="radio_male">
@@ -29,14 +33,15 @@
         </div>
         <span name="gender" class="error-feedback" />
       </div>
-      <div class="form-group">
-        <ValidationProvider rules="required" v-slot="{ errors }">
+      <ValidationProvider name="username" rules="required" v-slot="{ errors }">
+        <div class="form-group">
           <input
             ref="username"
             v-model="form.username"
             name="username"
             type="text"
             class="form-control"
+            pattern="^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,20}$"
             :placeholder="$t('create_login')"
           />
           <span class="error-feedback" v-text="errors[0]" />
@@ -44,11 +49,11 @@
             class="invalid-feedback d-block"
             v-if="backendErrors.username && backendErrors.username.length > 0"
             v-text="backendErrors.username[0]"
-          />
-        </ValidationProvider>
-      </div>
-      <div class="form-group">
-        <ValidationProvider rules="required" v-slot="{ errors }">
+          ></div>
+        </div>
+      </ValidationProvider>
+      <ValidationProvider rules="required" v-slot="{ errors }">
+        <div class="form-group">
           <input
             type="tel"
             name="phone"
@@ -63,11 +68,11 @@
             v-if="backendErrors.phone && backendErrors.phone.length > 0"
             v-text="backendErrors.phone[0]"
           />
-        </ValidationProvider>
-      </div>
+        </div>
+      </ValidationProvider>
 
-      <div class="form-group">
-        <ValidationProvider rules="required" v-slot="{ errors }">
+      <ValidationProvider rules="required" v-slot="{ errors }">
+        <div class="form-group">
           <input
             v-model="form.password"
             name="password"
@@ -76,8 +81,8 @@
             :placeholder="$t('create_password')"
           />
           <span class="error-feedback" v-text="errors[0]" />
-        </ValidationProvider>
-      </div>
+        </div>
+      </ValidationProvider>
 
       <div class="form-group">
         <button
@@ -98,7 +103,6 @@
 <script>
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 import * as yup from "yup";
-// import { Modal } from "bootstrap";
 
 export default {
   components: {
@@ -111,8 +115,9 @@ export default {
         .string()
         .required(this.$t("Required field"))
         .trim()
+        .min(4)
         .matches(
-          /^[a-zA-Z][\w-_]{3,19}$/,
+          /^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,20}$/,
           this.$t("validate_english_character")
         ),
       phone: yup.string().required(this.$t("Required field")),
@@ -142,42 +147,52 @@ export default {
   },
   methods: {
     async handleRegister() {
+      this.loading = true;
+      this.form.lang = this.$i18n.locale;
       this.backendErrors = {
         username: [],
         phone: [],
       };
       this.message = "";
-      // this.successful = false;
-      this.loading = true;
-      this.form.lang = this.$i18n.locale;
+      console.log('form: ', this.form);
 
-      try {
-        const res = await this.$axios.$post("api/auth/register", this.form);
-        if (res.message == "Success") {
-          this.message = res.message;
+      this.schema
+        .validate(this.form)
+        .then(async () => {
+          try {
+            const res = await this.$axios.$post("api/auth/register", this.form);
+            if (res.message == "Success") {
+              this.message = res.message;
 
-          this.$store.commit("setGuest", {
-            username: this.form.username,
-            password: this.form.password,
-            phone: this.form.phone,
-          });
+              this.$store.commit("setGuest", {
+                username: this.form.username,
+                password: this.form.password,
+                phone: this.form.phone,
+              });
 
-          this.$bvModal.show('confirm-sms-code-modal');
-        } else {
-          this.backendErrors = { ...res.errors };
-        }
-      } catch (error) {
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+              this.$bvModal.show('confirm-sms-code-modal');
+            } else {
+              this.backendErrors = { ...res.errors };
+            }
+          } catch (error) {
+            const message =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.message ||
+              error.toString();
 
-        this.$toast.error(
-          this.$t("error_while_fetching_data") + ": " + message
-        );
-      }
+            this.$toast.error(
+              this.$t("error_while_fetching_data") + ": " + message
+            );
+          }
+        })
+        .catch(err => {
+          console.log('error: ', err);
+          // err.inner.forEach(error => {
+          //   this.backendErrors[error.path] = error.message;
+          // });
+        });
 
       this.loading = false;
     },

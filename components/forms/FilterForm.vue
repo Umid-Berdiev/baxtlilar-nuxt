@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group">
-            <label for="">{{ $t("age") }} ( от ) ( до) </label>
+            <label for>{{ $t("age") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#">{{ $t("country_residence") }} </label>
+            <label for="#">{{ $t("country_residence") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -45,15 +45,13 @@
                 v-for="country in getCountries"
                 :key="country.key"
                 :value="country.id"
-              >
-                {{ country.name }}
-              </a-select-option>
+              >{{ country.name }}</a-select-option>
             </a-select>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#">{{ $t("city_residence") }} </label>
+            <label for="#">{{ $t("city_residence") }}</label>
             <a-select
               :showSearch="false"
               :placeholder="$t('choose')"
@@ -65,9 +63,7 @@
                 v-for="item in getRegions"
                 :key="item.id"
                 :value="item.id"
-              >
-                {{ item.name }}
-              </a-select-option>
+              >{{ item.name }}</a-select-option>
             </a-select>
           </div>
         </div>
@@ -75,7 +71,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("religion") }}</label>
+            <label for>{{ $t("religion") }}</label>
             <div class="row">
               <div class="col-6" v-for="item in getReligions" :key="item.id">
                 <div class="form-group radio_button">
@@ -108,7 +104,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("family_status") }}</label>
+            <label for>{{ $t("family_status") }}</label>
             <div class="row">
               <div class="col-6">
                 <div class="form-group radio_button">
@@ -169,7 +165,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_smoking") }} </label>
+            <label for>{{ $t("relation_smoking") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -214,7 +210,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_alcohol") }} </label>
+            <label for>{{ $t("relation_alcohol") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -259,7 +255,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_drugs") }} </label>
+            <label for>{{ $t("relation_drugs") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -304,7 +300,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("financial_status") }} </label>
+            <label for>{{ $t("financial_status") }}</label>
             <div class="row">
               <div class="col-6">
                 <div class="form-group radio_button">
@@ -331,9 +327,7 @@
                       'middle' == getMainFilterDefaultForm.financial_status
                     "
                   />
-                  <label for="financial-status-3"
-                    >{{ $t("middle_income") }}
-                  </label>
+                  <label for="financial-status-3">{{ $t("middle_income") }}</label>
                 </div>
               </div>
               <div class="col-6">
@@ -347,9 +341,11 @@
                       'low' == getMainFilterDefaultForm.financial_status
                     "
                   />
-                  <label for="financial-status-4">{{
-                    $t("little_income")
-                  }}</label>
+                  <label for="financial-status-4">
+                    {{
+                      $t("little_income")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-6">
@@ -361,9 +357,11 @@
                     value="-1"
                     :checked="-1 == getMainFilterDefaultForm.financial_status"
                   />
-                  <label for="financial-status-2">{{
-                    $t("doesnt_matter")
-                  }}</label>
+                  <label for="financial-status-2">
+                    {{
+                      $t("doesnt_matter")
+                    }}
+                  </label>
                 </div>
               </div>
             </div>
@@ -373,7 +371,7 @@
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t("height") }} ( от ) ( до) </label>
+            <label for>{{ $t("height") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -400,7 +398,7 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="">{{ $t("weight") }} ( от ) ( до)</label>
+            <label for>{{ $t("weight") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -429,7 +427,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-12">
-            <label for="">{{ $t("choose_type_questionnaire") }} </label>
+            <label for>{{ $t("choose_type_questionnaire") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -440,9 +438,11 @@
                     value="national"
                     :checked="'national' == getMainFilterDefaultForm.type_form"
                   />
-                  <label for="type-form-1">{{
-                    $t("national_questionnaire")
-                  }}</label>
+                  <label for="type-form-1">
+                    {{
+                      $t("national_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-12">
@@ -456,9 +456,11 @@
                       'international' == getMainFilterDefaultForm.type_form
                     "
                   />
-                  <label for="type-form-2">{{
-                    $t("international_questionnaire")
-                  }}</label>
+                  <label for="type-form-2">
+                    {{
+                      $t("international_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-12">
@@ -470,9 +472,11 @@
                     value="universal"
                     :checked="'universal' == getMainFilterDefaultForm.type_form"
                   />
-                  <label for="type-form-3">{{
-                    $t("universal_questionnaire")
-                  }}</label>
+                  <label for="type-form-3">
+                    {{
+                      $t("universal_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
             </div>
@@ -495,7 +499,6 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import _ from "lodash";
-// import { Modal } from 'bootstrap'
 
 export default {
   data() {
@@ -555,10 +558,7 @@ export default {
         alert(e);
       }
 
-      const modal = this.$Modal.getInstance(
-        document.getElementById("setting-modal")
-      );
-      modal.show();
+      this.$bvModal.show("setting-modal")
     },
   },
 };

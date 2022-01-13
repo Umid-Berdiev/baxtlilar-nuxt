@@ -13,16 +13,22 @@
             :value="user.education"
             name="education"
           >
-            <a-select-option value="average">{{
-              $t("average")
-            }}</a-select-option>
-            <a-select-option value="unfinished_higher">{{
-              $t("unfinished_higher")
-            }}</a-select-option>
+            <a-select-option value="average">
+              {{
+                $t("average")
+              }}
+            </a-select-option>
+            <a-select-option value="unfinished_higher">
+              {{
+                $t("unfinished_higher")
+              }}
+            </a-select-option>
             <a-select-option value="higher">{{ $t("higher") }}</a-select-option>
-            <a-select-option value="academic_degree">{{
-              $t("academic_degree")
-            }}</a-select-option>
+            <a-select-option value="academic_degree">
+              {{
+                $t("academic_degree")
+              }}
+            </a-select-option>
           </a-select>
         </div>
       </div>
@@ -30,7 +36,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("profession") }}</label>
+          <label for>{{ $t("profession") }}</label>
           <input
             type="text"
             :placeholder="$t('fill')"
@@ -41,7 +47,7 @@
       </div>
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("employment") }}</label>
+          <label for>{{ $t("employment") }}</label>
           <input
             type="text"
             :placeholder="$t('fill')"
@@ -54,10 +60,10 @@
     <div class="row">
       <div class="col-lg-10">
         <div class="form-group">
-          <label for="">{{ $t("hobby") }}</label>
+          <label for>{{ $t("hobby") }}</label>
           <textarea
             name="hobby"
-            id=""
+            id
             :placeholder="$t('fill') + '....'"
             v-model="user.hobby"
           ></textarea>
@@ -67,7 +73,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("relation_smoking") }}</label>
+          <label for>{{ $t("relation_smoking") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -84,7 +90,7 @@
       </div>
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("relation_alcohol") }}</label>
+          <label for>{{ $t("relation_alcohol") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -101,7 +107,7 @@
       </div>
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("relation_drugs") }}</label>
+          <label for>{{ $t("relation_drugs") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -120,7 +126,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-4 col-6">
         <div class="form-group">
-          <label for="">{{ $t("financial_status") }}</label>
+          <label for>{{ $t("financial_status") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -130,16 +136,18 @@
             :value="user.financial_status"
           >
             <a-select-option value="1">{{ $t("wealthy") }}</a-select-option>
-            <a-select-option value="2">{{
-              $t("middle_income")
-            }}</a-select-option>
+            <a-select-option value="2">
+              {{
+                $t("middle_income")
+              }}
+            </a-select-option>
             <a-select-option value="3">{{ $t("no_income") }}</a-select-option>
           </a-select>
         </div>
       </div>
       <div class="col-lg-4 col-sm-4 col-6">
         <div class="form-group">
-          <label for="">{{ $t("living_space") }}</label>
+          <label for>{{ $t("living_space") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -149,12 +157,16 @@
             :value="user.living_space"
           >
             <a-select-option value="1">{{ $t("own_home") }}</a-select-option>
-            <a-select-option value="2">{{
-              $t("rent_apartment")
-            }}</a-select-option>
-            <a-select-option value="3">{{
-              $t("live_with_parents")
-            }}</a-select-option>
+            <a-select-option value="2">
+              {{
+                $t("rent_apartment")
+              }}
+            </a-select-option>
+            <a-select-option value="3">
+              {{
+                $t("live_with_parents")
+              }}
+            </a-select-option>
           </a-select>
         </div>
       </div>
@@ -162,7 +174,7 @@
     <div class="row">
       <div class="col-lg-10">
         <div class="form-group">
-          <label for="">{{ $t("ready_live_together") }}?</label>
+          <label for>{{ $t("ready_live_together") }}?</label>
           <div class="row big_radio">
             <div class="col-lg-2 col-sm-4 col-6">
               <input
@@ -203,7 +215,6 @@
 
 <script>
 import { mapMutations } from "vuex";
-// import { Modal } from "bootstrap";
 
 export default {
   props: { user: Object },
@@ -236,10 +247,7 @@ export default {
 
       try {
         await this.$store.dispatch("saveUserEducaton", form);
-        const modal = this.$Modal.getInstance(
-          document.getElementById("setting-modal")
-        );
-        modal.show();
+        this.$bvModal.show("setting-modal")
       } catch (e) {
         alert(e);
       }

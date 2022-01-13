@@ -1,17 +1,17 @@
 <template>
   <form @submit.prevent="submit">
-    <h2>{{ $t("passport_image") }}</h2>
+    <!-- <h2>{{ $t("passport_image") }}</h2>
     <img
       v-if="user.passport_image"
       id="passport_image"
       :src="APP_URL + user.passport_image"
       alt="User_passport"
     />
-    <h5 v-else>{{ $t("passport_image_not_found") }}</h5>
+    <h5 v-else>{{ $t("passport_image_not_found") }}</h5>-->
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("Choose Language") }}</label>
+          <label for>{{ $t("Choose Language") }}</label>
           <a-select
             :placeholder="$t('choose')"
             :showSearch="false"
@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("new_password") }}</label>
+          <label for>{{ $t("new_password") }}</label>
           <input type="password" placeholder="........" v-model="password" />
         </div>
       </div>
@@ -37,7 +37,7 @@
     <div class="row">
       <div class="col-lg-4 col-sm-6">
         <div class="form-group">
-          <label for="">{{ $t("rewrite_password") }}</label>
+          <label for>{{ $t("rewrite_password") }}</label>
           <input type="password" placeholder="........" v-model="confirm" />
           <span class="text-danger">{{ error }}</span>
         </div>
@@ -59,7 +59,6 @@
 
 <script>
 import { mapActions } from "vuex";
-// import { Modal } from 'bootstrap'
 
 export default {
   props: { user: Object },
@@ -82,10 +81,7 @@ export default {
         this.loading = true;
         await this.fetchChangePassword(this.confirm);
         this.loading = false;
-        const modal = this.$Modal.getInstance(
-          document.getElementById("setting-modal")
-        );
-        modal.show();
+        this.$bvModal.show("setting-modal")
       }
     },
     selectLocale(locale) {

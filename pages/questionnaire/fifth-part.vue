@@ -12,19 +12,21 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("parents") }} </label>
+            <label for>{{ $t("parents") }}</label>
             <a-select
               label-in-value
-              :placeholde="$t('choose')"
+              :placeholde="$t('type_name')"
               :showSearch="false"
               @change="selectParents"
               class="form-control"
               name="parents"
               :default-value="{ key: '2' }"
             >
-              <a-select-option value="2">{{
-                $t("mom_and_dad")
-              }}</a-select-option>
+              <a-select-option value="2">
+                {{
+                  $t("mom_and_dad")
+                }}
+              </a-select-option>
               <a-select-option value="1">{{ $t("dad") }}</a-select-option>
               <a-select-option value="0">{{ $t("mom") }}</a-select-option>
               <a-select-option value="-1">{{ $t("orphan") }}</a-select-option>
@@ -33,7 +35,7 @@
         </div>
         <div class="col-sm-4 col-6">
           <div class="form-group">
-            <label for="">{{ $t("count_brothers") }}</label>
+            <label for>{{ $t("count_brothers") }}</label>
             <a-select
               :showSearch="false"
               name="brothersCount"
@@ -41,15 +43,17 @@
               :default-value="1"
               class="form-control"
             >
-              <a-select-option v-for="item in 11" :key="item" :value="item - 1">
-                {{ item - 1 }}
-              </a-select-option>
+              <a-select-option
+                v-for="item in 11"
+                :key="item"
+                :value="item - 1"
+              >{{ item - 1 }}</a-select-option>
             </a-select>
           </div>
         </div>
         <div class="col-sm-4 col-6">
           <div class="form-group">
-            <label for="">{{ $t("count_sisters") }}</label>
+            <label for>{{ $t("count_sisters") }}</label>
             <a-select
               :showSearch="false"
               name="sistersCount"
@@ -61,9 +65,7 @@
                 v-for="item in 11"
                 :key="item + '-2'"
                 :value="item - 1"
-              >
-                {{ item - 1 }}
-              </a-select-option>
+              >{{ item - 1 }}</a-select-option>
             </a-select>
           </div>
         </div>
@@ -71,13 +73,13 @@
       <div class="row" v-if="parents == 2 || parents == 0">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("mom") }}</label>
+            <label for>{{ $t("mom") }}</label>
             <input type="text" :placeholder="$t('fill')" name="motherName" />
           </div>
         </div>
         <div class="col-sm-2 col-6">
           <div class="form-group">
-            <label for="">{{ $t("age") }}</label>
+            <label for>{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
@@ -88,7 +90,7 @@
         </div>
         <div class="col-sm-4 col-6">
           <div class="form-group">
-            <label for="">{{ $t("employment") }}</label>
+            <label for>{{ $t("employment") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -100,13 +102,13 @@
       <div class="row" v-if="parents == 2 || parents == 1">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("dad") }}</label>
+            <label for>{{ $t("dad") }}</label>
             <input type="text" :placeholder="$t('fill')" name="fatherName" />
           </div>
         </div>
         <div class="col-sm-2">
           <div class="form-group">
-            <label for="">{{ $t("age") }}</label>
+            <label for>{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
@@ -117,7 +119,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("employment") }}</label>
+            <label for>{{ $t("employment") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -129,7 +131,7 @@
       <div class="row" v-for="index in getBrothersCount" :key="index + '-b'">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ index }} - {{ $t("brother") }} </label>
+            <label for>{{ index }} - {{ $t("brother") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -139,7 +141,7 @@
         </div>
         <div class="col-sm-2">
           <div class="form-group">
-            <label for="">{{ $t("age") }}</label>
+            <label for>{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
@@ -150,7 +152,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("employment") }}</label>
+            <label for>{{ $t("employment") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -160,7 +162,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("family_status") }} </label>
+            <label for>{{ $t("family_status") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -172,7 +174,7 @@
       <div class="row" v-for="index in getSistersCount" :key="index + '-g'">
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ index }} - {{ $t("sister") }} </label>
+            <label for>{{ index }} - {{ $t("sister") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -182,7 +184,7 @@
         </div>
         <div class="col-sm-2">
           <div class="form-group">
-            <label for="">{{ $t("age") }}</label>
+            <label for>{{ $t("age") }}</label>
             <input
               type="number"
               :placeholder="$t('fill')"
@@ -193,7 +195,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("employment") }}</label>
+            <label for>{{ $t("employment") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -203,7 +205,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="">{{ $t("family_status") }} </label>
+            <label for>{{ $t("family_status") }}</label>
             <input
               type="text"
               :placeholder="$t('fill')"
@@ -225,9 +227,7 @@
           <input name="image_status" value="1" type="checkbox" id="ada1" />
           <label for="ada1">{{ $t("blur_photos") }}</label>
         </div>
-        <p>
-          {{ $t("blur_photo_less") }}
-        </p>
+        <p>{{ $t("blur_photo_less") }}</p>
       </div>
       <div class="anc_link_bottom">
         <button type="submit" class="link_blue">

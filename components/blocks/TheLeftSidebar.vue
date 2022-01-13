@@ -1,11 +1,11 @@
 <template>
   <div class="sidebar_template" id="left-sidebar">
     <UserMenu />
-    <a href="#" class="to_premium">
+    <nuxt-link :to="localePath('/tariffs')" class="to_premium">
       <h2>Premium</h2>
       <h2>200 000 сум</h2>
       <p v-text="$t('many_possibilities')" />
-    </a>
+    </nuxt-link>
   </div>
 </template>
 

@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-lg-8">
         <div class="form-group">
-          <label for="">{{ $t("type_addres") }}</label>
+          <label for>{{ $t("type_addres") }}</label>
           <input
             type="text"
             name="place_of_birth"
@@ -18,12 +18,8 @@
       </div>
       <div class="col-lg-8">
         <div class="form-group">
-          <label for="">{{ $t("type_residence_address") }}</label>
-          <input
-            type="text"
-            name="issued_by"
-            v-model="user.place_of_residence"
-          />
+          <label for>{{ $t("type_residence_address") }}</label>
+          <input type="text" name="issued_by" v-model="user.place_of_residence" />
           <span class="text-danger">{{ issuedByError }}</span>
         </div>
       </div>
@@ -31,18 +27,16 @@
     <div class="confirm_for">
       <h2>{{ $t("confirmation_personal_data") }}</h2>
       <div class="item_con">
-        <img src="~/assets/images/con2.svg" alt="" />
+        <img src="~/assets/images/con2.svg" alt />
         {{ $t("confirmation_personal_data_fewer_response") }}
       </div>
-      <h3>
-        {{ $t("attach_passwort_text") }}
-      </h3>
+      <h3>{{ $t("attach_passwort_text") }}</h3>
     </div>
     <h3>{{ $t("passport_data") }}</h3>
     <div class="row">
       <div class="col-sm-2 col-3">
         <div class="form-group">
-          <label for="">{{ $t("serie") }}</label>
+          <label for>{{ $t("serie") }}</label>
           <input
             type="text"
             style="text-transform: uppercase"
@@ -56,7 +50,7 @@
       </div>
       <div class="col-sm-4 col-3">
         <div class="form-group">
-          <label for="">{{ $t("number") }}</label>
+          <label for>{{ $t("number") }}</label>
           <input
             type="number"
             placeholder="1234567"
@@ -69,7 +63,7 @@
       </div>
       <div class="col-sm-4 col-6">
         <div class="form-group">
-          <label for="">{{ $t("when_given") }}</label>
+          <label for>{{ $t("when_given") }}</label>
           <a-date-picker
             :placeholder="$t('select_date')"
             format="YYYY-MM-DD"
@@ -96,9 +90,10 @@
       ref="thanks_filling"
     ></button>
     <div class="anc_link_bottom">
-      <button @click="$refs.fileInput.click()" class="link_blue mb-1">
-        {{ $t("passport_image") }} {{ fileName }}
-      </button>
+      <button
+        @click="$refs.fileInput.click()"
+        class="link_blue mb-1"
+      >{{ $t("passport_image") }} {{ fileName }}</button>
       <span class="text-danger mb-4">{{ passportPhotoError }}</span>
 
       <button type="submit" class="link_blue red">
@@ -114,7 +109,6 @@
 
 <script>
 import { mapActions, mapMutations } from "vuex";
-// import { Modal } from "bootstrap";
 
 export default {
   props: { user: Object },
@@ -162,11 +156,7 @@ export default {
         await this.savePassportData(form);
 
         this.loading = false;
-
-        const modal = this.$Modal.getInstance(
-          document.getElementById("setting-modal")
-        );
-        modal.show();
+        this.$bvModal.show("setting-modal")
       }
     },
 

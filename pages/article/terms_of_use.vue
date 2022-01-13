@@ -1,12 +1,10 @@
 <template>
   <section class="article_section">
     <div class="container">
-      <!-- <img :src="getFooterListOne.image" alt="" /> -->
-      <h1>{{ getFooterListOne.name }}</h1>
-      <p v-html="getFooterListOne.text" />
+      <h1>{{ termsOfUse.name }}</h1>
+      <p v-html="termsOfUse.text" />
     </div>
   </section>
-  <!-- <the-footer /> -->
 </template>
 
 <script>
@@ -18,10 +16,18 @@ export default {
   auth: "guest",
   components: { TheFooter },
   async created() {
-    const keyword = this.$route.params.key;
+    const keyword = 'terms_of_use';
     const lang = this.$i18n.locale;
-    await this.fetchFooterListOne({ keyword, lang });
-    // console.log();
+    const response = await this.$axios.get("api/pages/one", {
+      params: { keyword, lang },
+    });
+
+    this.termsOfUse = response.data
+  },
+  data() {
+    return {
+      termsOfUse: {}
+    }
   },
   methods: {
     ...mapActions(["fetchFooterListOne"]),
@@ -29,5 +35,8 @@ export default {
   computed: {
     ...mapGetters(["getFooterListOne"]),
   },
+  async beforeDestroy() {
+    this.$store.commit('isTermsReading', false);
+  }
 };
 </script>

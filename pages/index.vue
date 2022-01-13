@@ -6,7 +6,9 @@
           <div class="col-lg-6">
             <div class="enter_site_left">
               <h1>
-                {{ $t("find_happiness") }} <br />{{ $t("along_Baxtlilar") }}
+                {{ $t("find_happiness") }}
+                <br />
+                {{ $t("along_Baxtlilar") }}
               </h1>
               <p>{{ $t("site_for_seriously_relationships") }}</p>
               <a href="#">{{ $t("details") }}</a>
@@ -26,6 +28,7 @@
     <faq-accordion id="faq-courses" />
 
     <the-footer />
+    <language-modal />
   </div>
 </template>
 
@@ -35,6 +38,7 @@ import FaqAccordion from "@/components/accordions/FaqAccordion.vue";
 import NewsList from "@/components/lists/NewsList.vue";
 import TheFooter from "@/components/blocks/TheFooter.vue";
 import RegisterForm from "@/components/forms/RegisterForm.vue";
+import LanguageModal from "~/components/modals/LanguageModal.vue";
 
 export default {
   layout: "auth",
@@ -45,6 +49,11 @@ export default {
     NewsList,
     TheFooter,
     RegisterForm,
+    LanguageModal,
+  },
+  mounted() {
+    console.log(this.$store.state.isTermsReading === false);
+    if (!localStorage.getItem("agreement") && this.$store.state.isTermsReading === false) this.$bvModal.show("lang-modal");
   },
 };
 </script>

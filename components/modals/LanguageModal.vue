@@ -3,7 +3,7 @@
     <template #modal-header>
       <h2>{{ $t("choose_language") }}</h2>
     </template>
-    <img src="~/assets/images/lang_logo.jpg" alt="" class="img_logo_lang" />
+    <img src="~/assets/images/lang_logo.jpg" alt class="img_logo_lang" />
     <form @submit.prevent="handleSubmit">
       <div class="form-group select_language">
         <input type="radio" id="lang2" v-model="lang" value="uz" />
@@ -20,13 +20,19 @@
           v-model="agreement"
           :value="true"
         />
-        <label for="customCheck1"
-          >{{ $t("condition_text") }}
-          <a href="#">{{ $t("condition") }}</a></label
-        >
-        <span class="text-danger" v-show="errorVisibility">{{
-          $t("condition_required")
-        }}</span>
+        <label for="customCheck1">
+          {{ $t("condition_text") }}
+          <button
+            class="btn btn-link"
+            @click="goto()"
+          >{{ $t("condition") }}</button>
+          <!-- <a href="#">{{ $t("condition") }}</a> -->
+        </label>
+        <span class="text-danger" v-show="errorVisibility">
+          {{
+            $t("condition_required")
+          }}
+        </span>
       </div>
       <button type="submit" class="link_blue">{{ $t("accept") }}</button>
     </form>
@@ -38,12 +44,18 @@ export default {
   data() {
     return {
       // languageModal: null,
-      lang: "uz",
+      lang: this.$i18n.locale,
       agreement: false,
       errorVisibility: false,
     };
   },
   methods: {
+    async getOne(keyword) {
+      const response = await this.$axios.get("api/pages/one", {
+        params: { lang, keyword },
+      });
+    },
+
     handleSubmit() {
       if (this.agreement) {
         localStorage.setItem("agreement", true);
@@ -54,6 +66,13 @@ export default {
         this.errorVisibility = true;
       }
     },
+
+    goto() {
+      this.$i18n.setLocale(this.lang);
+      this.$bvModal.hide('lang-modal')
+      this.$store.commit('isTermsReading', true);
+      this.$router.push(`/${this.lang}/article/terms_of_use`)
+    }
   },
 };
 </script>
