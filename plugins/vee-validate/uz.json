@@ -1,0 +1,31 @@
+{
+  "code": "ru",
+  "messages": {
+    "alpha": "{_field_} maydoni может содержать только буквы",
+    "alpha_dash": "{_field_} maydoni может содержать только буквы, цифры и дефис",
+    "alpha_num": "{_field_} maydoni может содержать только буквы и цифры",
+    "alpha_spaces": "{_field_} maydoni может содержать только буквы и пробелы",
+    "between": "{_field_} maydoni должно быть между {min} и {max}",
+    "confirmed": "{_field_} maydoni не совпадает с {target}",
+    "digits": "{_field_} maydoni должно быть числовым и длиной {length}",
+    "dimensions": "{_field_} maydoni должно быть {width} пикселей на {height} пикселей",
+    "email": "{_field_} maydoni elektron manzil formatiga to'g'ri kelishi kk",
+    "excluded": "{_field_} maydoni должно быть допустимым значением",
+    "ext": "{_field_} maydoni должно быть действительным файлом",
+    "image": "{_field_} maydoni должно быть изображением",
+    "oneOf": "{_field_} maydoni должно быть допустимым значением",
+    "integer": "{_field_} maydoni должно быть целым числом",
+    "length": "{_field_} maydon uzunligi {length} ga teng bo'lishi kk",
+    "max": "{_field_} maydoni {length} belgidan oshmasligi kk",
+    "max_value": "{_field_} maydoni должно быть {max} или менее",
+    "mimes": "{_field_} maydoni должно иметь допустимый тип файла",
+    "min": "{_field_} maydoni {length} belgidan kam bo'lmasligi kk",
+    "min_value": "{_field_} maydoni должно быть {min} или больше",
+    "numeric": "{_field_} maydoni должно быть числом",
+    "regex": "{_field_} maydoni noto'g'ri formatda",
+    "required": "{_field_} maydoni to'ldirilishi shart",
+    "required_if": "{_field_} maydoni to'ldirilishi shart",
+    "size": "{_field_} maydoni должно быть меньше, чем {size}KB",
+    "double": "{_field_} maydoni должно быть допустимым десятичным числом"
+  }
+}

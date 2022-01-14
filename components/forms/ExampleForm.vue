@@ -1,106 +1,88 @@
 <template>
-  <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-    <b-form @submit.prevent="handleSubmit(onSubmit)" @reset="resetForm">
+  <ValidationObserver v-slot="{ handleSubmit, invalid }">
+    <form
+      @submit.prevent="handleSubmit(handleRegister)"
+      class="enter_site_right"
+    >
+      <div class="form-group">
+        <div class="radio_male">
+          <input type="radio" v-model="gender" id="boy" :value="1" />
+          <label for="boy">
+            <img src="@/assets/images/boy.svg" alt />
+            {{ $t("male") }}
+          </label>
+          <input type="radio" v-model="gender" id="girl" :value="2" />
+          <label for="girl">
+            <img src="@/assets/images/girl.svg" alt />
+            {{ $t("female") }}
+          </label>
+        </div>
+        <span name="gender" class="error-feedback" />
+      </div>
       <ValidationProvider
-        rules="required|email"
-        name="Email"
-        v-slot="{ valid, errors }"
+        name="username"
+        :rules="rules.username"
+        v-slot="{ errors }"
       >
-        <b-form-group
-          label="Email address:"
-          label-for="exampleInput1"
-          description="We'll never share your email with anyone else."
-        >
-          <b-form-input
-            type="email"
-            v-model="email"
-            :state="errors[0] ? false : (valid ? true : null)"
-            placeholder="Enter email"
-          ></b-form-input>
-          <b-form-invalid-feedback id="inputLiveFeedback">{{ errors[0] }}</b-form-invalid-feedback>
-        </b-form-group>
+        <div class="form-group">
+          <input
+            type="text"
+            v-model="username"
+            class="form-control"
+            :placeholder="$t('create_login')"
+          />
+          <span class="error-feedback">{{ errors[0] }}</span>
+          <div
+            class="invalid-feedback d-block"
+            v-if="backendErrors.username && backendErrors.username.length > 0"
+            v-text="backendErrors.username[0]"
+          ></div>
+        </div>
       </ValidationProvider>
-
+      <ValidationProvider name="phone" :rules="rules.tel" v-slot="{ errors }">
+        <div class="form-group">
+          <input
+            type="tel"
+            v-model="phone"
+            class="form-control"
+            :placeholder="$t('Enter your phone number')"
+          />
+          <span class="error-feedback">{{ errors[0] }}</span>
+          <div
+            class="invalid-feedback d-block"
+            v-if="backendErrors.phone && backendErrors.phone.length > 0"
+            v-text="backendErrors.phone[0]"
+          />
+        </div>
+      </ValidationProvider>
       <ValidationProvider
-        rules="required"
-        name="Password"
-        vid="password"
-        v-slot="{ valid, errors }"
+        name="password"
+        :rules="rules.password"
+        v-slot="{ errors }"
       >
-        <b-form-group
-          label="Password:"
-          description="We'll never share your password with anyone else."
-        >
-          <b-form-input
+        <div class="form-group">
+          <input
             type="password"
             v-model="password"
-            :state="errors[0] ? false : (valid ? true : null)"
-            placeholder="Enter password"
-          ></b-form-input>
-          <b-form-invalid-feedback id="inputLiveFeedback">{{ errors[0] }}</b-form-invalid-feedback>
-        </b-form-group>
+            class="form-control"
+            :placeholder="$t('create_password')"
+          />
+          <span class="error-feedback" v-text="errors[0]" />
+        </div>
       </ValidationProvider>
 
-      <ValidationProvider
-        rules="required|confirmed:password"
-        name="Password confirmation"
-        v-slot="{ valid, errors }"
-      >
-        <b-form-group label="Confirm Password:" label-for="exampleInput1">
-          <b-form-input
-            type="password"
-            v-model="confirmation"
-            :state="errors[0] ? false : (valid ? true : null)"
-            placeholder="Confirm Password"
-          ></b-form-input>
-          <b-form-invalid-feedback id="inputLiveFeedback">{{ errors[0] }}</b-form-invalid-feedback>
-        </b-form-group>
-      </ValidationProvider>
-
-      <ValidationProvider
-        name="Subject"
-        rules="required"
-        v-slot="{ valid, errors }"
-      >
-        <b-form-group
-          id="exampleInputGroup3"
-          label="Subject:"
-          label-for="exampleInput3"
+      <div class="form-group">
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          :disabled="loading || invalid"
         >
-          <b-form-select
-            id="exampleInput3"
-            :state="errors[0] ? false : (valid ? true : null)"
-            v-model="subject"
-          >
-            <option value>None</option>
-            <option value="S1">Subject 1</option>
-            <option value="S2">Subject 2</option>
-          </b-form-select>
-          <b-form-invalid-feedback id="inputLiveFeedback">{{ errors[0] }}</b-form-invalid-feedback>
-        </b-form-group>
-      </ValidationProvider>
-
-      <ValidationProvider
-        name="Drink"
-        rules="required|length:2"
-        v-slot="{ valid, errors }"
-      >
-        <b-form-group id="exampleGroup4">
-          <b-form-checkbox-group
-            :state="errors[0] ? false : (valid ? true : null)"
-            v-model="choices"
-            id="exampleChecks"
-          >
-            <b-form-checkbox value="Coffee">Coffe</b-form-checkbox>
-            <b-form-checkbox value="Tea">Tea</b-form-checkbox>
-            <b-form-checkbox value="Soda">Soda</b-form-checkbox>
-          </b-form-checkbox-group>
-          <b-form-invalid-feedback id="inputLiveFeedback">{{ errors[0] }}</b-form-invalid-feedback>
-        </b-form-group>
-      </ValidationProvider>
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+          &nbsp;
+          {{ $t("signup") }}
+        </button>
+      </div>
+    </form>
   </ValidationObserver>
 </template>
 
@@ -108,32 +90,86 @@
 import { ValidationObserver, ValidationProvider } from "vee-validate";
 
 export default {
-  name: "BootstrapForm",
   components: {
     ValidationObserver,
-    ValidationProvider
+    ValidationProvider,
   },
-  data: () => ({
-    email: "",
-    password: "",
-    confirmation: "",
-    subject: "",
-    choices: []
-  }),
+  data() {
+    return {
+      loading: false,
+      backendErrors: {
+        username: [],
+        phone: [],
+      },
+      gender: 1,
+      username: "",
+      phone: "",
+      password: "",
+      rules: {
+        username: { required: true, regex: /^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{4,20}$/ },
+        tel: { required: true, regex: /^[\+][\d]{1,15}$/ },
+        password: { required: true, min: { length: 6 }, max: { length: 40 } }
+      },
+    };
+  },
   methods: {
-    onSubmit() {
-      console.log("Form submitted yay!");
+    async handleRegister() {
+      this.loading = true;
+      const form = {
+        lang: this.$i18n.locale,
+        gender: this.gender,
+        username: this.username,
+        phone: this.phone,
+        password: this.password,
+      };
+
+      this.backendErrors = {
+        username: [],
+        phone: [],
+      };
+
+      try {
+        const res = await this.$axios.$post("api/auth/register", form);
+        if (res.message == "Success") {
+          this.message = res.message;
+
+          this.$store.commit("setGuest", {
+            username: form.username,
+            password: form.password,
+            phone: form.phone,
+          });
+
+          this.$bvModal.show('confirm-sms-code-modal');
+        } else {
+          this.backendErrors = { ...res.errors };
+        }
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        this.$toast.error(
+          this.$t("error_while_fetching_data") + ": " + message
+        );
+      }
+
+      this.loading = false;
     },
-    resetForm() {
-      this.email = "";
-      this.password = "";
-      this.confirmation = "";
-      this.subject = "";
-      this.choices = [];
-      requestAnimationFrame(() => {
-        this.$refs.observer.reset();
-      });
-    }
-  }
+  },
 };
 </script>
+
+<style scoped>
+.error-feedback {
+  color: red;
+}
+#myToastEl {
+  background: #1890ff;
+}
+#toastPlacement {
+  z-index: 1061;
+}
+</style>

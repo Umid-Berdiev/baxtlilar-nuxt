@@ -15,7 +15,8 @@
             </div>
           </div>
           <div class="col-lg-6">
-            <register-form />
+            <!-- <register-form /> -->
+            <example-form />
           </div>
         </div>
       </div>
@@ -39,6 +40,7 @@ import NewsList from "@/components/lists/NewsList.vue";
 import TheFooter from "@/components/blocks/TheFooter.vue";
 import RegisterForm from "@/components/forms/RegisterForm.vue";
 import LanguageModal from "~/components/modals/LanguageModal.vue";
+import ExampleForm from "~/components/forms/ExampleForm.vue";
 
 export default {
   layout: "auth",
@@ -50,9 +52,9 @@ export default {
     TheFooter,
     RegisterForm,
     LanguageModal,
+    ExampleForm
   },
   mounted() {
-    console.log(this.$store.state.isTermsReading === false);
     if (!localStorage.getItem("agreement") && this.$store.state.isTermsReading === false) this.$bvModal.show("lang-modal");
   },
 };

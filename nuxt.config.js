@@ -34,7 +34,8 @@ export default {
   plugins: [
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
-    { src: "~/plugins/validate.js", mode: "client" },
+    // { src: "~/plugins/validate.js", mode: "client" },
+    { src: "~/plugins/vee-validate/index.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -69,6 +70,8 @@ export default {
   ],
 
   i18n: {
+    // lazy: true,
+    // loadLanguagesAsync: true,
     locales: [
       { code: "en", name: "English" },
       { code: "ru", name: "Russian" },
@@ -78,6 +81,11 @@ export default {
     vueI18nLoader: true,
     vueI18n: i18nConfig,
     strategy: "prefix",
+    // detectBrowserLanguage: {
+    //   useCookie: true,
+    //   cookieKey: "i18n_redirected",
+    // },
+    // rootRedirect: "uz",
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -120,7 +128,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: ["vee-validate/dist/rules "],
+    transpile: ["vee-validate/dist/rules"],
     loaders: {
       less: {
         lessOptions: {

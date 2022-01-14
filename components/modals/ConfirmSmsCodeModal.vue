@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import authService from "~/plugins/services/auth.service";
+
 export default {
   data() {
     return {
@@ -102,6 +104,12 @@ export default {
       this.codeLoading = false;
     },
   },
+  async mounted() {
+    this.$root.$on('bv::modal::hide', (bvEvent, modalId) => {
+      console.log('Modal is about to be shown', bvEvent, modalId)
+    })
+    // authService.logout()
+  }
 };
 </script>
 

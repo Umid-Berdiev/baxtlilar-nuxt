@@ -4,6 +4,7 @@
       @submit.prevent="handleSubmit(handleRegister)"
       class="enter_site_right"
       ref="form"
+      novalidate
     >
       <!-- <div v-if="!successful"> -->
       <div class="form-group">
