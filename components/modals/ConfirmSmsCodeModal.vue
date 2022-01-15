@@ -5,6 +5,7 @@
     centered
     hide-header
     hide-footer
+    no-close-on-backdrop
   >
     <div id="enter_site_popup" class="popup_register_style">
       <form @submit.prevent="submitCode">
@@ -17,7 +18,7 @@
           <span class="text-danger">{{ codeError }}</span>
         </div>
         <div class="form-group text-center">
-          <button class="link_blue" :disabled="codeLoading">
+          <button type="submit" class="link_blue" :disabled="codeLoading">
             <span v-show="codeLoading" class="spinner-border spinner-border-sm"></span>
             &nbsp;
             <span
@@ -31,21 +32,20 @@
         <div class="col-auto">
           <span class="text-success">{{ codeInfo }}</span>
         </div>
-        <div class="col-auto ms-auto">
+        <div class="col-auto ml-auto">
           <button
-            :disabled="codeSentStatus"
-            class="btn ms-auto"
+            :disabled="countDown > 0"
+            class="btn ml-auto resend_sms_btn"
             @click="resendSms"
-          >{{ $t("resend_sms") }}</button>
+          >{{ $t("resend_sms") }} {{ countDown > 0 ? countDown : '' }}</button>
         </div>
+        <!-- <div>{{ countDown }}</div> -->
       </div>
     </div>
   </b-modal>
 </template>
 
 <script>
-import authService from "~/plugins/services/auth.service";
-
 export default {
   data() {
     return {
@@ -54,10 +54,12 @@ export default {
       codeError: "",
       codeSentStatus: false,
       codeInfo: "",
+      countDown: 0
     };
   },
   methods: {
     async submitCode() {
+      // console.log('submitCode clicked');
       this.codeError = "";
       this.codeLoading = true;
 
@@ -91,26 +93,42 @@ export default {
       this.codeError = "";
       this.codeInfo = "";
 
-      const response = await this.$axios.post("check-phone", {
-        phone: this.phone,
-      });
+      try {
+        const response = await this.$axios.post("api/check-phone", {
+          phone: this.$store.state.user.userPhone,
+          // phone: this.phone,
+        });
 
-      if (response.data.status) {
-        this.codeSentStatus = true;
-        this.codeInfo = this.$t("Code sent");
-        setTimeout(() => (this.codeSentStatus = true), 60000);
+        if (response.data.status) {
+          this.$toast.info(this.$t("Code_sent"));
+          // this.codeInfo = this.$t("Code_sent");
+          this.countDown = 60;
+          this.countDownTimer()
+        }
+      } catch (error) {
+        this.codeError = error.data;
       }
+
 
       this.codeLoading = false;
     },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        setTimeout(() => {
+          this.countDown -= 1
+          this.countDownTimer()
+        }, 1000)
+      }
+    }
   },
-  async mounted() {
-    this.$root.$on('bv::modal::hide', (bvEvent, modalId) => {
-      console.log('Modal is about to be shown', bvEvent, modalId)
-    })
-    // authService.logout()
+  mounted() {
+    // this.countDownTimer()
   }
 };
 </script>
 
-<style></style>
+<style scoped>
+.resend_sms_btn:focus {
+  box-shadow: none;
+}
+</style>

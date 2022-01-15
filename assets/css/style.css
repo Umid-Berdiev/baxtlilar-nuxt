@@ -5035,16 +5035,15 @@ section.faq .card .card-body {
   }
 }
 
-.ant-select.form-control.ant-select-single.ant-select-show-arrow {
+.ant-select.form-control {
   background: none !important;
   border: 0 !important;
+  box-shadow: none !important;
 }
-.ant-select.form-control.ant-select-single.ant-select-show-arrow
-  .ant-select-arrow {
+.ant-select.form-control .ant-select-arrow {
   right: 20px;
 }
-.ant-select.form-control.ant-select-single.ant-select-show-arrow
-  .ant-select-selector {
+.ant-select .ant-select-selection--single {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
@@ -5056,44 +5055,32 @@ section.faq .card .card-body {
   box-shadow: none !important;
 }
 @media (max-width: 1600px) {
-  .ant-select.form-control.ant-select-single.ant-select-show-arrow
-    .ant-select-selector {
+  .ant-select.form-control .ant-select-selector {
     padding-left: 20px;
   }
 }
 @media (max-width: 767px) {
-  .ant-select.form-control.ant-select-single.ant-select-show-arrow
-    .ant-select-selector {
+  .ant-select.form-control .ant-select-selector {
     height: 40px;
   }
 }
-.ant-select.form-control.ant-select-single.ant-select-show-arrow
-  .ant-select-selector
-  .ant-select-selection-search {
+.ant-select .ant-select-selection--single .ant-select-selection-search {
   left: 25px;
 }
 @media (max-width: 1600px) {
-  .ant-select.form-control.ant-select-single.ant-select-show-arrow
-    .ant-select-selector
-    .ant-select-selection-search {
+  .ant-select.form-control .ant-select-selector .ant-select-selection-search {
     left: 20px;
   }
 }
-.ant-select.form-control.ant-select-single.ant-select-show-arrow
-  .ant-select-selector
-  .ant-select-selection-item {
+.ant-select .ant-select-selection-selected-value {
   line-height: 50px;
 }
 @media (max-width: 767px) {
-  .ant-select.form-control.ant-select-single.ant-select-show-arrow
-    .ant-select-selector
-    .ant-select-selection-item {
+  .ant-select.form-control .ant-select-selector .ant-select-selection-item {
     line-height: 40px;
   }
 }
-.ant-select.form-control.ant-select-single.ant-select-show-arrow
-  .ant-select-selector
-  input {
+.ant-select .ant-select-selection--single input {
   height: 100%;
 }
 

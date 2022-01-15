@@ -31,7 +31,10 @@
               class="spinner-border spinner-border-sm"
             ></span>
             &nbsp;
-            <span v-text="$t('Send')" class="text-capitalize text-white"></span>
+            <span
+              v-text="$t('Send')"
+              class="text-capitalize text-white"
+            ></span>
           </button>
         </div>
       </form>
@@ -58,10 +61,7 @@
         </div>
         <div class="form-group text-center">
           <button class="link_blue" :disabled="codeLoading">
-            <span
-              v-show="codeLoading"
-              class="spinner-border spinner-border-sm"
-            ></span>
+            <span v-show="codeLoading" class="spinner-border spinner-border-sm"></span>
             &nbsp;
             <span
               v-text="$t('Reset Password')"
@@ -70,9 +70,11 @@
           </button>
         </div>
         <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">
-            {{ message }}
-          </div>
+          <div
+            v-if="message"
+            class="alert alert-danger"
+            role="alert"
+          >{{ message }}</div>
         </div>
       </form>
     </div>
@@ -103,18 +105,18 @@ export default {
     ...mapActions(["fetchCheckPhone", "fetchCheckSmsCode"]),
     async phoneSubmit() {
       this.phoneError = "";
-      if (this.phone.length != 17) {
-        this.phoneError = this.$t("Wrong number");
+      // if (this.phone.length != 17) {
+      //   this.phoneError = this.$t("Wrong number");
+      // } else {
+      this.phoneLoading = true;
+      const res = await this.fetchCheckPhone(this.phone);
+      if (res.status) {
+        this.phoneVerified = true;
       } else {
-        this.phoneLoading = true;
-        const res = await this.fetchCheckPhone(this.phone);
-        if (res.status) {
-          this.phoneVerified = true;
-        } else {
-          this.phoneError = this.$t("Wrong number");
-        }
-        this.phoneLoading = false;
+        this.phoneError = this.$t("Wrong number");
       }
+      this.phoneLoading = false;
+      // }
     },
     async submitCode() {
       this.codeError = "";

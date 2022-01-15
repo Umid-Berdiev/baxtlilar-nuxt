@@ -9289,6 +9289,11 @@ vue-client-only@^2.0.0:
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.1.0.tgz#1a67a47b8ecacfa86d75830173fffee3bf8a4ee3"
   integrity sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==
 
+vue-disable-autocomplete@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vue-disable-autocomplete/-/vue-disable-autocomplete-0.0.4.tgz#6318b515ade128247038121f33a6586c1d0899e8"
+  integrity sha512-NtEMoepVfFScR6f7d37g3tQh3F5VU75ai+5+GHoQ0pt3ftrLUeOWXi0ozQDExTwPFgLK3Yk86NeyokSZMlXvFg==
+
 vue-functional-data-merge@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-3.1.0.tgz#08a7797583b7f35680587f8a1d51d729aa1dc657"

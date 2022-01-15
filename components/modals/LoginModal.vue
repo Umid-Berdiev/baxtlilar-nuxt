@@ -9,7 +9,7 @@
     <div class="popup_register_style">
       <h2 v-text="$t('signin')" class="text-capitalize"></h2>
       <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
-        <form @submit.prevent="handleSubmit(handleLogin)">
+        <form @submit.prevent="handleSubmit(userLogin)">
           <div class="form-group">
             <ValidationProvider
               rules="required"
@@ -94,7 +94,7 @@ export default {
     };
   },
   methods: {
-    async handleLogin() {
+    async userLogin() {
       this.loading = true;
       this.form.lang = this.$i18n.locale;
 
@@ -104,18 +104,29 @@ export default {
         });
 
         this.$refs.loginModal.hide();
-        if (res.data.message == "phone_number_not_verified") {
-          this.$store.commit("setUserPhone", res.data.phone);
+
+        this.$auth.strategy.token.set(res.data.accessToken);
+        this.$router.push(this.localePath("/home"));
+
+      } catch (error) {
+        error && console.log('error.response: ', error.response);
+
+        const phone =
+          (error.response &&
+            error.response.data &&
+            error.response.data.data &&
+            error.response.data.data.phone)
+
+        console.log('phone: ', phone);
+
+        if (phone) {
+          this.$store.commit("user/setUserPhone", phone);
+          this.$refs.loginModal.hide();
 
           this.$bvModal.show('confirm-sms-code-modal');
         } else {
-          this.$auth.strategy.token.set(res.data.accessToken);
-          // window.location.href = "/home";
-          this.$router.push(this.localePath("/home"));
+          this.message = this.$t("Credentials not match");
         }
-
-      } catch (error) {
-        this.message = this.$t("Credentials not match");
       }
 
       this.loading = false;

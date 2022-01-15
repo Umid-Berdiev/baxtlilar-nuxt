@@ -26,7 +26,7 @@
       >
         <div class="form-group">
           <input
-            type="text"
+            :type="fieldTypes.username"
             v-model="username"
             class="form-control"
             :placeholder="$t('create_login')"
@@ -39,10 +39,10 @@
           ></div>
         </div>
       </ValidationProvider>
-      <ValidationProvider name="phone" :rules="rules.tel" v-slot="{ errors }">
+      <ValidationProvider name="phone" :rules="rules.phone" v-slot="{ errors }">
         <div class="form-group">
           <input
-            type="tel"
+            :type="fieldTypes.phone"
             v-model="phone"
             class="form-control"
             :placeholder="$t('Enter your phone number')"
@@ -62,10 +62,13 @@
       >
         <div class="form-group">
           <input
-            type="password"
+            :type="fieldTypes.password"
+            @focus="handleType"
+            @blur="handleType"
             v-model="password"
             class="form-control"
             :placeholder="$t('create_password')"
+            autocomplete="off"
           />
           <span class="error-feedback" v-text="errors[0]" />
         </div>
@@ -107,9 +110,14 @@ export default {
       password: "",
       rules: {
         username: { required: true, regex: /^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{4,20}$/ },
-        tel: { required: true, regex: /^[\+][\d]{1,15}$/ },
+        phone: { required: true, regex: /^[\+][\d]{1,15}$/ },
         password: { required: true, min: { length: 6 }, max: { length: 40 } }
       },
+      fieldTypes: {
+        username: 'text',
+        phone: 'tel',
+        password: 'text',
+      }
     };
   },
   methods: {
@@ -158,6 +166,16 @@ export default {
 
       this.loading = false;
     },
+    handleType(event) {
+      const { srcElement, type } = event;
+      const { name, value } = srcElement;
+
+      if (type === 'blur' && !value) {
+        this.fieldTypes[name] = 'text'
+      } else {
+        this.fieldTypes[name] = 'password'
+      }
+    }
   },
 };
 </script>

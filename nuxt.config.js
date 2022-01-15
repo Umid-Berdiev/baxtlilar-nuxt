@@ -34,7 +34,6 @@ export default {
   plugins: [
     "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
-    // { src: "~/plugins/validate.js", mode: "client" },
     { src: "~/plugins/vee-validate/index.js", mode: "client" },
   ],
 
@@ -71,7 +70,7 @@ export default {
 
   i18n: {
     // lazy: true,
-    // loadLanguagesAsync: true,
+    loadLanguagesAsync: true,
     locales: [
       { code: "en", name: "English" },
       { code: "ru", name: "Russian" },

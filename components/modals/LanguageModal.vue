@@ -1,16 +1,40 @@
 <template>
-  <b-modal ref="languageModal" id="lang-modal" hide-footer no-close-on-backdrop>
+  <b-modal
+    ref="languageModal"
+    id="lang-modal"
+    modal-class="language_popup_style"
+    hide-footer
+    no-close-on-backdrop
+  >
     <template #modal-header>
       <h2>{{ $t("choose_language") }}</h2>
     </template>
     <img src="~/assets/images/lang_logo.jpg" alt class="img_logo_lang" />
     <form @submit.prevent="handleSubmit">
       <div class="form-group select_language">
-        <input type="radio" id="lang2" v-model="lang" value="uz" />
+        <input
+          type="radio"
+          id="lang2"
+          v-model="lang"
+          value="uz"
+          @click="(e) => $i18n.setLocale(e.target.value)"
+        />
         <label for="lang2">UZ</label>
-        <input type="radio" id="lang1" v-model="lang" value="ru" />
+        <input
+          type="radio"
+          id="lang1"
+          v-model="lang"
+          value="ru"
+          @click="(e) => $i18n.setLocale(e.target.value)"
+        />
         <label for="lang1">RU</label>
-        <input type="radio" id="lang3" v-model="lang" value="en" />
+        <input
+          type="radio"
+          id="lang3"
+          v-model="lang"
+          value="en"
+          @click="(e) => $i18n.setLocale(e.target.value)"
+        />
         <label for="lang3">EN</label>
       </div>
       <div class="form-group checkbox_style">
@@ -22,10 +46,11 @@
         />
         <label for="customCheck1">
           {{ $t("condition_text") }}
-          <button
+          <a
+            href="#"
             class="btn btn-link"
             @click="goto()"
-          >{{ $t("condition") }}</button>
+          >{{ $t("condition") }}</a>
           <!-- <a href="#">{{ $t("condition") }}</a> -->
         </label>
         <span class="text-danger" v-show="errorVisibility">
