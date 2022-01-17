@@ -1,12 +1,12 @@
 class UserService {
   async getCurrentUserInfo() {
     try {
-      const res = await this.$axios.get('user')
-      return res.data
+      const res = await this.$axios.get("/api/user");
+      return res.data;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 }
 
-export default new UserService()
+export default new UserService();
