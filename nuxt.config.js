@@ -90,13 +90,14 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     credentials: true,
-    prefix: process.env.API_URL,
-    proxy: true,
+    baseURL: process.env.API_URL,
+    // prefix: process.env.API_URL,
+    // proxy: true,
   },
 
-  proxy: {
-    "/api/": process.env.API_URL,
-  },
+  // proxy: {
+  //   "/api/": process.env.API_URL,
+  // },
 
   auth: {
     strategies: {
@@ -106,16 +107,19 @@ export default {
         endpoints: {
           login: {
             url: "/api/auth/login",
+            method: "post",
+            propertyName: false,
           },
           logout: {
             url: "/api/auth/logout",
+            method: "post",
+            propertyName: false,
           },
-          user: {
-            url: "/api/user",
-          },
+          user: { url: "/api/user", method: "get", propertyName: false },
         },
       },
     },
+    localStorage: false,
     redirect: {
       login: "/",
       logout: "/",
