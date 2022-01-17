@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar_top" v-if="currentUser">
     <div class="avatar_user">
-      <img :src="API_URL + currentUser.photo" alt="" />
+      <img :src="API_URL + currentUser.photo" alt />
     </div>
     <h4 v-text="currentUser.fullname"></h4>
     <div class="status_user">
@@ -9,8 +9,7 @@
         <icon-status :status="currentUser.status" />
       </div>
       <div class="link_svg not_link">
-        <icon-vip />
-        VIP
+        <icon-vip />VIP
       </div>
     </div>
     <nuxt-link :to="localePath('/home')" class="link_svg">
@@ -111,8 +110,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      newMessageNotifications: "user/newMessageNotifications",
-      otherNotifications: "user/otherNotifications",
+      newMessageNotifications: "userModule/newMessageNotifications",
+      otherNotifications: "userModule/otherNotifications",
     }),
     currentUser() {
       return this.$auth.user || {};
@@ -120,7 +119,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchUnreadNotifications: "user/fetchUnreadNotifications",
+      fetchUnreadNotifications: "userModule/fetchUnreadNotifications",
     }),
   },
 };

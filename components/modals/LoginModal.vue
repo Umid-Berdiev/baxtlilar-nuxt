@@ -120,7 +120,7 @@ export default {
         console.log('phone: ', phone);
 
         if (phone) {
-          this.$store.commit("user/setUserPhone", phone);
+          this.$store.commit("userModule/setUserPhone", phone);
           this.$refs.loginModal.hide();
 
           this.$bvModal.show('confirm-sms-code-modal');

@@ -12,9 +12,7 @@
       <div class="row">
         <div class="col-sm-8">
           <div class="form-group">
-            <label for="fullname" id="fullname-label">
-              {{ $t("fio") }}
-            </label>
+            <label for="fullname" id="fullname-label">{{ $t("fio") }}</label>
             <input
               type="text"
               name="fullname"
@@ -27,9 +25,7 @@
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="username">
-              {{ $t("nikname") }}
-            </label>
+            <label for="username">{{ $t("nikname") }}</label>
             <input
               type="text"
               name="username"
@@ -44,9 +40,7 @@
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#" id="country-label"
-              >{{ $t("country_residence") }}
-            </label>
+            <label for="#" id="country-label">{{ $t("country_residence") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -58,16 +52,14 @@
                 v-for="country in getCountries"
                 :key="country.key"
                 :value="country.id"
-              >
-                {{ country.name }}
-              </a-select-option>
+              >{{ country.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ countryError }}</span>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#" id="region-label">{{ $t("city_residence") }} </label>
+            <label for="#" id="region-label">{{ $t("city_residence") }}</label>
             <a-select
               :showSearch="false"
               :placeholder="$t('choose')"
@@ -78,18 +70,14 @@
                 v-for="item in getRegions"
                 :key="item.id"
                 :value="item.id"
-              >
-                {{ item.name }}
-              </a-select-option>
+              >{{ item.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ regionError }}</span>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="form-group">
-            <label for="birthday" id="birthday-label">
-              {{ $t("birth_date") }}
-            </label>
+            <label for="birthday" id="birthday-label">{{ $t("birth_date") }}</label>
             <a-date-picker
               :placeholder="$t('select_date')"
               format="YYYY-MM-DD"
@@ -105,9 +93,7 @@
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <label id="citizinship_country-label">
-              {{ $t("citizenship") }}
-            </label>
+            <label id="citizinship_country-label">{{ $t("citizenship") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -119,18 +105,18 @@
                 v-for="country in getCountries"
                 :key="country.key"
                 :value="country.id"
-              >
-                {{ country.name }}
-              </a-select-option>
+              >{{ country.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ citizenship_countryError }}</span>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="religion" id="religion-label">{{
-              $t("religion")
-            }}</label>
+            <label for="religion" id="religion-label">
+              {{
+                $t("religion")
+              }}
+            </label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -142,18 +128,18 @@
                 v-for="relegion in getReligions"
                 :key="relegion.id"
                 :value="relegion.id"
-              >
-                {{ relegion.name }}
-              </a-select-option>
+              >{{ relegion.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ religionError }}</span>
           </div>
         </div>
         <div class="col-sm-4">
           <div class="form-group">
-            <label for="religious_attitude" id="religious_attitude-label">{{
-              $t("relation_religion")
-            }}</label>
+            <label for="religious_attitude" id="religious_attitude-label">
+              {{
+                $t("relation_religion")
+              }}
+            </label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -161,15 +147,9 @@
               @change="selectRelegiousAttitude"
               class="form-control"
             >
-              <a-select-option value="high">
-                {{ $t("high") }}
-              </a-select-option>
-              <a-select-option value="medium">
-                {{ $t("medium") }}
-              </a-select-option>
-              <a-select-option value="not">
-                {{ $t("not") }}
-              </a-select-option>
+              <a-select-option value="high">{{ $t("high") }}</a-select-option>
+              <a-select-option value="medium">{{ $t("medium") }}</a-select-option>
+              <a-select-option value="not">{{ $t("not") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ religious_attitudeError }}</span>
           </div>
@@ -192,9 +172,7 @@
                     v-for="item in 171"
                     :key="item + 49"
                     :value="item + 49"
-                  >
-                    {{ item + 49 }}
-                  </a-select-option>
+                  >{{ item + 49 }}</a-select-option>
                 </a-select>
                 <span class="text-danger">{{ heightError }}</span>
               </div>
@@ -203,7 +181,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="" id="weight-label">{{ $t("weight") }}</label>
+            <label for id="weight-label">{{ $t("weight") }}</label>
             <div class="row">
               <div class="col-6">
                 <a-select
@@ -217,9 +195,7 @@
                     v-for="item in 161"
                     :key="item + 39"
                     :value="item + 39"
-                  >
-                    {{ item + 39 }}
-                  </a-select-option>
+                  >{{ item + 39 }}</a-select-option>
                 </a-select>
                 <span class="text-danger">{{ weightError }}</span>
               </div>
@@ -228,9 +204,11 @@
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="zodiac-sign" id="znak_zodiak-label">{{
-              $t("zodiac_sign")
-            }}</label>
+            <label for="zodiac-sign" id="znak_zodiak-label">
+              {{
+                $t("zodiac_sign")
+              }}
+            </label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -238,49 +216,25 @@
               @change="selectZnakZodiak"
               class="form-control"
             >
-              <a-select-option value="Aquarius">
-                {{ $t("Aquarius") }}
-              </a-select-option>
-              <a-select-option value="Sagittarius">
-                {{ $t("Sagittarius") }}
-              </a-select-option>
-              <a-select-option value="Leo">
-                {{ $t("Leo") }}
-              </a-select-option>
-              <a-select-option value="Aries">
-                {{ $t("Aries") }}
-              </a-select-option>
-              <a-select-option value="Taurus">
-                {{ $t("Taurus") }}
-              </a-select-option>
-              <a-select-option value="Virgo">
-                {{ $t("Virgo") }}
-              </a-select-option>
-              <a-select-option value="Capricorn">
-                {{ $t("Capricorn") }}
-              </a-select-option>
-              <a-select-option value="Gemini">
-                {{ $t("Gemini") }}
-              </a-select-option>
-              <a-select-option value="Libra">
-                {{ $t("Libra") }}
-              </a-select-option>
-              <a-select-option value="Cancer">
-                {{ $t("Cancer") }}
-              </a-select-option>
-              <a-select-option value="Scorpio">
-                {{ $t("Scorpio") }}
-              </a-select-option>
-              <a-select-option value="Pisces">
-                {{ $t("Pisces") }}
-              </a-select-option>
+              <a-select-option value="Aquarius">{{ $t("Aquarius") }}</a-select-option>
+              <a-select-option value="Sagittarius">{{ $t("Sagittarius") }}</a-select-option>
+              <a-select-option value="Leo">{{ $t("Leo") }}</a-select-option>
+              <a-select-option value="Aries">{{ $t("Aries") }}</a-select-option>
+              <a-select-option value="Taurus">{{ $t("Taurus") }}</a-select-option>
+              <a-select-option value="Virgo">{{ $t("Virgo") }}</a-select-option>
+              <a-select-option value="Capricorn">{{ $t("Capricorn") }}</a-select-option>
+              <a-select-option value="Gemini">{{ $t("Gemini") }}</a-select-option>
+              <a-select-option value="Libra">{{ $t("Libra") }}</a-select-option>
+              <a-select-option value="Cancer">{{ $t("Cancer") }}</a-select-option>
+              <a-select-option value="Scorpio">{{ $t("Scorpio") }}</a-select-option>
+              <a-select-option value="Pisces">{{ $t("Pisces") }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ znak_zodiakError }}</span>
           </div>
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for="" id="eye_color-label">{{ $t("eye_color") }}</label>
+            <label for id="eye_color-label">{{ $t("eye_color") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -289,9 +243,11 @@
               @change="selectEyeColor"
               class="form-control"
             >
-              <a-select-option v-for="item in colors" :key="item" :value="item">
-                {{ $t(item) }}
-              </a-select-option>
+              <a-select-option
+                v-for="item in colors"
+                :key="item"
+                :value="item"
+              >{{ $t(item) }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ eye_colorError }}</span>
           </div>
@@ -300,11 +256,8 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group">
-            <label for="" id="about-label">{{ $t("about_yourself") }}</label>
-            <textarea
-              name="about"
-              :placeholder="$t('about_yourself')"
-            ></textarea>
+            <label for id="about-label">{{ $t("about_yourself") }}</label>
+            <textarea name="about" :placeholder="$t('about_yourself')"></textarea>
             <span class="text-danger">{{ aboutError }}</span>
           </div>
         </div>
@@ -323,9 +276,7 @@
 
           <label for="ada1">{{ $t("blur_photos") }}</label>
         </div>
-        <p>
-          {{ $t("blur_photo_less") }}
-        </p>
+        <p>{{ $t("blur_photo_less") }}</p>
       </div>
       <div class="new_add_l">
         <button type="submit" class="link_blue" :disabled="loading">
@@ -421,7 +372,7 @@ export default {
         values.images = this.images.map((image) => image.thumbUrl);
         values = { ...values, ...this.selects };
         const res = await this.$store.dispatch(
-          "questionnaire/saveUserQuestionnaire",
+          "questionnaireModule/saveUserQuestionnaire",
           values
         );
 

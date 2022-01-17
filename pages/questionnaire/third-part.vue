@@ -213,10 +213,10 @@ export default {
   },
   methods: {
     ...mapActions({
-      saveUserFamilyStatus: "questionnaire/saveUserFamilyStatus",
+      saveUserFamilyStatus: "questionnaireModule/saveUserFamilyStatus",
     }),
     ...mapMutations({
-      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+      setQuestionnairePercent: "questionnaireModule/setQuestionnairePercent",
     }),
     children(e) {
       if (e.target.value == 1) {

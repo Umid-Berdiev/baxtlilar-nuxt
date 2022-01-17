@@ -6,7 +6,7 @@
       data-fancybox
       data-src="https://www.youtube.com/watch?v=Jju2POnq7e8"
     >
-      <img src="~/assets/images/play.svg" alt="" />
+      <img src="~/assets/images/play.svg" alt />
       {{ $t("watch_video") }}
     </a>
     <div class="progress_bar">
@@ -19,13 +19,9 @@
           :aria-valuenow="getQuestionnairePercent"
           aria-valuemin="0"
           aria-valuemax="100"
-        >
-          {{ getQuestionnairePercent }}%
-        </div>
+        >{{ getQuestionnairePercent }}%</div>
       </div>
-      <p>
-        {{ $t("questionnaire_sidebar_text") }}
-      </p>
+      <p>{{ $t("questionnaire_sidebar_text") }}</p>
     </div>
   </div>
 </template>
@@ -36,7 +32,7 @@
 export default {
   computed: {
     getQuestionnairePercent() {
-      return this.$store.getters["questionnaire/getQuestionnairePercent"];
+      return this.$store.getters["questionnaireModule/getQuestionnairePercent"];
     },
   },
 };

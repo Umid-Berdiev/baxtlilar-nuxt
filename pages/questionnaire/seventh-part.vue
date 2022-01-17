@@ -137,9 +137,9 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+      setQuestionnairePercent: "questionnaireModule/setQuestionnairePercent",
     }),
-    ...mapActions({ savePassportData: "questionnaire/savePassportData" }),
+    ...mapActions({ savePassportData: "questionnaireModule/savePassportData" }),
     uploadImage(e) {
       let file = e.target.files[0];
       this.file_name = ": " + file.name;

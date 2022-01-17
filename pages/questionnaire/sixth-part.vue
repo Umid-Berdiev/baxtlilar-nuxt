@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group">
-            <label for="" id="age-label">{{ $t("age") }} ( от ) ( до) </label>
+            <label for id="age-label">{{ $t("age") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -41,9 +41,7 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#" id="country-label"
-              >{{ $t("country_residence") }}
-            </label>
+            <label for="#" id="country-label">{{ $t("country_residence") }}</label>
             <a-select
               :placeholder="$t('choose')"
               :showSearch="false"
@@ -55,16 +53,14 @@
                 v-for="country in getCountries"
                 :key="country.key"
                 :value="country.id"
-              >
-                {{ country.name }}
-              </a-select-option>
+              >{{ country.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ countryError }}</span>
           </div>
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#" id="region-label">{{ $t("city_residence") }} </label>
+            <label for="#" id="region-label">{{ $t("city_residence") }}</label>
             <a-select
               :showSearch="false"
               :placeholder="$t('choose')"
@@ -75,9 +71,7 @@
                 v-for="item in getRegions"
                 :key="item.id"
                 :value="item.id"
-              >
-                {{ item.name }}
-              </a-select-option>
+              >{{ item.name }}</a-select-option>
             </a-select>
             <span class="text-danger">{{ regionError }}</span>
           </div>
@@ -86,7 +80,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("religion") }}</label>
+            <label for>{{ $t("religion") }}</label>
             <div class="row">
               <div class="col-6" v-for="item in getReligions" :key="item.id">
                 <div class="form-group radio_button">
@@ -118,7 +112,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("family_status") }}</label>
+            <label for>{{ $t("family_status") }}</label>
             <div class="row">
               <div class="col-6">
                 <div class="form-group radio_button">
@@ -172,7 +166,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_smoking") }} </label>
+            <label for>{{ $t("relation_smoking") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -205,7 +199,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_alcohol") }} </label>
+            <label for>{{ $t("relation_alcohol") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -238,7 +232,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("relation_drugs") }} </label>
+            <label for>{{ $t("relation_drugs") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -271,7 +265,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-10">
-            <label for="">{{ $t("financial_status") }} </label>
+            <label for>{{ $t("financial_status") }}</label>
             <div class="row">
               <div class="col-6">
                 <div class="form-group radio_button">
@@ -292,9 +286,7 @@
                     id="financial-status-3"
                     value="middle"
                   />
-                  <label for="financial-status-3"
-                    >{{ $t("middle_income") }}
-                  </label>
+                  <label for="financial-status-3">{{ $t("middle_income") }}</label>
                 </div>
               </div>
               <div class="col-6">
@@ -305,9 +297,11 @@
                     id="financial-status-4"
                     value="low"
                   />
-                  <label for="financial-status-4">{{
-                    $t("little_income")
-                  }}</label>
+                  <label for="financial-status-4">
+                    {{
+                      $t("little_income")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-6">
@@ -319,9 +313,11 @@
                     value="-1"
                     checked
                   />
-                  <label for="financial-status-2">{{
-                    $t("doesnt_matter")
-                  }}</label>
+                  <label for="financial-status-2">
+                    {{
+                      $t("doesnt_matter")
+                    }}
+                  </label>
                 </div>
               </div>
             </div>
@@ -331,9 +327,7 @@
       <div class="row">
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="" id="height-label"
-              >{{ $t("height") }} ( от ) ( до)
-            </label>
+            <label for id="height-label">{{ $t("height") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -362,9 +356,7 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="" id="weight-label"
-              >{{ $t("weight") }} ( от ) ( до)</label
-            >
+            <label for id="weight-label">{{ $t("weight") }} ( от ) ( до)</label>
             <div class="row">
               <div class="col-6">
                 <input
@@ -395,7 +387,7 @@
       <div class="f_education">
         <div class="row">
           <div class="col-lg-12">
-            <label for="">{{ $t("choose_type_questionnaire") }} </label>
+            <label for>{{ $t("choose_type_questionnaire") }}</label>
             <div class="row">
               <div class="col-12">
                 <div class="form-group radio_button">
@@ -405,9 +397,11 @@
                     id="type-form-1"
                     value="national"
                   />
-                  <label for="type-form-1">{{
-                    $t("national_questionnaire")
-                  }}</label>
+                  <label for="type-form-1">
+                    {{
+                      $t("national_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-12">
@@ -418,9 +412,11 @@
                     id="type-form-2"
                     value="international"
                   />
-                  <label for="type-form-2">{{
-                    $t("international_questionnaire")
-                  }}</label>
+                  <label for="type-form-2">
+                    {{
+                      $t("international_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
               <div class="col-12">
@@ -432,9 +428,11 @@
                     value="universal"
                     checked
                   />
-                  <label for="type-form-3">{{
-                    $t("universal_questionnaire")
-                  }}</label>
+                  <label for="type-form-3">
+                    {{
+                      $t("universal_questionnaire")
+                    }}
+                  </label>
                 </div>
               </div>
             </div>
@@ -466,7 +464,7 @@
         <div class="row" v-for="item in 5" :key="item">
           <div class="col-lg-4 col-6">
             <div class="form-group">
-              <label for="">{{ $t("friend") }} {{ item }}</label>
+              <label for>{{ $t("friend") }} {{ item }}</label>
               <input
                 type="text"
                 :placeholder="$t('fill')"
@@ -476,7 +474,7 @@
           </div>
           <div class="col-lg-4 col-6">
             <div class="form-group">
-              <label for="">{{ $t("number") }}</label>
+              <label for>{{ $t("number") }}</label>
               <input
                 type="tel"
                 :placeholder="$t('fill')"
@@ -531,14 +529,14 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+      setQuestionnairePercent: "questionnaireModule/setQuestionnairePercent",
     }),
     ...mapActions({
       fetchReligions: "fetchReligions",
       fetchCountries: "fetchCountries",
       fetchRegions: "fetchRegions",
-      saveFilterData: "questionnaire/saveFilterData",
-      saveFriendsData: "questionnaire/saveFriendsData",
+      saveFilterData: "questionnaireModule/saveFilterData",
+      saveFriendsData: "questionnaireModule/saveFriendsData",
     }),
     selectCountry(value) {
       this.fetchRegions(value);

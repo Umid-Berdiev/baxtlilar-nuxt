@@ -120,7 +120,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions({ fetchUnreadNotifications: "user/fetchUnreadNotifications" }),
+    ...mapActions({ fetchUnreadNotifications: "userModule/fetchUnreadNotifications" }),
     connect() {
       if (this.currentRoom.id) {
         let vm = this;

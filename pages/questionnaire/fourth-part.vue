@@ -8,14 +8,15 @@
       <div>5</div>
     </div>
     <h2>{{ $t("questions_and_answers") }}</h2>
-    <h2 class="text-center" v-if="getBlistQuestions.length == 0">
-      {{ $t("no_questions") }}
-    </h2>
+    <h2
+      class="text-center"
+      v-if="getBlistQuestions.length == 0"
+    >{{ $t("no_questions") }}</h2>
     <form @submit.prevent="submit">
       <div class="row">
         <div class="col-xl-7" v-for="item in getBlistQuestions" :key="item.id">
           <div class="form-group">
-            <label for="">{{ item.questions }}</label>
+            <label for>{{ item.questions }}</label>
             <textarea
               name="answers[]"
               :placeholder="$t('text') + '...'"
@@ -52,18 +53,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ getBlistQuestions: "questionnaire/getBlistQuestions" }),
+    ...mapGetters({ getBlistQuestions: "questionnaireModule/getBlistQuestions" }),
   },
   created() {
     this.fetchBlistQuestions();
   },
   methods: {
     ...mapActions({
-      fetchBlistQuestions: "questionnaire/fetchBlistQuestions",
-      saveUserAnswers: "questionnaire/saveUserAnswers",
+      fetchBlistQuestions: "questionnaireModule/fetchBlistQuestions",
+      saveUserAnswers: "questionnaireModule/saveUserAnswers",
     }),
     ...mapMutations({
-      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+      setQuestionnairePercent: "questionnaireModule/setQuestionnairePercent",
     }),
     async submit(e) {
       this.loading = true;

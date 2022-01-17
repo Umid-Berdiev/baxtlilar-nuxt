@@ -139,12 +139,11 @@ export default {
     };
   },
   computed: {
-    // ...mapGetters(["user/newMessageNotifications", "user/otherNotifications"]),
     newMessageNotifications() {
-      return this.$store.getters["user/newMessageNotifications"];
+      return this.$store.getters["userModule/newMessageNotifications"];
     },
     otherNotifications() {
-      return this.$store.getters["user/otherNotifications"];
+      return this.$store.getters["userModule/otherNotifications"];
     },
   },
 };

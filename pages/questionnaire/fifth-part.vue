@@ -287,9 +287,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions({ saveUserFamilyData: "questionnaire/saveUserFamilyData" }),
+    ...mapActions({ saveUserFamilyData: "questionnaireModule/saveUserFamilyData" }),
     ...mapMutations({
-      setQuestionnairePercent: "questionnaire/setQuestionnairePercent",
+      setQuestionnairePercent: "questionnaireModule/setQuestionnairePercent",
     }),
     async submit(e) {
       this.loading = true;

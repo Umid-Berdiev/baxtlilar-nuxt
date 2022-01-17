@@ -37,9 +37,9 @@
             :disabled="countDown > 0"
             class="btn ml-auto resend_sms_btn"
             @click="resendSms"
+            type="button"
           >{{ $t("resend_sms") }} {{ countDown > 0 ? countDown : '' }}</button>
         </div>
-        <!-- <div>{{ countDown }}</div> -->
       </div>
     </div>
   </b-modal>
@@ -77,7 +77,8 @@ export default {
             },
           });
 
-          await this.$store.dispatch("user/setAccessToken", res2.data.accessToken);
+          this.$auth.strategy.token.set(res2.data.accessToken);
+          // await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
           window.location.href = "/home";
           // this.$router.push(this.localePath("/home"));

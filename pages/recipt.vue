@@ -4,9 +4,11 @@
     <div class="tab_description">
       <ul class="nav nav_descr">
         <li>
-          <a href="#tab1" class="active" data-toggle="tab">{{
-            $t("all_offers")
-          }}</a>
+          <a href="#tab1" class="active" data-toggle="tab">
+            {{
+              $t("all_offers")
+            }}
+          </a>
         </li>
         <li>
           <a href="#tab2" data-toggle="tab">{{ $t("recived") }}</a>
@@ -40,13 +42,13 @@ export default {
   },
   computed: {
     sentOffers() {
-      return this.$store.getters["user/getSentOffers"];
+      return this.$store.getters["userModule/getSentOffers"];
     },
     receivedOffers() {
-      return this.$store.getters["user/getReceivedOffers"];
+      return this.$store.getters["userModule/getReceivedOffers"];
     },
     allOffers() {
-      return this.$store.getters["user/getAllOffers"];
+      return this.$store.getters["userModule/getAllOffers"];
     },
   },
 };
