@@ -119,10 +119,10 @@ export default {
     redirect: {
       login: "/",
       logout: "/",
-      callback: "/",
+      callback: false,
       home: false,
     },
-    plugins: [{ src: "~/plugins/axios", ssr: true }],
+    // plugins: [{ src: "~/plugins/axios", ssr: true }],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
