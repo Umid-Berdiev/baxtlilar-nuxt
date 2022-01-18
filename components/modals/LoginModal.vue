@@ -105,7 +105,7 @@ export default {
 
         this.$refs.loginModal.hide();
 
-        this.$auth.strategy.token.set(res.data.accessToken);
+        // this.$auth.strategy.token.set(res.data.accessToken);
         this.$router.push(this.localePath("/home"));
 
       } catch (error) {

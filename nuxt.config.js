@@ -122,7 +122,7 @@ export default {
         },
       },
     },
-    localStorage: false,
+    // localStorage: false,
     redirect: {
       login: "/",
       logout: "/",
