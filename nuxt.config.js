@@ -120,9 +120,10 @@ export default {
             // propertyName: false
           },
         },
-        // user: {
-        //   property: false,
-        // },
+        user: {
+          property: false,
+          autoFetch: false,
+        },
       },
     },
     // localStorage: false,

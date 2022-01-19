@@ -74,6 +74,8 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from "vee-validate";
+// import authService from "~/plugins/services/auth";
+import axios from 'axios'
 
 export default {
   components: {
@@ -99,13 +101,48 @@ export default {
       this.form.lang = this.$i18n.locale;
 
       try {
-        const res = await this.$auth.loginWith("laravelSanctum", {
-          data: this.form,
-        });
+        // const res = await this.$auth.loginWith("laravelSanctum", {
+        //   data: this.form,
+        // });
 
-        this.$auth.strategy.token.set(res.accessToken);
-        this.$router.push(this.localePath("/home"));
-        this.$refs.loginModal.hide();
+        // this.$auth.strategy.token.set(res.accessToken);
+
+        this.$axios.get("/sanctum/csrf-cookie")
+          .then((response) => {
+            this.$axios.post("/api/auth/login", this.form)
+              .then(async (res) => {
+                localStorage.setItem(
+                  "accessToken",
+                  JSON.stringify(res.data.accessToken)
+                );
+
+                // this.$auth.strategy.token.set(res.accessToken);
+                this.$axios.setHeader('Authorization', `Bearer ${res.data.accessToken}`)
+                const userInfo = await this.$axios.$get('/api/user')
+                this.$auth.setUser(userInfo)
+                this.$store.state.auth.loggedIn = true
+                // this.$auth.loggedIn = true
+                this.$router.push(this.localePath("/home"));
+                this.$refs.loginModal.hide();
+              }).catch(error => {
+                const errorMessage =
+                  (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                  error.toString();
+
+                console.log("errorMessage : ", errorMessage);
+              })
+          }).catch(error => {
+            const errorMessage =
+              (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+              error.toString();
+
+            console.log("errorMessage : ", errorMessage);
+          });
+
       } catch (error) {
         error && console.log('error.response: ', error.response);
 
