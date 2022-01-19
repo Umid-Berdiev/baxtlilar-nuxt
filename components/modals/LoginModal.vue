@@ -103,11 +103,9 @@ export default {
           data: this.form,
         });
 
-        this.$refs.loginModal.hide();
-
-        // this.$auth.strategy.token.set(res.data.accessToken);
+        this.$auth.strategy.token.set(res.accessToken);
         this.$router.push(this.localePath("/home"));
-
+        this.$refs.loginModal.hide();
       } catch (error) {
         error && console.log('error.response: ', error.response);
 

@@ -78,7 +78,7 @@ export default {
           });
 
           this.$auth.strategy.token.set(res2.data.accessToken);
-          // await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
+          await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
           window.location.href = "/home";
           // this.$router.push(this.localePath("/home"));

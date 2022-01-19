@@ -80,23 +80,17 @@ export default {
     vueI18nLoader: true,
     vueI18n: i18nConfig,
     strategy: "prefix",
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: "i18n_redirected",
-    // },
-    // rootRedirect: "uz",
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    credentials: true,
-    // baseURL: process.env.API_URL,
     prefix: process.env.API_URL,
+    credentials: true,
     proxy: true,
   },
 
   proxy: {
-    "/api/": process.env.API_URL,
+    "/api": process.env.API_URL,
   },
 
   auth: {
@@ -105,24 +99,12 @@ export default {
         provider: "laravel/sanctum",
         url: process.env.API_URL,
         endpoints: {
-          login: {
-            url: "/api/auth/login",
-            method: "post",
-            propertyName: false,
-          },
-          logout: {
-            url: "/api/auth/logout",
-            method: "post",
-            propertyName: false,
-          },
-          user: { url: "/api/user", method: "get", propertyName: false },
-        },
-        user: {
-          property: false,
+          login: "/api/auth/login",
+          logout: "/api/auth/logout",
+          user: "/api/user",
         },
       },
     },
-    // localStorage: false,
     redirect: {
       login: "/",
       logout: "/",
