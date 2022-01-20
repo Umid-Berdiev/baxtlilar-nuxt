@@ -100,29 +100,47 @@ export default {
 
   auth: {
     strategies: {
-      laravelSanctum: {
-        provider: "laravel/sanctum",
-        url: process.env.API_URL,
-        endpoints: {
-          login: {
-            url: "/api/auth/login",
-            // method: "post",
-            // propertyName: false,
-          },
-          logout: {
-            url: "/api/auth/logout",
-            // method: "post",
-            // propertyName: false,
-          },
-          user: {
-            url: "/api/user",
-            // method: "get",
-            // propertyName: false
-          },
+      // laravelSanctum: {
+      //   provider: "laravel/sanctum",
+      //   url: process.env.API_URL,
+      //   endpoints: {
+      //     login: {
+      //       url: "/api/auth/login",
+      //       // method: "post",
+      //       // propertyName: false,
+      //     },
+      //     logout: {
+      //       url: "/api/auth/logout",
+      //       // method: "post",
+      //       // propertyName: false,
+      //     },
+      //     user: {
+      //       url: "/api/user",
+      //       // method: "get",
+      //       // propertyName: false
+      //     },
+      //   },
+      //   user: {
+      //     property: false,
+      //     autoFetch: false,
+      //   },
+      // },
+
+      local: {
+        token: {
+          property: "accessToken",
+          // global: true,
+          // required: true,
+          // type: 'Bearer'
         },
         user: {
           property: false,
-          autoFetch: false,
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: "/api/auth/login", method: "post" },
+          logout: { url: "/api/auth/logout", method: "post" },
+          user: { url: "/api/user", method: "get" },
         },
       },
     },

@@ -70,18 +70,18 @@ export default {
         });
 
         if (res.data.status) {
-          const res2 = await this.$auth.loginWith("laravelSanctum", {
+          const res2 = await this.$auth.loginWith("local", {
             data: {
               username: this.$store.getters.getGuest.username,
               password: this.$store.getters.getGuest.password,
             },
           });
 
-          this.$auth.strategy.token.set(res2.data.accessToken);
-          await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
+          // this.$auth.strategy.token.set(res2.data.accessToken);
+          // await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
-          window.location.href = "/home";
-          // this.$router.push(this.localePath("/home"));
+          // window.location.href = "/home";
+          this.$router.push(this.localePath("/home"));
         } else this.codeError = this.$t("Wrong code");
       } catch (error) {
         this.codeError = error.data;
