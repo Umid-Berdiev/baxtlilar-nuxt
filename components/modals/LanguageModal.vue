@@ -47,7 +47,7 @@
         <label for="customCheck1">
           {{ $t("condition_text") }}
           <a
-            href="#"
+            href="javascript:;"
             class="btn btn-link"
             @click="goto()"
           >{{ $t("condition") }}</a>

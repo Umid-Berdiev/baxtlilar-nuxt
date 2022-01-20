@@ -32,11 +32,16 @@
             :placeholder="$t('create_login')"
           />
           <span class="error-feedback">{{ errors[0] }}</span>
-          <div
+          <span
+            class="error-feedback"
+            v-if="backendErrors.username && backendErrors.username.length > 0"
+            v-text="backendErrors.username[0]"
+          ></span>
+          <!-- <div
             class="invalid-feedback d-block"
             v-if="backendErrors.username && backendErrors.username.length > 0"
             v-text="backendErrors.username[0]"
-          ></div>
+          ></div>-->
         </div>
       </ValidationProvider>
       <ValidationProvider name="phone" :rules="rules.phone" v-slot="{ errors }">
@@ -48,11 +53,11 @@
             :placeholder="$t('Enter your phone number')"
           />
           <span class="error-feedback">{{ errors[0] }}</span>
-          <div
-            class="invalid-feedback d-block"
+          <span
+            class="error-feedback"
             v-if="backendErrors.phone && backendErrors.phone.length > 0"
             v-text="backendErrors.phone[0]"
-          />
+          ></span>
         </div>
       </ValidationProvider>
       <ValidationProvider
@@ -116,7 +121,7 @@ export default {
       fieldTypes: {
         username: 'text',
         phone: 'tel',
-        password: 'text',
+        password: 'password',
       }
     };
   },
