@@ -22,15 +22,13 @@
                         :showSearch="false"
                         name="from_height"
                         class="form-control"
-                        v-model="form.from_height"
+                        v-model="from_height"
                       >
                         <a-select-option
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                        >
-                          {{ item + 49 }}
-                        </a-select-option>
+                        >{{ item + 49 }}</a-select-option>
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -39,15 +37,13 @@
                         :showSearch="false"
                         name="up_to_height"
                         class="form-control"
-                        v-model="form.up_to_height"
+                        v-model="up_to_height"
                       >
                         <a-select-option
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                        >
-                          {{ item + 49 }}
-                        </a-select-option>
+                        >{{ item + 49 }}</a-select-option>
                       </a-select>
                     </div>
                   </div>
@@ -63,15 +59,13 @@
                         :showSearch="false"
                         name="from_age"
                         class="form-control"
-                        v-model="form.from_age"
+                        v-model="from_age"
                       >
                         <a-select-option
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                        >
-                          {{ item }}
-                        </a-select-option>
+                        >{{ item }}</a-select-option>
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -80,15 +74,13 @@
                         :showsearch="false"
                         :name="'up_to_age'"
                         class="form-control"
-                        v-model="form.up_to_age"
+                        v-model="up_to_age"
                       >
                         <a-select-option
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                        >
-                          {{ item }}
-                        </a-select-option>
+                        >{{ item }}</a-select-option>
                       </a-select>
                     </div>
                   </div>
@@ -114,20 +106,14 @@
       </div>
     </div>
     <div class="radio_button allget">
-      <input
-        name="random"
-        type="radio"
-        :value="true"
-        id="as1"
-        v-model="form.random"
-      />
+      <input name="random" type="radio" :value="true" id="as1" v-model="random" />
       <label for="as1">{{ $t("new_first") }}</label>
       <input
         name="random"
         type="radio"
         :value="false"
         id="as2"
-        v-model="form.random"
+        v-model="random"
       />
       <label for="as2">{{ $t("mix") }}</label>
     </div>
@@ -147,6 +133,13 @@ export default {
       bigLoading: false,
       loading: false,
       form: {},
+      from_height: null,
+      up_to_height: null,
+      from_age: null,
+      up_to_age: null,
+      random: null,
+      random: null,
+      country_id: null
     };
   },
   computed: {
@@ -157,11 +150,11 @@ export default {
 
     if (_.isEmpty(this.getMainFilterDefaultForm)) {
       this.form = await this.fetchMainFilterDefaultForm();
-      this.form.random = true;
+      this.random = true;
       await this.fetchMainFilterResult(this.getMainFilterDefaultForm);
     } else {
       this.form = this.getMainFilterDefaultForm;
-      this.form.random = true;
+      this.random = true;
       await this.fetchMainFilterResult(this.getMainFilterDefaultForm);
     }
 
@@ -172,11 +165,19 @@ export default {
     ...mapMutations(["setMainFilterResult"]),
     async submit(e) {
       this.loading = true;
-      this.form.country_id = this.getSelectedCountry
+      this.country_id = this.getSelectedCountry
         ? this.getSelectedCountry
         : null;
 
-      await this.fetchMainFilterResult(this.form);
+      await this.fetchMainFilterResult({
+        from_height: this.from_height,
+        up_to_height: this.up_to_height,
+        from_age: this.from_age,
+        up_to_age: this.up_to_age,
+        random: this.random,
+        random: this.random,
+        country_id: this.country_id,
+      });
       this.loading = false;
     },
     toggle(event) {

@@ -51,11 +51,11 @@
             class="btn btn-link"
             @click="goto()"
           >{{ $t("condition") }}</a>
-          <!-- <a href="#">{{ $t("condition") }}</a> -->
+          <!-- <a href="javascript:;">{{ $t("condition") }}</a> -->
         </label>
         <span class="text-danger" v-show="errorVisibility">
           {{
-            $t("condition_required")
+          $t("condition_required")
           }}
         </span>
       </div>

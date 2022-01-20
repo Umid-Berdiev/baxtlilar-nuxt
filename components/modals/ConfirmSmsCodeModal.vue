@@ -96,7 +96,7 @@ export default {
 
       try {
         const response = await this.$axios.post("api/check-phone", {
-          phone: this.$store.state.user.userPhone,
+          phone: this.$store.state.userModule.userPhone,
           // phone: this.phone,
         });
 

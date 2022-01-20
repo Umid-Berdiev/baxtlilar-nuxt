@@ -5,7 +5,7 @@
     <a
       v-for="(item, index) in notifications"
       :key="index"
-      href="#"
+      href="javascript:;"
       class="message_item"
       :class="{ unread: item.read_at === null }"
       @click="handleClick(item.id)"

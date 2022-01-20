@@ -105,10 +105,8 @@ export default {
     ...mapActions(["fetchCheckPhone", "fetchCheckSmsCode"]),
     async phoneSubmit() {
       this.phoneError = "";
-      // if (this.phone.length != 17) {
-      //   this.phoneError = this.$t("Wrong number");
-      // } else {
       this.phoneLoading = true;
+
       const res = await this.fetchCheckPhone(this.phone);
       if (res.status) {
         this.phoneVerified = true;
@@ -116,7 +114,6 @@ export default {
         this.phoneError = this.$t("Wrong number");
       }
       this.phoneLoading = false;
-      // }
     },
     async submitCode() {
       this.codeError = "";
@@ -127,14 +124,12 @@ export default {
         password: this.password,
       });
       if (res.status) {
-        this.$store.dispatch("auth/login", res).then(
+        this.$auth.loginWith("local", { data: res }).then(
           () => {
-            // console.log("RESPONSE2");
             this.$refs.resetPasswordModal.hide();
             this.$router.push("/home");
           },
           (error) => {
-            // console.log("ERROR2");
             this.loading = false;
             this.message = "Credentials not match";
           }

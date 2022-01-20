@@ -2,7 +2,12 @@
   <div>
     <a @click="addFavourite" class="to_favourite active" v-if="favourite"></a>
     <a @click="addFavourite" class="to_favourite" v-else></a>
-    <a href="#" @click="showModal" class="close_user_card" v-if="showX">
+    <a
+      href="javascript:;"
+      @click="showModal"
+      class="close_user_card"
+      v-if="showX"
+    >
       <svg
         width="20"
         height="21"
@@ -29,12 +34,8 @@
           <div class="modal-body" style="max-width: 700px">
             <h2>{{ $t("Are you sure block this user") }}</h2>
             <div class="button-group">
-              <button @click="blockUser" class="link_blue">
-                {{ $t("yes") }}
-              </button>
-              <button @click="closeModal" class="link_blue red">
-                {{ $t("no") }}
-              </button>
+              <button @click="blockUser" class="link_blue">{{ $t("yes") }}</button>
+              <button @click="closeModal" class="link_blue red">{{ $t("no") }}</button>
             </div>
           </div>
         </div>

@@ -12,9 +12,9 @@
           :isFavourite="currentUser.isFavourite"
           :showX="false"
         />
-        <!-- <a href="#" class="close_user_card">
+        <!-- <a href="javascript:;" class="close_user_card">
           <icon-x />
-        </a> -->
+        </a>-->
       </div>
       <div class="tabs">
         <ul id="tabs-nav">

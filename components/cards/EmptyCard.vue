@@ -1,11 +1,9 @@
 <template>
   <div class="empty_card">
-    <img src="~/assets/images/und.svg" alt="" />
-    <h4>
-      {{ texts[textIndex] }}
-    </h4>
+    <img src="~/assets/images/und.svg" alt />
+    <h4>{{ texts[textIndex] }}</h4>
     <p>{{ $t("For all questions, please contact technical support") }}</p>
-    <!-- <a href="#" class="link_blue">Купить</a> -->
+    <!-- <a href="javascript:;" class="link_blue">Купить</a> -->
   </div>
 </template>
 

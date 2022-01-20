@@ -51,7 +51,7 @@ export default {
     },
     getUnreadNotificationsForChatroom(chatRoomId) {
       let arr = [];
-      this.$store.state.user.newMessageNotifications.forEach((notification) => {
+      this.$store.state.userModule.newMessageNotifications.forEach((notification) => {
         console.log("notification: ", notification);
         if (notification.data && notification.data.chat_room_id == chatRoomId)
           arr.push(notification);

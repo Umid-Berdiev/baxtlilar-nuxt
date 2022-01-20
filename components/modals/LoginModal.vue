@@ -45,7 +45,7 @@
           <div class="forget_title">
             {{ $t("forget_password") }}
             <a
-              href="#"
+              href="javascript:;"
               @click="showResetPasswordModal"
             >{{ $t("restore") }}</a>
           </div>
@@ -115,7 +115,7 @@ export default {
           });
 
       } catch (error) {
-        error && console.log('error.response: ', error.response);
+        // error && console.log('error.response: ', error.response);
 
         const phone =
           (error.response &&
@@ -123,7 +123,7 @@ export default {
             error.response.data.data &&
             error.response.data.data.phone)
 
-        console.log('phone: ', phone);
+        // console.log('phone: ', phone);
 
         if (phone) {
           this.$store.commit("userModule/setUserPhone", phone);

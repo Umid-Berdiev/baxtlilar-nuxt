@@ -9,7 +9,7 @@
           <img :src="otherUser.profile_photo_url" />
           <h2 v-text="otherUser.username"></h2>
         </div>
-        <a href="#" class="link_blue red">{{ $t('choosing_user') }}</a>
+        <a href="javascript:;" class="link_blue red">{{ $t('choosing_user') }}</a>
         <div class="dropdown">
           <div class="dropdown_top">
             <svg
@@ -40,13 +40,13 @@
             </svg>
           </div>
           <div class="dropdown_body">
-            <a href="#" data-fancybox data-src="#deleteMsg">
+            <a href="javascript:;" data-fancybox data-src="#deleteMsg">
               {{
-                $t('delete')
+              $t('delete')
               }}
             </a>
-            <a href="#">{{ $t('settings') }}</a>
-            <a href="#">{{ $t('logout') }}</a>
+            <a href="javascript:;">{{ $t('settings') }}</a>
+            <a href="javascript:;">{{ $t('logout') }}</a>
           </div>
         </div>
       </div>

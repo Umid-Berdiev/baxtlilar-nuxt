@@ -22,12 +22,11 @@
           <button
             class="btn btn-link text-decoration-none"
             @click="gotoSettings"
-          >
-            {{ $t("settings") }}
-          </button>
-          <button class="btn btn-link text-decoration-none" @click="logOut">
-            {{ $t("logout") }}
-          </button>
+          >{{ $t("settings") }}</button>
+          <button
+            class="btn btn-link text-decoration-none"
+            @click="logOut"
+          >{{ $t("logout") }}</button>
         </div>
       </div>
       <div class="dropdown" v-else>
@@ -60,7 +59,10 @@
           </svg>
         </div>
         <div class="dropdown_body">
-          <a href="#" @click="showComplaintModal">{{ $t("complain") }}</a>
+          <a
+            href="javascript:;"
+            @click="showComplaintModal"
+          >{{ $t("complain") }}</a>
         </div>
       </div>
       <h2>{{ user.username }}</h2>

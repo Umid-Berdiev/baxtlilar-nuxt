@@ -12,7 +12,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
     <div class="blog_item">
       <div class="blog_item_title">
@@ -25,7 +25,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
     <div class="blog_item">
       <div class="blog_item_title">
@@ -38,7 +38,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
     <div class="blog_item">
       <div class="blog_item_title">
@@ -51,7 +51,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
     <div class="blog_item">
       <div class="blog_item_title">
@@ -64,7 +64,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
     <div class="blog_item">
       <div class="blog_item_title">
@@ -77,7 +77,7 @@
         Текст описание про себя Текст описание про себя Текст описание про себя
         Текст описание про себя м
       </p>
-      <a href="#" class="link_blue">Читать дальше</a>
+      <a href="javascript:;" class="link_blue">Читать дальше</a>
     </div>
   </div>
 </template>

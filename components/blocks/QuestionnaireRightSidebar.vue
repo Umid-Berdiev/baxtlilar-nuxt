@@ -1,7 +1,7 @@
 <template>
   <div class="right_anceta">
     <a
-      href="#"
+      href="javascript:;"
       class="watching"
       data-fancybox
       data-src="https://www.youtube.com/watch?v=Jju2POnq7e8"

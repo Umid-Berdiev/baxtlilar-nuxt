@@ -5,7 +5,7 @@
         <nuxt-link :to="localePath('/home')" class="logo">
           <img src="~/assets/images/logo.png" alt />
         </nuxt-link>
-        <a href="#" class="link_blue">
+        <a href="javascript:;" class="link_blue">
           <svg
             width="22"
             height="22"

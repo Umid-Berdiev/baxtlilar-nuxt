@@ -15,7 +15,10 @@
           <p>{{ $t("Days") }}: {{ item.day }}</p>
           <p>{{ $t("Reciprocity") }}: {{ item.reciprocity }}</p>
           <div class="tariff_price">{{ item.price }} сум</div>
-          <a href="#" @click="payTariff(item.id)">{{ $t("Select tariff") }}</a>
+          <a
+            href="javascript:;"
+            @click="payTariff(item.id)"
+          >{{ $t("Select tariff") }}</a>
         </div>
       </div>
       <div class="col-xl-4 col-sm-6">
@@ -37,7 +40,10 @@
           <h5>{{ item.name }}</h5>
 
           <p>{{ item.description }}</p>
-          <a href="#" @click="freeTariff(item.id)">{{ $t("Select tariff") }}</a>
+          <a
+            href="javascript:;"
+            @click="freeTariff(item.id)"
+          >{{ $t("Select tariff") }}</a>
         </div>
       </div>
     </div>

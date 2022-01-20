@@ -6,13 +6,13 @@
           <div class="col-sm-6">
             <nuxt-link to="/" class="logo">Baxtlilar</nuxt-link>
             <div class="socials">
-              <a href="#">
+              <a href="javascript:;">
                 <icon-facebook />
               </a>
-              <a href="#">
+              <a href="javascript:;">
                 <icon-instagram />
               </a>
-              <a href="#">
+              <a href="javascript:;">
                 <icon-twitter />
               </a>
             </div>
@@ -37,7 +37,7 @@
         <p>2010-2020 Privacy-Terms</p>
         <p>
           Разработка
-          <a href="#">BPM-Group.uz</a>
+          <a href="javascript:;">BPM-Group.uz</a>
         </p>
       </div>
     </div>

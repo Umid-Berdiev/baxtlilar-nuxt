@@ -11,7 +11,7 @@
                 {{ $t("along_Baxtlilar") }}
               </h1>
               <p>{{ $t("site_for_seriously_relationships") }}</p>
-              <a href="#">{{ $t("details") }}</a>
+              <a href="javascript:;">{{ $t("details") }}</a>
             </div>
           </div>
           <div class="col-lg-6">

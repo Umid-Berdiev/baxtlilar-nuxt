@@ -3,14 +3,14 @@
     <div class="container">
       <div class="hdr_main">
         <nuxt-link to="/" class="logo">
-          <img src="@/assets/images/logo.png" alt="" />
+          <img src="@/assets/images/logo.png" alt />
         </nuxt-link>
         <div class="sidebar_mobile" @click="closeMobileHeaderMenu">
           <ul class="list_header js-anchor-link">
             <li>
               <a href="/#how-does-it-work">{{ $t("how_it_works") }}</a>
             </li>
-            <!-- <li><a href="#">{{ $t('tariffs') }}</a></li> -->
+            <!-- <li><a href="javascript:;">{{ $t('tariffs') }}</a></li> -->
             <li>
               <a href="/#news">{{ $t("news") }}</a>
             </li>
@@ -26,9 +26,9 @@
           @click="showModalFunc"
         />
 
-        <a href="#" class="hamburger" @click="openMobileHeaderMenu"
-          ><img src="@/assets/images/hamburger.svg" alt=""
-        /></a>
+        <a href="javascript:;" class="hamburger" @click="openMobileHeaderMenu">
+          <img src="@/assets/images/hamburger.svg" alt />
+        </a>
       </div>
     </div>
   </header>
