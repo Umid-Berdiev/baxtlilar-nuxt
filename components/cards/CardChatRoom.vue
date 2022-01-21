@@ -10,7 +10,7 @@
     <template v-if="chatRoom.messages && chatRoom.messages.length > 0">
       <div class="mess_user">
         <h2 v-text="otherUser && otherUser.username" />
-        <p v-text="messages[chatRoom.messages.length - 1].message" />
+        <p v-text="chatRoom.messages[chatRoom.messages.length - 1].message" />
       </div>
       <div class="date_message">
         <span
