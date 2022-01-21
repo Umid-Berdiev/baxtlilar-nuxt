@@ -1,7 +1,7 @@
 <template>
   <b-modal
     centered
-    class="language_popup_style"
+    modal-class="language_popup_style"
     id="success-modal"
     ref="successModal"
     hide-header

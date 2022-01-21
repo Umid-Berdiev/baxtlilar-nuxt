@@ -5039,6 +5039,7 @@ section.faq .card .card-body {
   background: none !important;
   border: 0 !important;
   box-shadow: none !important;
+  margin-bottom: 16px;
 }
 .ant-select.form-control .ant-select-arrow {
   right: 20px;
@@ -5050,7 +5051,7 @@ section.faq .card .card-body {
   border-radius: 100px;
   width: 100%;
   height: 50px;
-  padding-left: 25px;
+  padding-left: 14px;
   width: 100%;
   box-shadow: none !important;
 }
@@ -5115,17 +5116,17 @@ span.datepicker.form-control.ant-calendar-picker input {
 }
 
 .ant-select-single .ant-select-selector .ant-select-selection-item,
-.ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+.ant-select .ant-select-selection__placeholder {
   line-height: 50px;
 }
 @media (max-width: 767px) {
   .ant-select-single .ant-select-selector .ant-select-selection-item,
-  .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+  .ant-select .ant-select-selection__placeholder {
     line-height: 40px;
   }
 }
 
-.ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+.ant-select .ant-select-selection__placeholder {
   color: #7e7e7e !important;
 }
 
@@ -5159,4 +5160,15 @@ span.datepicker.form-control.ant-calendar-picker input::placeholder {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* .ant-select .ant-select-selection__placeholder {
+  top: 30%;
+  margin-top: 0;
+  line-height: unset;
+} */
+
+.anticon.anticon-calendar.ant-calendar-picker-icon {
+  margin-top: 0;
+  right: 20px;
 }

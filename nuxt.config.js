@@ -21,8 +21,8 @@ export default {
     scripts: [
       {
         src: "https://code-ya.jivosite.com/widget/GyXBzOKWA2",
-        // body: true,
-        defer: true,
+        body: true,
+        // defer: true,
       },
     ],
   },
@@ -41,21 +41,11 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    "@nuxtjs/dotenv",
-    [
-      "@nuxtjs/laravel-echo",
-      {
-        broadcaster: "pusher",
-        cluster: process.env.PUSHER_APP_CLUSTER,
-        forceTLS: true,
-        key: process.env.PUSHER_APP_KEY,
-        connectOnLogin: true,
-        disconnectOnLogout: true,
-        // authModule: true,
-      },
-    ],
-  ],
+  buildModules: ["@nuxtjs/dotenv", "@nuxtjs/laravel-echo"],
+
+  echo: {
+    plugins: ["~/plugins/echo.js"],
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -69,7 +59,6 @@ export default {
   ],
 
   i18n: {
-    // lazy: true,
     loadLanguagesAsync: true,
     locales: [
       { code: "en", name: "English" },
@@ -80,11 +69,6 @@ export default {
     vueI18nLoader: true,
     vueI18n: i18nConfig,
     strategy: "prefix",
-    // detectBrowserLanguage: {
-    //   useCookie: true,
-    //   cookieKey: "i18n_redirected",
-    // },
-    // rootRedirect: "uz",
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -100,42 +84,12 @@ export default {
 
   auth: {
     strategies: {
-      // laravelSanctum: {
-      //   provider: "laravel/sanctum",
-      //   url: process.env.API_URL,
-      //   endpoints: {
-      //     login: {
-      //       url: "/api/auth/login",
-      //       // method: "post",
-      //       // propertyName: false,
-      //     },
-      //     logout: {
-      //       url: "/api/auth/logout",
-      //       // method: "post",
-      //       // propertyName: false,
-      //     },
-      //     user: {
-      //       url: "/api/user",
-      //       // method: "get",
-      //       // propertyName: false
-      //     },
-      //   },
-      //   user: {
-      //     property: false,
-      //     autoFetch: false,
-      //   },
-      // },
-
       local: {
         token: {
           property: "accessToken",
-          // global: true,
-          // required: true,
-          // type: 'Bearer'
         },
         user: {
           property: false,
-          // autoFetch: true
         },
         endpoints: {
           login: { url: "/api/auth/login", method: "post" },
@@ -144,14 +98,12 @@ export default {
         },
       },
     },
-    // localStorage: false,
     redirect: {
       login: "/",
       logout: "/",
       callback: false,
       home: false,
     },
-    // plugins: [{ src: "~/plugins/axios", ssr: true }],
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

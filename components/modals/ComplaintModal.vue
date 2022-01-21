@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal ref="complaintModal">
+    <b-modal ref="complaintModal" modal-class="language_popup_style">
       <div id="enter_site_popup" class="popup_register_style">
         <h2 v-text="$t('complain')" class="text-capitalize"></h2>
         <form @submit.prevent="submit">
@@ -15,10 +15,7 @@
           </div>
           <div class="form-group text-center">
             <button class="link_blue" :disabled="loading">
-              <span
-                v-show="loading"
-                class="spinner-border spinner-border-sm"
-              ></span>
+              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
               &nbsp;
               <span
                 v-text="$t('complain')"

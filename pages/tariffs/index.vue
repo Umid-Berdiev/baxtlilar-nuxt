@@ -25,7 +25,7 @@
         <div class="tariff_item premium_plan">
           <h5>{{ $t("Premium") }}</h5>
           <p>{{ $t("Individual approach and guarantee of finding a pair") }}</p>
-          <nuxt-link to="/premium_tariff">{{ $t("details") }}</nuxt-link>
+          <nuxt-link to="tariffs/premium-tariffs">{{ $t("details") }}</nuxt-link>
         </div>
       </div>
       <div

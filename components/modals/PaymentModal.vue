@@ -1,6 +1,6 @@
 <template>
   <b-modal
-    class="language_popup_style"
+    modal-class="language_popup_style"
     id="payment-modal"
     ref="paymentModal"
     hide-header
@@ -15,12 +15,14 @@
           class="payment-option"
           src="~/assets/images/click.png"
           alt="Success"
+          width="300"
         />
         <img
           @click="paymentCreate('Payme')"
           class="payment-option"
           src="~/assets/images/payme.png"
           alt="Success"
+          width="300"
         />
       </div>
       <button :disabled="loading" @click="hideModal" class="link_blue red">

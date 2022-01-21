@@ -103,7 +103,11 @@
       </form>
     </div>
 
-    <b-modal class="language_popup_style" id="thanksFillingModal">
+    <b-modal
+      class="language_popup_style"
+      id="thanksFillingModal"
+      modal-class="language_popup_style"
+    >
       <h2>{{ $t("thanks_fill_questionnaire") }}</h2>
       <h4>{{ $t("Your profile is pending") }}</h4>
       <nuxt-link

@@ -7,28 +7,20 @@
     >
       <img :src="otherUser && otherUser.profile_photo_url" />
     </div>
-    <div class="mess_user">
-      <h2 v-text="otherUser && otherUser.username" />
-      <p
-        v-text="
-          chatRoom.messages &&
-          chatRoom.messages[chatRoom.messages.length - 1].message
-        "
-      />
-    </div>
-    <div class="date_message">
-      <span
-        v-text="
-          formatDate(
-            chatRoom.messages &&
-            chatRoom.messages[chatRoom.messages.length - 1].created_at
-          )
-        "
-      />
-      <span>
-        <img src="~/assets/images/readen.svg" />
-      </span>
-    </div>
+    <template v-if="chatRoom.messages && chatRoom.messages.length > 0">
+      <div class="mess_user">
+        <h2 v-text="otherUser && otherUser.username" />
+        <p v-text="messages[chatRoom.messages.length - 1].message" />
+      </div>
+      <div class="date_message">
+        <span
+          v-text="formatDate(chatRoom.messages[chatRoom.messages.length - 1].created_at)"
+        />
+        <span>
+          <img src="~/assets/images/readen.svg" />
+        </span>
+      </div>
+    </template>
   </nuxt-link>
 </template>
 
