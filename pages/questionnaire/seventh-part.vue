@@ -110,10 +110,10 @@
     >
       <h2>{{ $t("thanks_fill_questionnaire") }}</h2>
       <h4>{{ $t("Your profile is pending") }}</h4>
-      <nuxt-link
-        :to="localePath('/home')"
+      <a
+        :href="'/' + $i18n.locale + '/home'"
         class="link_blue red"
-      >{{ $t("next") }}</nuxt-link>
+      >{{ $t("next") }}</a>
     </b-modal>
   </div>
 </template>

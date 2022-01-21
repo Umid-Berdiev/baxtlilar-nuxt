@@ -5,13 +5,16 @@
     <a
       v-for="(item, index) in notifications"
       :key="index"
-      href="#"
+      href="javascript:;"
       class="message_item"
       :class="{ unread: item.read_at === null }"
       @click="handleClick(item.id)"
     >
       <div class="mess_user">
-        <p v-text="item.data.message" />
+        <p
+          v-text="item.data.message"
+          :class="{ 'text-white': item.read_at === null, 'text-dark': item.read_at !== null }"
+        />
       </div>
       <div class="date_message">
         <span v-text="formatDate(item.created_at)" />
@@ -19,7 +22,7 @@
     </a>
 
     <!-- Modal -->
-    <b-modal id="notificationModal">
+    <b-modal id="notificationModal" modal-class="language_popup_style">
       <template #modal-header="{ close }">
         <h5 class="modal-title" id="notificationModalLabel"></h5>
         <b-button size="sm" variant="outline-danger" @click="close()">X</b-button>
