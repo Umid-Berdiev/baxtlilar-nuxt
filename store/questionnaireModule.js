@@ -56,7 +56,7 @@ const actions = {
 
   async saveFilterData({ commit, rootState }, payload) {
     const res = await this.$axios.post("api/user-preference-filter", {
-      params: payload,
+      ...payload,
     });
     // localStorage.setItem("user", JSON.stringify(res.data.user));
     return res.data;

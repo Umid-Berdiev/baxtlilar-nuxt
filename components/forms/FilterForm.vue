@@ -12,7 +12,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="from_age"
-                  v-model="getMainFilterDefaultForm.from_age"
+                  v-model="defaultForm.from_age"
                   min="18"
                   max="100"
                 />
@@ -22,7 +22,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="up_to_age"
-                  v-model="getMainFilterDefaultForm.up_to_age"
+                  v-model="defaultForm.up_to_age"
                   min="18"
                   max="100"
                 />
@@ -38,7 +38,7 @@
               :showSearch="false"
               name="country_id"
               @change="selectCountry"
-              :default-value="getMainFilterDefaultForm.country_id"
+              :default-value="defaultForm.country_id"
               class="form-control"
             >
               <a-select-option
@@ -56,7 +56,7 @@
               :showSearch="false"
               :placeholder="$t('choose')"
               @change="selectRegion"
-              :default-value="getMainFilterDefaultForm.region_id"
+              :default-value="defaultForm.region_id"
               class="form-control"
             >
               <a-select-option
@@ -79,7 +79,7 @@
                     type="radio"
                     name="religion_id"
                     :value="item.id"
-                    :checked="item.id == getMainFilterDefaultForm.religion_id"
+                    :checked="item.id == defaultForm.religion_id"
                     :id="'religion-' + item.id"
                   />
                   <label :for="'religion-' + item.id">{{ item.name }}</label>
@@ -91,7 +91,7 @@
                     type="radio"
                     name="religion_id"
                     value="null"
-                    :checked="null == getMainFilterDefaultForm.religion_id"
+                    :checked="null == defaultForm.religion_id"
                     id="religion"
                   />
                   <label for="religion">{{ $t("doesnt_matter") }}</label>
@@ -114,7 +114,7 @@
                     name="family_status"
                     value="single"
                     :checked="
-                      getMainFilterDefaultForm.family_status == 'single'
+                      defaultForm.family_status == 'single'
                     "
                   />
                   <label for="family-status-1">{{ $t("single") }}</label>
@@ -128,7 +128,7 @@
                     name="family_status"
                     value="divorced"
                     :checked="
-                      getMainFilterDefaultForm.family_status == 'divorced'
+                      defaultForm.family_status == 'divorced'
                     "
                   />
                   <label for="family-status-3">{{ $t("divorced") }}</label>
@@ -141,7 +141,7 @@
                     id="family-status-4"
                     name="family_status"
                     value="widow"
-                    :checked="getMainFilterDefaultForm.family_status == 'widow'"
+                    :checked="defaultForm.family_status == 'widow'"
                   />
                   <label for="family-status-4">{{ $t("widow") }}</label>
                 </div>
@@ -153,7 +153,7 @@
                     id="family-status-2"
                     name="family_status"
                     value="-1"
-                    :checked="-1 == getMainFilterDefaultForm.family_status"
+                    :checked="-1 == defaultForm.family_status"
                   />
                   <label for="family-status-2">{{ $t("doesnt_matter") }}</label>
                 </div>
@@ -174,7 +174,7 @@
                     name="smoking"
                     id="smoking-1"
                     value="2"
-                    :checked="'2' == getMainFilterDefaultForm.smoking"
+                    :checked="'2' == defaultForm.smoking"
                   />
                   <label for="smoking-1">{{ $t("strongly_against") }}</label>
                 </div>
@@ -186,7 +186,7 @@
                     name="smoking"
                     id="smoking-2"
                     value="2"
-                    :checked="'2' == getMainFilterDefaultForm.smoking"
+                    :checked="'2' == defaultForm.smoking"
                   />
                   <label for="smoking-2">{{ $t("not_against") }}</label>
                 </div>
@@ -198,7 +198,7 @@
                     name="smoking"
                     id="smoking-3"
                     value="3"
-                    :checked="'3' == getMainFilterDefaultForm.smoking"
+                    :checked="'3' == defaultForm.smoking"
                   />
                   <label for="smoking-3">{{ $t("doesnt_matter") }}</label>
                 </div>
@@ -219,7 +219,7 @@
                     name="alcohol"
                     id="alcohol-1"
                     value="1"
-                    :checked="'1' == getMainFilterDefaultForm.alcohol"
+                    :checked="'1' == defaultForm.alcohol"
                   />
                   <label for="alcohol-1">{{ $t("strongly_against") }}</label>
                 </div>
@@ -231,7 +231,7 @@
                     name="alcohol"
                     id="alcohol-2"
                     value="2"
-                    :checked="'2' == getMainFilterDefaultForm.alcohol"
+                    :checked="'2' == defaultForm.alcohol"
                   />
                   <label for="alcohol-2">{{ $t("not_against") }}</label>
                 </div>
@@ -242,7 +242,7 @@
                     type="radio"
                     name="alcohol"
                     id="alcohol-3"
-                    :checked="'3' == getMainFilterDefaultForm.alcohol"
+                    :checked="'3' == defaultForm.alcohol"
                     value="3"
                   />
                   <label for="alcohol-3">{{ $t("doesnt_matter") }}</label>
@@ -264,7 +264,7 @@
                     name="drugs"
                     id="drug-1"
                     value="1"
-                    :checked="'1' == getMainFilterDefaultForm.drugs"
+                    :checked="'1' == defaultForm.drugs"
                   />
                   <label for="drug-1">{{ $t("strongly_against") }}</label>
                 </div>
@@ -276,7 +276,7 @@
                     name="drugs"
                     id="drug-2"
                     value="2"
-                    :checked="'2' == getMainFilterDefaultForm.drugs"
+                    :checked="'2' == defaultForm.drugs"
                   />
                   <label for="drug-2">{{ $t("not_against") }}</label>
                 </div>
@@ -288,7 +288,7 @@
                     name="drugs"
                     id="drug-3"
                     value="3"
-                    :checked="'3' == getMainFilterDefaultForm.drugs"
+                    :checked="'3' == defaultForm.drugs"
                   />
                   <label for="drug-3">{{ $t("doesnt_matter") }}</label>
                 </div>
@@ -310,7 +310,7 @@
                     id="financial-status-1"
                     value="high"
                     :checked="
-                      'high' == getMainFilterDefaultForm.financial_status
+                      'high' == defaultForm.financial_status
                     "
                   />
                   <label for="financial-status-1">{{ $t("wealthy") }}</label>
@@ -324,7 +324,7 @@
                     id="financial-status-3"
                     value="middle"
                     :checked="
-                      'middle' == getMainFilterDefaultForm.financial_status
+                      'middle' == defaultForm.financial_status
                     "
                   />
                   <label for="financial-status-3">{{ $t("middle_income") }}</label>
@@ -338,7 +338,7 @@
                     id="financial-status-4"
                     value="low"
                     :checked="
-                      'low' == getMainFilterDefaultForm.financial_status
+                      'low' == defaultForm.financial_status
                     "
                   />
                   <label for="financial-status-4">
@@ -355,7 +355,7 @@
                     name="financial_status"
                     id="financial-status-2"
                     value="-1"
-                    :checked="-1 == getMainFilterDefaultForm.financial_status"
+                    :checked="-1 == defaultForm.financial_status"
                   />
                   <label for="financial-status-2">
                     {{
@@ -378,7 +378,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="from_height"
-                  v-model="getMainFilterDefaultForm.from_height"
+                  v-model="defaultForm.from_height"
                   min="100"
                   max="250"
                 />
@@ -388,7 +388,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="up_to_height"
-                  v-model="getMainFilterDefaultForm.up_to_height"
+                  v-model="defaultForm.up_to_height"
                   min="100"
                   max="250"
                 />
@@ -405,7 +405,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="from_weight"
-                  v-model="getMainFilterDefaultForm.from_weight"
+                  v-model="defaultForm.from_weight"
                   min="30"
                   max="150"
                 />
@@ -415,7 +415,7 @@
                   type="number"
                   :placeholder="$t('fill')"
                   name="up_to_weight"
-                  v-model="getMainFilterDefaultForm.up_to_weight"
+                  v-model="defaultForm.up_to_weight"
                   min="30"
                   max="150"
                 />
@@ -436,7 +436,7 @@
                     name="type_form"
                     id="type-form-1"
                     value="national"
-                    :checked="'national' == getMainFilterDefaultForm.type_form"
+                    :checked="'national' == defaultForm.type_form"
                   />
                   <label for="type-form-1">
                     {{
@@ -453,7 +453,7 @@
                     id="type-form-2"
                     value="international"
                     :checked="
-                      'international' == getMainFilterDefaultForm.type_form
+                      'international' == defaultForm.type_form
                     "
                   />
                   <label for="type-form-2">
@@ -470,7 +470,7 @@
                     name="type_form"
                     id="type-form-3"
                     value="universal"
-                    :checked="'universal' == getMainFilterDefaultForm.type_form"
+                    :checked="'universal' == defaultForm.type_form"
                   />
                   <label for="type-form-3">
                     {{
@@ -498,7 +498,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import _ from "lodash";
+import { isEmpty } from "lodash";
 
 export default {
   data() {
@@ -507,6 +507,7 @@ export default {
       loading: false,
       country_id: null,
       region_id: null,
+      defaultForm: {}
     };
   },
   computed: {
@@ -514,28 +515,27 @@ export default {
       "getReligions",
       "getCountries",
       "getRegions",
-      "getMainFilterDefaultForm",
     ]),
   },
   async created() {
-    // await this.fetchCountries();
-    // await this.fetchReligions();
-    if (_.isEmpty(this.getMainFilterDefaultForm))
-      await this.fetchMainFilterDefaultForm();
+    this.defaultForm = this.$store.getters.getMainFilterDefaultForm
 
-    // await this.fetchRegions(this.getMainFilterDefaultForm.country_id);
-    this.country_id = this.getMainFilterDefaultForm.country_id;
-    this.region_id = this.getMainFilterDefaultForm.region_id;
+    if (isEmpty(this.defaultForm)) {
+      this.fetchMainFilterDefaultForm();
+      this.defaultForm = this.$store.getters.getMainFilterDefaultForm
+    }
+
+    this.country_id = this.defaultForm.country_id;
+    this.region_id = this.defaultForm.region_id;
     this.pageLoading = false;
   },
   methods: {
-    ...mapMutations(["setQuestionnairePercent"]),
+    ...mapMutations(["questionnaireModule/setQuestionnairePercent"]),
     ...mapActions([
       "fetchReligions",
       "fetchCountries",
       "fetchRegions",
       "fetchMainFilterDefaultForm",
-      "saveFilterData",
     ]),
     selectCountry(value) {
       this.fetchRegions(value);
@@ -552,10 +552,17 @@ export default {
       form.region_id = this.region_id;
 
       try {
-        await this.saveFilterData(form);
+        await this.$store.dispatch("questionnaireModule/saveFilterData", form);
         this.loading = false;
-      } catch (e) {
-        alert(e);
+      } catch (error) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        this.$toast.error("Error while saving data: ", message);
       }
 
       this.$bvModal.show("setting-modal")

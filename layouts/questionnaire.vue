@@ -20,7 +20,6 @@ export default {
     QuestionnaireRightSidebar,
   },
   mounted() {
-    console.log("ok");
 
     let nextPath = "/";
 
