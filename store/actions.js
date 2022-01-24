@@ -4,66 +4,86 @@ import userService from "~/plugins/services/user.service";
 
 const actions = {
   async fetchCountries({ commit }) {
-    commit("setLoadingState", true);
-    const response = await this.$axios.post("api/countries", {
-      lang: this.$i18n.locale,
-    });
-    commit("setСountries", response.data);
-    commit("setLoadingState", false);
+    // commit("setLoadingState", true);
+    try {
+      const response = await this.$axios.$post("/api/countries", {
+        lang: this.$i18n.locale,
+      });
+      commit("setСountries", response);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      // console.error("Error while fetching data: ", message);
+      // this.app.$toast.error("Error while fetching data: ", message);
+    }
+    // commit("setLoadingState", false);
   },
   async fetchRegions({ commit }, payload) {
-    const response = await this.$axios.post("api/regions", {
+    const response = await this.$axios.post("/api/regions", {
       country_id: payload,
       lang: this.$i18n.locale,
     });
     commit("setRegions", response.data);
   },
   async fetchReligions({ commit }) {
-    const response = await this.$axios.post("api/religions", {
+    const response = await this.$axios.post("/api/religions", {
       lang: this.$i18n.locale,
     });
     commit("setReligions", response.data);
   },
   async fetchLanguages({ commit }) {
-    const response = await this.$axios.post("api/languages");
+    const response = await this.$axios.post("/api/languages");
     commit("setLanguages", response.data);
   },
   async fetchMainFilterResult({ commit }, payload) {
     commit("setMainFilterResult", []);
-    const response = await this.$axios.post("api/main-filter", payload);
+    const response = await this.$axios.post("/api/main-filter", payload);
     commit("setMainFilterResult", response.data);
   },
   async fetchMainFilterDefaultForm({ commit }) {
     try {
-      const response = await this.$axios.$post("api/main-filter-default-form");
+      const response = await this.$axios.$post("/api/main-filter-default-form");
       commit("setMainFilterDefaultForm", response);
       commit("setSelectedCountry", response.country);
 
       return response;
     } catch (error) {
-      this.$toast.error("Error while fetching data: ", error);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      console.error("Error while fetching data: ", message);
+      // this.app.$toast.error("Error while fetching data: ", message);
     }
   },
   async fetchFavourites({ commit }) {
     commit("setFavourites", []);
-    const response = await this.$axios.$post("api/favourites");
+    const response = await this.$axios.$post("/api/favourites");
     commit("setFavourites", response.data);
   },
 
   async fetchUserImages({ commit }, payload) {
-    const response = await this.$axios.post("api/user-images", payload);
+    const response = await this.$axios.post("/api/user-images", payload);
     // commit("setUserImages", response.data);
     return response.data;
   },
   async fetchDeleteImage({ commit }, payload) {
-    const response = await this.$axios.post("api/delete-image", payload);
+    const response = await this.$axios.post("/api/delete-image", payload);
     // commit("setUserImages", response.data);
     // return response.data;
   },
 
   async fetchAnswers({ commit }, payload) {
     try {
-      const response = await this.$axios.post("api/user-answers-by-user", {
+      const response = await this.$axios.post("/api/user-answers-by-user", {
         user_id: payload,
       });
       return response.data;
@@ -75,13 +95,13 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchRelatives({ commit }, payload) {
     try {
-      const response = await this.$axios.post("api/user-relatives-by-user", {
+      const response = await this.$axios.post("/api/user-relatives-by-user", {
         user_id: payload,
       });
       return response.data;
@@ -93,13 +113,13 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchUserById({ commit }, payload) {
     try {
-      const response = await this.$axios.post("api/user-by-id", {
+      const response = await this.$axios.post("/api/user-by-id", {
         user_id: payload,
       });
       commit("setCurrentUser", response.data);
@@ -112,13 +132,13 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchChangePassword({ commit }, payload) {
     try {
-      const response = await this.$axios.post("api/change-password", {
+      const response = await this.$axios.post("/api/change-password", {
         password: payload,
       });
       return response.data;
@@ -130,13 +150,13 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchOffer({ commit }, payload) {
     try {
-      const response = await this.$axios.post("api/offer", payload);
+      const response = await this.$axios.post("/api/offer", payload);
       return response.data;
     } catch (error) {
       const message =
@@ -146,13 +166,13 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
 
   async fetchRelativesForSetting({ commit }) {
     try {
-      const response = await this.$axios.get("api/relatives");
+      const response = await this.$axios.get("/api/relatives");
       return response.data;
     } catch (error) {
       const message =
@@ -162,67 +182,67 @@ const actions = {
         error.message ||
         error.toString();
 
-      this.$toast.error("Error while fetching data: ", message);
+      this.app.$toast.error("Error while fetching data: ", message);
     }
   },
   async fetchChatId({ commit }, payload) {
-    const response = await this.$axios.post("api/chat-id", payload);
+    const response = await this.$axios.post("/api/chat-id", payload);
     return response.data;
   },
   async fetchNews({ commit }) {
-    const response = await this.$axios.get("api/news-list");
+    const response = await this.$axios.get("/api/news-list");
     commit("setNews", response.data);
   },
   async fetchNewsDetail({ commit }, payload) {
-    const response = await this.$axios.get("api/news-detail/" + payload);
+    const response = await this.$axios.get("/api/news-detail/" + payload);
     commit("setNewsDetail", response.data);
   },
   async fetchFaq({ commit }) {
-    const response = await this.$axios.get("api/chavo-list");
+    const response = await this.$axios.get("/api/chavo-list");
     commit("setFaq", response.data);
   },
   async fetchSupportCategoryWithChavos({ commit }) {
-    const response = await this.$axios.get("api/category-support-chavo");
+    const response = await this.$axios.get("/api/category-support-chavo");
     commit("setSupportCategoryWithChavos", response.data);
   },
   async fetchCheckPhone({ commit }, payload) {
-    const response = await this.$axios.post("api/check-phone", {
+    const response = await this.$axios.post("/api/check-phone", {
       phone: payload,
     });
     return response.data;
   },
   async fetchCheckSmsCode({ commit }, payload) {
-    const response = await this.$axios.post("api/check-sms-code", payload);
+    const response = await this.$axios.post("/api/check-sms-code", payload);
     return response.data;
   },
   async fetchFooterList({ commit }, payload) {
-    const response = await this.$axios.get("api/pages/list?lang=" + payload);
+    const response = await this.$axios.get("/api/pages/list?lang=" + payload);
     commit("setFooterList", response.data);
   },
   async fetchFooterListOne({ commit }, payload) {
-    const response = await this.$axios.get("api/pages/one", {
+    const response = await this.$axios.get("/api/pages/one", {
       params: payload,
     });
     commit("setFooterListOne", response.data);
   },
 
   async fetchComplaint({ commit }, payload) {
-    const response = await this.$axios.post("api/complaint", payload);
+    const response = await this.$axios.post("/api/complaint", payload);
     return response.data;
   },
   async fetchTariffList({ commit }, payload) {
-    const response = await this.$axios.get("api/tariff/list", {
+    const response = await this.$axios.get("/api/tariff/list", {
       params: { lang: payload },
     });
     commit("setTariffList", response.data);
     return response.data;
   },
   async fetchFreeTariff({ commit }, payload) {
-    const response = await this.$axios.post("api/free-tariff", payload);
+    const response = await this.$axios.post("/api/free-tariff", payload);
     return response.data;
   },
   async fetchCreatePayment({ commit }, payload) {
-    const response = await this.$axios.post("api/create-payment", payload);
+    const response = await this.$axios.post("/api/create-payment", payload);
     return response.data;
   },
 
@@ -241,13 +261,8 @@ const actions = {
 
   async register({ commit }, user) {
     try {
-      const res = await this.$axios.post("api/auth/register", {
+      const res = await this.$axios.post("/api/auth/register", {
         ...user,
-        // username: user.username,
-        // gender: user.gender,
-        // phone: user.phone,
-        // password: user.password,
-        // lang: user.lang,
       });
 
       if (res.data.message == "Success") {

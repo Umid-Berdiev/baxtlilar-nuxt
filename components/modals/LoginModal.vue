@@ -99,44 +99,47 @@ export default {
       this.form.lang = this.$i18n.locale;
 
       try {
-        this.$axios.get("/sanctum/csrf-cookie")
+        await this.$axios.get("/sanctum/csrf-cookie")
           .then(async (response) => {
             let res = await this.$auth.loginWith('local', { data: this.form })
-            this.$router.push(this.localePath("/home"));
+            if (this.$auth.user.step !== 0) {
+              this.$router.push(this.localePath("/home"));
+            } else this.$router.push(this.localePath("/questionnaire"));
           }).catch(error => {
-            const errorMessage =
+            const phone =
               (error.response &&
                 error.response.data &&
-                error.response.data.message) ||
-              error.toString();
+                error.response.data.data &&
+                error.response.data.data.phone)
 
-            this.loading = false;
-            this.message = this.$t(errorMessage);
+            if (phone) {
+              this.$store.commit("setGuest", {
+                username: this.form.username,
+                password: this.form.password,
+                phone: phone,
+              });
+
+              this.$refs.loginModal.hide();
+
+              this.$bvModal.show('confirm-sms-code-modal');
+            } else {
+              this.message = this.$t("Credentials not match");
+            }
           });
-
       } catch (error) {
-        // error && console.log('error.response: ', error.response);
-
-        const phone =
+        const message =
           (error.response &&
             error.response.data &&
-            error.response.data.data &&
-            error.response.data.data.phone)
+            error.response.data.message ||
+            error.toString())
 
-        // console.log('phone: ', phone);
-
-        if (phone) {
-          this.$store.commit("userModule/setUserPhone", phone);
-          this.$refs.loginModal.hide();
-
-          this.$bvModal.show('confirm-sms-code-modal');
-        } else {
-          this.message = this.$t("Credentials not match");
-        }
+        this.message = this.$t(message);
+        // this.message = this.$t("Credentials not match");
+      } finally {
+        this.loading = false;
       }
-
-      this.loading = false;
     },
+
     showResetPasswordModal() {
       this.$refs.loginModal.hide();
 

@@ -48,15 +48,21 @@ export default {
       tabIndex: null,
     };
   },
-  async asyncData({ $axios, route, $auth, app }) {
-    try {
-      const currentUser = await $axios.$get(`api/user-details/${$auth.user.id}`);
-      const tabIndex = Number(route.query.tab) || 0;
+  async created() {
+    if (this.$store.state.countries.length === 0) {
+      this.$store.dispatch('fetchCountries')
+    }
 
-      return {
-        currentUser,
-        tabIndex,
-      };
+    if (this.$store.state.religions.length === 0) {
+      this.$store.dispatch('fetchReligions')
+    }
+
+    try {
+      const currentUser = await this.$axios.$get(`api/user-details/${this.$auth.user.id}`);
+      const tabIndex = Number(this.$route.query.tab) || 0;
+
+        this.currentUser = currentUser
+        this.tabIndex = tabIndex
 
     } catch (error) {
       const message =
@@ -67,12 +73,46 @@ export default {
         error.toString();
 
       console.log(
-        app.i18n.t("error_while_fetching_data") + ": " + message
+        this.$i18n.t("error_while_fetching_data") + ": " + message
       );
-      app.toast.error(
-        app.i18n.t("error_while_fetching_data") + ": " + message
+      this.$toast.error(
+        this.$i18n.t("error_while_fetching_data") + ": " + message
       );
     }
   },
+  // async asyncData({ $axios, route, $auth, app, store }) {
+  //   if (store.state.countries.length === 0) {
+  //     const response = await $axios.$post("/api/countries", {
+  //       lang: app.i18n.locale,
+  //     });
+
+  //     store.commit("setСountries", response);
+  //   }
+
+  //   try {
+  //     const currentUser = await $axios.$get(`api/user-details/${$auth.user.id}`);
+  //     const tabIndex = Number(route.query.tab) || 0;
+
+  //     return {
+  //       currentUser,
+  //       tabIndex,
+  //     };
+
+  //   } catch (error) {
+  //     const message =
+  //       (error.response &&
+  //         error.response.data &&
+  //         error.response.data.message) ||
+  //       error.message ||
+  //       error.toString();
+
+  //     console.log(
+  //       app.i18n.t("error_while_fetching_data") + ": " + message
+  //     );
+  //     app.$toast.error(
+  //       app.i18n.t("error_while_fetching_data") + ": " + message
+  //     );
+  //   }
+  // },
 };
 </script>

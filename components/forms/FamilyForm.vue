@@ -319,7 +319,7 @@ export default {
   },
   methods: {
     ...mapActions(["saveUserFamilyData", "fetchRelativesForSetting"]),
-    ...mapMutations(["setQuestionnairePercent"]),
+    ...mapMutations(["questionnaireModule/setQuestionnairePercent"]),
     async submit(e) {
       this.loading = true;
       const formData = new FormData(e.target);

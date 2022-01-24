@@ -44,6 +44,7 @@
             class="form-control"
             pattern="^(?=.*[a-zA-Z]{1,})(?=.*[\d]{0,})[a-zA-Z0-9]{1,20}$"
             :placeholder="$t('create_login')"
+            autocomplete="off"
           />
           <span class="error-feedback" v-text="errors[0]" />
           <div
@@ -62,6 +63,7 @@
             pattern="^[\+][\d]{1,15}$"
             :placeholder="$t('Enter your phone number')"
             v-model="form.phone"
+            autocomplete="off"
           />
           <span class="error-feedback">{{ errors[0] }}</span>
           <div
@@ -80,6 +82,7 @@
             type="password"
             class="form-control"
             :placeholder="$t('create_password')"
+            autocomplete="off"
           />
           <span class="error-feedback" v-text="errors[0]" />
         </div>

@@ -14,11 +14,20 @@
           class="text-center text-muted"
         ></h5>
         <div class="form-group">
-          <input name="code" ref="smsCode" :placeholder="$t('Code')" />
+          <input
+            type="text"
+            name="code"
+            v-model="smsCode"
+            :placeholder="$t('Code')"
+          />
           <span class="text-danger">{{ codeError }}</span>
         </div>
         <div class="form-group text-center">
-          <button type="submit" class="link_blue" :disabled="codeLoading">
+          <button
+            type="submit"
+            class="link_blue"
+            :disabled="codeLoading || smsCode === ''"
+          >
             <span
               v-show="codeLoading"
               class="spinner-border spinner-border-sm"
@@ -60,21 +69,25 @@ export default {
       codeSentStatus: false,
       codeInfo: "",
       countDown: 0,
+      smsCode: "",
     };
   },
   methods: {
     async submitCode() {
-      // console.log('submitCode clicked');
-      this.codeError = "";
-      this.codeLoading = true;
+      console.log("submitCode clicked");
 
       try {
-        const res = await this.$axios.post("api/sms-code-confirmation", {
-          code: this.$refs.smsCode.value,
-          phone: this.$store.getters.getGuest.phone,
+        this.codeError = "";
+        this.codeLoading = true;
+        const code = this.smsCode;
+        const phone = this.$store.getters.getGuest.phone;
+
+        const res = await this.$axios.$post("/api/sms-code-confirmation", {
+          code,
+          phone,
         });
 
-        if (res.data.status) {
+        if (res.status === true) {
           const res2 = await this.$auth.loginWith("local", {
             data: {
               username: this.$store.getters.getGuest.username,
@@ -82,17 +95,21 @@ export default {
             },
           });
 
-          // this.$auth.strategy.token.set(res2.data.accessToken);
-          // await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
           // window.location.href = "/home";
           this.$router.push(this.localePath("/questionnaire"));
         } else this.codeError = this.$t("Wrong code");
       } catch (error) {
-        this.codeError = error.data;
-      }
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.toString();
 
-      this.codeLoading = false;
+        this.codeError = message;
+      } finally {
+        this.codeLoading = false;
+      }
     },
     async resendSms() {
       this.codeLoading = true;
@@ -100,19 +117,20 @@ export default {
       this.codeInfo = "";
 
       try {
-        const response = await this.$axios.post("api/check-phone", {
-          phone: this.$store.state.userModule.userPhone,
-          // phone: this.phone,
+        const response = await this.$axios.$post("api/check-phone", {
+          phone: this.$store.getters.getGuest.phone,
         });
 
-        if (response.data.status) {
+        if (response.status) {
           this.$toast.info(this.$t("Code_sent"));
           // this.codeInfo = this.$t("Code_sent");
           this.countDown = 60;
           this.countDownTimer();
+        } else {
+          this.codeError = "smth went Wrong";
         }
       } catch (error) {
-        this.codeError = error.data;
+        this.codeError = error;
       }
 
       this.codeLoading = false;
@@ -126,14 +144,18 @@ export default {
       }
     },
   },
-  mounted() {
-    // this.countDownTimer()
-  },
 };
 </script>
 
 <style scoped>
 .resend_sms_btn:focus {
   box-shadow: none;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+button.link_blue:disabled:hover {
+  background: #1890ff !important;
 }
 </style>

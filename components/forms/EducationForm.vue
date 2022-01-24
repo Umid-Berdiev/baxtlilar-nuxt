@@ -237,7 +237,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setQuestionnairePercent"]),
+    ...mapMutations(["questionnaireModule/setQuestionnairePercent"]),
     async submit(e) {
       this.loading = true;
       const formData = new FormData(e.target);
