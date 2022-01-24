@@ -28,7 +28,8 @@
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                        >{{ item + 49 }}</a-select-option>
+                          >{{ item + 49 }}</a-select-option
+                        >
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -43,7 +44,8 @@
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                        >{{ item + 49 }}</a-select-option>
+                          >{{ item + 49 }}</a-select-option
+                        >
                       </a-select>
                     </div>
                   </div>
@@ -65,7 +67,8 @@
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                        >{{ item }}</a-select-option>
+                          >{{ item }}</a-select-option
+                        >
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -80,7 +83,8 @@
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                        >{{ item }}</a-select-option>
+                          >{{ item }}</a-select-option
+                        >
                       </a-select>
                     </div>
                   </div>
@@ -106,7 +110,13 @@
       </div>
     </div>
     <div class="radio_button allget">
-      <input name="random" type="radio" :value="true" id="as1" v-model="random" />
+      <input
+        name="random"
+        type="radio"
+        :value="true"
+        id="as1"
+        v-model="random"
+      />
       <label for="as1">{{ $t("new_first") }}</label>
       <input
         name="random"
@@ -139,7 +149,7 @@ export default {
       up_to_age: null,
       random: null,
       random: null,
-      country_id: null
+      country_id: null,
     };
   },
   computed: {

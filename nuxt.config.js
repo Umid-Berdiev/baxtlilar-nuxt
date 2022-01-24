@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s - nuxt-baxtlilar",
-    title: "nuxt-baxtlilar",
+    titleTemplate: "%s - Baxtlilar",
+    title: "Baxtlilar",
     htmlAttrs: {
       lang: "en",
     },

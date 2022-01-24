@@ -44,14 +44,16 @@
           </div>
           <div class="forget_title">
             {{ $t("forget_password") }}
-            <a
-              href="javascript:;"
-              @click="showResetPasswordModal"
-            >{{ $t("restore") }}</a>
+            <a href="javascript:;" @click="showResetPasswordModal">{{
+              $t("restore")
+            }}</a>
           </div>
           <div class="form-group text-center">
             <button class="link_blue" :disabled="loading">
-              <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+              <span
+                v-show="loading"
+                class="spinner-border spinner-border-sm"
+              ></span>
               &nbsp;
               <span
                 v-text="$t('signin')"
@@ -60,11 +62,9 @@
             </button>
           </div>
           <div class="form-group">
-            <div
-              v-if="message"
-              class="alert alert-danger"
-              role="alert"
-            >{{ message }}</div>
+            <div v-if="message" class="alert alert-danger" role="alert">
+              {{ message }}
+            </div>
           </div>
         </form>
       </ValidationObserver>
@@ -99,18 +99,18 @@ export default {
       this.form.lang = this.$i18n.locale;
 
       try {
-        await this.$axios.get("/sanctum/csrf-cookie")
+        await this.$axios
+          .get("/sanctum/csrf-cookie")
           .then(async (response) => {
-            let res = await this.$auth.loginWith('local', { data: this.form })
-            if (this.$auth.user.step !== 0) {
-              this.$router.push(this.localePath("/home"));
-            } else this.$router.push(this.localePath("/questionnaire"));
-          }).catch(error => {
+            let res = await this.$auth.loginWith("local", { data: this.form });
+            this.$router.push(this.localePath("/home"));
+          })
+          .catch((error) => {
             const phone =
-              (error.response &&
-                error.response.data &&
-                error.response.data.data &&
-                error.response.data.data.phone)
+              error.response &&
+              error.response.data &&
+              error.response.data.data &&
+              error.response.data.data.phone;
 
             if (phone) {
               this.$store.commit("setGuest", {
@@ -121,7 +121,7 @@ export default {
 
               this.$refs.loginModal.hide();
 
-              this.$bvModal.show('confirm-sms-code-modal');
+              this.$bvModal.show("confirm-sms-code-modal");
             } else {
               this.message = this.$t("Credentials not match");
             }
@@ -130,8 +130,8 @@ export default {
         const message =
           (error.response &&
             error.response.data &&
-            error.response.data.message ||
-            error.toString())
+            error.response.data.message) ||
+          error.toString();
 
         this.message = this.$t(message);
         // this.message = this.$t("Credentials not match");

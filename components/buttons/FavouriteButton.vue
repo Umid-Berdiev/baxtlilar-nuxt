@@ -34,8 +34,12 @@
           <div class="modal-body" style="max-width: 700px">
             <h2>{{ $t("Are you sure block this user") }}</h2>
             <div class="button-group">
-              <button @click="blockUser" class="link_blue">{{ $t("yes") }}</button>
-              <button @click="closeModal" class="link_blue red">{{ $t("no") }}</button>
+              <button @click="blockUser" class="link_blue">
+                {{ $t("yes") }}
+              </button>
+              <button @click="closeModal" class="link_blue red">
+                {{ $t("no") }}
+              </button>
             </div>
           </div>
         </div>
@@ -64,9 +68,12 @@ export default {
 
   methods: {
     ...mapActions(["fetchAddFavourite", "fetchAddBlock"]),
-    addFavourite() {
-      this.fetchAddFavourite(this.user_id);
+    async addFavourite() {
+      const response = await this.$axios.post("api/add-favourite", {
+        user_id: this.user_id,
+      });
       this.favourite = !this.favourite;
+      // this.fetchAddFavourite(this.user_id);
     },
     blockUser() {
       this.$refs.favouriteModal.hide();
