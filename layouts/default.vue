@@ -28,16 +28,6 @@ export default {
     TheLeftSidebar,
     SettingModal,
   },
-  async created() {
-    if (this.$auth.user.step !== 0) {
-      this.$router.push(this.localePath("/questionnaire"));
-    }
-  },
-  computed: {
-    user() {
-      return this.$auth.user;
-    },
-  },
 };
 </script>
 

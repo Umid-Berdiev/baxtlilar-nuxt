@@ -19,6 +19,11 @@ export default {
       emptyIndex: 0,
     };
   },
+  async asyncData({ $auth, $router, app }) {
+    if ($auth.user.step !== 0) {
+      $router.push(app.i18n.localePath("/questionnaire"));
+    }
+  },
   computed: {
     currentUser() {
       return this.$auth.user;

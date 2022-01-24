@@ -19,7 +19,10 @@
         </div>
         <div class="form-group text-center">
           <button type="submit" class="link_blue" :disabled="codeLoading">
-            <span v-show="codeLoading" class="spinner-border spinner-border-sm"></span>
+            <span
+              v-show="codeLoading"
+              class="spinner-border spinner-border-sm"
+            ></span>
             &nbsp;
             <span
               v-text="$t('Confirm code')"
@@ -38,7 +41,9 @@
             class="btn ml-auto resend_sms_btn"
             @click="resendSms"
             type="button"
-          >{{ $t("resend_sms") }} {{ countDown > 0 ? countDown : '' }}</button>
+          >
+            {{ $t("resend_sms") }} {{ countDown > 0 ? countDown : "" }}
+          </button>
         </div>
       </div>
     </div>
@@ -54,7 +59,7 @@ export default {
       codeError: "",
       codeSentStatus: false,
       codeInfo: "",
-      countDown: 0
+      countDown: 0,
     };
   },
   methods: {
@@ -81,7 +86,7 @@ export default {
           // await this.$store.dispatch("userModule/setAccessToken", res2.data.accessToken);
           this.$refs.confirmSmsCodeModal.hide();
           // window.location.href = "/home";
-          this.$router.push(this.localePath("/home"));
+          this.$router.push(this.localePath("/questionnaire"));
         } else this.codeError = this.$t("Wrong code");
       } catch (error) {
         this.codeError = error.data;
@@ -104,27 +109,26 @@ export default {
           this.$toast.info(this.$t("Code_sent"));
           // this.codeInfo = this.$t("Code_sent");
           this.countDown = 60;
-          this.countDownTimer()
+          this.countDownTimer();
         }
       } catch (error) {
         this.codeError = error.data;
       }
-
 
       this.codeLoading = false;
     },
     countDownTimer() {
       if (this.countDown > 0) {
         setTimeout(() => {
-          this.countDown -= 1
-          this.countDownTimer()
-        }, 1000)
+          this.countDown -= 1;
+          this.countDownTimer();
+        }, 1000);
       }
-    }
+    },
   },
   mounted() {
     // this.countDownTimer()
-  }
+  },
 };
 </script>
 
