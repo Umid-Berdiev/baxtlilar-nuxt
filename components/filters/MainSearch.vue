@@ -6,7 +6,25 @@
       <div class="wrapper_filter" id="main-card" v-else>
         <div class="row">
           <div class="col-xl-6">
-            <CountrySelect :selectedCountry="form.country" />
+            <!-- <CountrySelect :selectedCountry="form.country" /> -->
+            <div class="form-group">
+              <label for="country" v-text="$t('country')" />
+              <a-select
+                id="country"
+                :showSearch="false"
+                :default-value="form.country && form.country.id"
+                @change="selectCountry"
+                :placeholder="$t('choose')"
+                class="form-control"
+              >
+                <a-select-option
+                  v-for="country in getCountries"
+                  :key="country.key"
+                  :value="country.id"
+                >{{ country.name }}</a-select-option>
+              </a-select>
+              <span class="text-danger">{{ errorText }}</span>
+            </div>
           </div>
           <div class="col-xl-6">
             <div class="row row_20">
@@ -120,12 +138,15 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import CountrySelect from "~/components/selects/CountrySelect.vue";
+// import CountrySelect from "~/components/selects/CountrySelect.vue";
 import Loader from "../Loader.vue";
 import _ from "lodash";
 
 export default {
-  components: { CountrySelect, Loader },
+  components: {
+    // CountrySelect,
+    Loader
+  },
   data() {
     return {
       bigLoading: false,
