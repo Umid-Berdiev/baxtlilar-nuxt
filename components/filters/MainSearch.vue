@@ -6,7 +6,7 @@
       <div class="wrapper_filter" id="main-card" v-else>
         <div class="row">
           <div class="col-xl-6">
-            <CountrySelect :selectedCountry="form.country" />
+            <country-select :selectedCountry="form.country" />
           </div>
           <div class="col-xl-6">
             <div class="row row_20">
