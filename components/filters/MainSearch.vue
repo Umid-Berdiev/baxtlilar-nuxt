@@ -209,7 +209,7 @@ export default {
     },
     selectCountry(value) {
       // this.fetchRegions(value);
-      this.setSelectedCountry(e);
+      this.setSelectedCountry(value);
       this.country_id = value;
     },
   },
