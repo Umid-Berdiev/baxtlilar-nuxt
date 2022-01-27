@@ -273,7 +273,7 @@
 <script>
 import _ from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import CountrySelect from "~/components/selects/CountrySelect.vue";
+// import CountrySelect from "~/components/selects/CountrySelect.vue";
 import ReligionSelect from "@/components/selects/religionSelect.vue";
 import UploadImage from "@/components/UploadImage.vue";
 import moment from "moment";
@@ -301,7 +301,7 @@ export default {
     };
   },
   components: {
-    CountrySelect,
+    // CountrySelect,
     ReligionSelect,
     UploadImage,
     UserImagesSlider,

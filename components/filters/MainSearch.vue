@@ -120,7 +120,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import CountrySelect from "../selects/CountrySelect.vue";
+import CountrySelect from "~/components/selects/CountrySelect.vue";
 import Loader from "../Loader.vue";
 import _ from "lodash";
 
