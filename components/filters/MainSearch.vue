@@ -6,7 +6,7 @@
       <div class="wrapper_filter" id="main-card" v-else>
         <div class="row">
           <div class="col-xl-6">
-            <country-select :selectedCountry="form.country" />
+            <CountrySelect :selectedCountry="form.country" />
           </div>
           <div class="col-xl-6">
             <div class="row row_20">
@@ -120,7 +120,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import CountrySelect from "~/components/selects/CountrySelect.vue";
+import CountrySelect from "../selects/CountrySelect.vue";
 import Loader from "../Loader.vue";
 import _ from "lodash";
 
@@ -142,8 +142,6 @@ export default {
   },
   computed: {
     ...mapGetters(["getSelectedCountry", "getMainFilterDefaultForm"]),
-  },
-  async created() {
   },
   async mounted() {
     this.bigLoading = true;
