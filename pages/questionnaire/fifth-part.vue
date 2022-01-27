@@ -74,7 +74,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for>{{ $t("mom") }}</label>
-            <input type="text" :placeholder="$t('fill')" name="motherName" />
+            <input type="text" :placeholder="$t('fill_name')" name="motherName" />
           </div>
         </div>
         <div class="col-sm-2 col-6">
@@ -103,7 +103,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             <label for>{{ $t("dad") }}</label>
-            <input type="text" :placeholder="$t('fill')" name="fatherName" />
+            <input type="text" :placeholder="$t('fill_name')" name="fatherName" />
           </div>
         </div>
         <div class="col-sm-2">
@@ -134,7 +134,7 @@
             <label for>{{ index }} - {{ $t("brother") }}</label>
             <input
               type="text"
-              :placeholder="$t('fill')"
+              :placeholder="$t('fill_name')"
               v-model="brothersName[index - 1]"
             />
           </div>
@@ -177,7 +177,7 @@
             <label for>{{ index }} - {{ $t("sister") }}</label>
             <input
               type="text"
-              :placeholder="$t('fill')"
+              :placeholder="$t('fill_name')"
               v-model="sistersName[index - 1]"
             />
           </div>

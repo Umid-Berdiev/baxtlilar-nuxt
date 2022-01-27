@@ -13,9 +13,7 @@
         v-for="country in getCountries"
         :key="country.key"
         :value="country.id"
-      >
-        {{ country.name }}
-      </a-select-option>
+      >{{ country.name }}</a-select-option>
     </a-select>
     <span class="text-danger">{{ errorText }}</span>
   </div>
@@ -26,7 +24,7 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 
 export default {
   props: {
-    selectedCountry: { type: Object, default: () => {} },
+    selectedCountry: { type: Object },
     errorText: String,
   },
   data() {
@@ -36,7 +34,7 @@ export default {
     ...mapGetters(["getCountries"]),
   },
   methods: {
-    ...mapActions(["fetchRegions", "fetchLanguages", "fetchCountries"]),
+    ...mapActions(["fetchCountries"]),
     ...mapMutations(["setSelectedCountry"]),
     selectCountry(e) {
       this.setSelectedCountry(e);
@@ -44,8 +42,8 @@ export default {
   },
   async created() {
     await this.fetchCountries();
-    if (this.selectedCountry) this.country = this.selectedCountry;
-    else this.country = this.getCountries[0];
+    // if (this.selectedCountry) this.country = this.selectedCountry;
+    // else this.country = this.getCountries[0];
   },
 };
 </script>

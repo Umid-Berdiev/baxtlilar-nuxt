@@ -48,13 +48,13 @@
       </div>
     </div>
 
-    <success-modal
+    <SuccessModal
       :success="isSuccess"
       :text="modalText ? $t(modalText) : ''"
       :loading="modalLoading"
     />
 
-    <payment-modal :type="type" @paymentFailed="paymentError($event)" />
+    <PaymentModal :type="type" @paymentFailed="paymentError($event)" />
   </div>
 </template>
 

@@ -107,6 +107,7 @@
       class="language_popup_style"
       id="thanksFillingModal"
       modal-class="language_popup_style"
+      hide-footer
     >
       <h2>{{ $t("thanks_fill_questionnaire") }}</h2>
       <h4>{{ $t("Your profile is pending") }}</h4>

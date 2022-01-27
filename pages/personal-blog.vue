@@ -1,8 +1,8 @@
 <template>
   <div class="template_main_right personal" id="content">
     <div class="block_top_about">
-      <user-images-slider :user_id="currentUser.id" />
-      <user-main :user="currentUser" />
+      <UserImagesSlider :user_id="currentUser.id" />
+      <UserMain :user="currentUser" />
     </div>
     <div class="block_tab">
       <div class="tabs">
@@ -20,13 +20,13 @@
         <!-- END tabs-nav -->
         <div id="tabs-content">
           <div id="tab1" class="tab-content">
-            <user-data :user="currentUser" />
+            <UserData :user="currentUser" />
           </div>
           <div id="tab2" class="tab-content">
-            <user-relatives :relatives="relatives" />
+            <UserRelatives :relatives="relatives" />
           </div>
           <div id="tab3" class="tab-content">
-            <user-answers :answers="answers" />
+            <UserAnswers :answers="answers" />
           </div>
         </div>
         <!-- END tabs-content -->

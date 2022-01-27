@@ -68,7 +68,7 @@
       <h2>{{ user.username }}</h2>
       <h2>{{ user.age }}</h2>
       <p>{{ user.country_name }}</p>
-      <icon-status :status="currentUser.status" />
+      <icon-status :userStatus="currentUser.status" />
       <br />
       <h6>{{ user.last_seen }}</h6>
     </div>

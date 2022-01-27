@@ -3,20 +3,20 @@
     <h1>{{ $t("settings") }}</h1>
     <div class="sett">
       <b-tabs v-model="tabIndex">
-        <b-tab :title="$t('questionnaire')">
+        <!-- <b-tab :title="$t('questionnaire')">
           <h2>{{ $t("modify_questionnaire") }}</h2>
           <self-form :user="currentUser" />
           <education-form :user="currentUser" />
         </b-tab>
         <b-tab :title="$t('family')">
           <family-form />
-        </b-tab>
+        </b-tab>-->
         <b-tab :title="$t('preferences')">
           <filter-form />
         </b-tab>
-        <b-tab :title="$t('confirmation')">
+        <!-- <b-tab :title="$t('confirmation')">
           <passport-form :user="currentUser" />
-        </b-tab>
+        </b-tab>-->
         <b-tab :title="$t('safety')">
           <security-form :user="currentUser" />
         </b-tab>

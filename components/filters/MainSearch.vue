@@ -6,9 +6,7 @@
       <div class="wrapper_filter" id="main-card" v-else>
         <div class="row">
           <div class="col-xl-6">
-            <country-select
-              :selectedCountry="getMainFilterDefaultForm.country"
-            />
+            <CountrySelect :selectedCountry="form.country" />
           </div>
           <div class="col-xl-6">
             <div class="row row_20">
@@ -22,14 +20,13 @@
                         :showSearch="false"
                         name="from_height"
                         class="form-control"
-                        v-model="from_height"
+                        v-model="form.from_height"
                       >
                         <a-select-option
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                          >{{ item + 49 }}</a-select-option
-                        >
+                        >{{ item + 49 }}</a-select-option>
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -38,14 +35,13 @@
                         :showSearch="false"
                         name="up_to_height"
                         class="form-control"
-                        v-model="up_to_height"
+                        v-model="form.up_to_height"
                       >
                         <a-select-option
                           v-for="item in 171"
                           :key="item + 49"
                           :value="item + 49"
-                          >{{ item + 49 }}</a-select-option
-                        >
+                        >{{ item + 49 }}</a-select-option>
                       </a-select>
                     </div>
                   </div>
@@ -61,14 +57,13 @@
                         :showSearch="false"
                         name="from_age"
                         class="form-control"
-                        v-model="from_age"
+                        v-model="form.from_age"
                       >
                         <a-select-option
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                          >{{ item }}</a-select-option
-                        >
+                        >{{ item }}</a-select-option>
                       </a-select>
                     </div>
                     <div class="col-6">
@@ -77,14 +72,13 @@
                         :showsearch="false"
                         :name="'up_to_age'"
                         class="form-control"
-                        v-model="up_to_age"
+                        v-model="form.up_to_age"
                       >
                         <a-select-option
                           v-for="item in 100"
                           :key="item"
                           :value="item"
-                          >{{ item }}</a-select-option
-                        >
+                        >{{ item }}</a-select-option>
                       </a-select>
                     </div>
                   </div>
@@ -110,13 +104,7 @@
       </div>
     </div>
     <div class="radio_button allget">
-      <input
-        name="random"
-        type="radio"
-        :value="true"
-        id="as1"
-        v-model="random"
-      />
+      <input name="random" type="radio" :value="true" id="as1" v-model="random" />
       <label for="as1">{{ $t("new_first") }}</label>
       <input
         name="random"
@@ -132,12 +120,12 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import countrySelect from "@/components/selects/countrySelect.vue";
+import CountrySelect from "~/components/selects/CountrySelect.vue";
 import Loader from "../Loader.vue";
 import _ from "lodash";
 
 export default {
-  components: { countrySelect, Loader },
+  components: { CountrySelect, Loader },
   data() {
     return {
       bigLoading: false,
@@ -156,17 +144,13 @@ export default {
     ...mapGetters(["getSelectedCountry", "getMainFilterDefaultForm"]),
   },
   async created() {
+  },
+  async mounted() {
     this.bigLoading = true;
-
-    if (_.isEmpty(this.getMainFilterDefaultForm)) {
-      this.form = await this.fetchMainFilterDefaultForm();
-      this.random = true;
-      await this.fetchMainFilterResult(this.getMainFilterDefaultForm);
-    } else {
-      this.form = this.getMainFilterDefaultForm;
-      this.random = true;
-      await this.fetchMainFilterResult(this.getMainFilterDefaultForm);
-    }
+    await this.fetchMainFilterDefaultForm();
+    this.form = { ...this.getMainFilterDefaultForm };
+    this.random = true;
+    // await this.fetchMainFilterResult(this.getMainFilterDefaultForm);
 
     this.bigLoading = false;
   },
@@ -197,7 +181,7 @@ export default {
     },
     toSetting() {
       this.$store.commit("setActiveFilterSection", true);
-      this.$router.push(this.localePath("/settings") + "?tab=2");
+      this.$router.push(this.localePath("/settings"));
     },
   },
   unmounted() {

@@ -58,11 +58,12 @@ export default {
     }
 
     try {
-      const currentUser = await this.$axios.$get(`api/user-details/${this.$auth.user.id}`);
+      const currentUser = await this.$auth.user;
+      // const currentUser = await this.$axios.$get(`api/user-details/${this.$auth.user.id}`);
       const tabIndex = Number(this.$route.query.tab) || 0;
 
-        this.currentUser = currentUser
-        this.tabIndex = tabIndex
+      this.currentUser = currentUser
+      this.tabIndex = tabIndex
 
     } catch (error) {
       const message =

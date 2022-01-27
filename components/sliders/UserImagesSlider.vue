@@ -45,10 +45,6 @@ export default {
       type: "both",
     });
   },
-  mounted() {
-    // console.log("Current Swiper instance object", this.swiper);
-    // this.swiper.slideTo(0, 1000, false);
-  },
   computed: {
     swiper() {
       return this.$refs.mainSwiper.$swiper;

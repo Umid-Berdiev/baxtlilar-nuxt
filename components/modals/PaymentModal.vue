@@ -9,7 +9,7 @@
   >
     <div>
       <h1>{{ $t("Select Payment option") }}</h1>
-      <div class="row">
+      <div class="row mb-3">
         <img
           @click="paymentCreate('Click')"
           class="payment-option"
@@ -80,6 +80,8 @@ export default {
 <style scoped>
 .payment-option {
   cursor: pointer;
+  padding: 1rem;
+  border-radius: 25px;
 }
 
 .payment-option:hover {

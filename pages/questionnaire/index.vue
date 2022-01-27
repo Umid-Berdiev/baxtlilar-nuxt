@@ -295,7 +295,7 @@
 <script>
 import _ from "lodash";
 import { mapActions, mapGetters } from "vuex";
-import countrySelect from "@/components/selects/countrySelect.vue";
+import CountrySelect from "~/components/selects/CountrySelect.vue";
 import ReligionSelect from "@/components/selects/religionSelect.vue";
 import TheUploadImage from "~/components/TheUploadImage.vue";
 
@@ -341,7 +341,7 @@ export default {
       imagesError: "",
     };
   },
-  components: { countrySelect, ReligionSelect, TheUploadImage },
+  components: { CountrySelect, ReligionSelect, TheUploadImage },
   computed: {
     ...mapGetters([
       "getSelectedCountry",

@@ -90,11 +90,12 @@ export default {
         },
         user: {
           property: false,
+          autoFetch: true,
         },
         endpoints: {
           login: { url: "/api/auth/login", method: "post" },
           logout: { url: "/api/auth/logout", method: "post" },
-          user: { url: "/api/user", method: "get" },
+          user: { url: "/api/user", method: "get", property: false },
         },
       },
     },

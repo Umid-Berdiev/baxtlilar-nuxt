@@ -518,14 +518,16 @@ export default {
     ]),
   },
   async created() {
-    this.defaultForm = this.$store.getters.getMainFilterDefaultForm
-
-    if (isEmpty(this.defaultForm)) {
-      this.fetchMainFilterDefaultForm();
-      this.defaultForm = this.$store.getters.getMainFilterDefaultForm
-    }
+    await this.fetchMainFilterDefaultForm();
+  },
+  async mounted() {
+    this.defaultForm = { ...this.$store.getters.getMainFilterDefaultForm }
 
     this.country_id = this.defaultForm.country_id;
+    if (this.country_id) {
+      this.fetchRegions(this.country_id)
+    }
+
     this.region_id = this.defaultForm.region_id;
     this.pageLoading = false;
   },
