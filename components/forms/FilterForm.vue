@@ -32,14 +32,15 @@
         </div>
         <div class="col-lg-4 col-sm-6">
           <div class="form-group">
-            <label for="#">{{ $t("country_residence") }}</label>
+            <label for="country">{{ $t("country_residence") }}</label>
             <a-select
-              :placeholder="$t('choose')"
+              id="country"
               :showSearch="false"
-              name="country_id"
-              @change="selectCountry"
               :default-value="defaultForm.country_id"
+              @change="selectCountry"
+              :placeholder="$t('choose')"
               class="form-control"
+              name="country_id"
             >
               <a-select-option
                 v-for="country in getCountries"

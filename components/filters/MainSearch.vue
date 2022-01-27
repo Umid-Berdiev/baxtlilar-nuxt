@@ -162,7 +162,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getSelectedCountry", "getMainFilterDefaultForm"]),
+    ...mapGetters(["getSelectedCountry", "getMainFilterDefaultForm", 'getCountries']),
+  },
+  async created() {
+    await this.fetchCountries()
   },
   async mounted() {
     this.bigLoading = true;
@@ -174,8 +177,10 @@ export default {
     this.bigLoading = false;
   },
   methods: {
-    ...mapActions(["fetchMainFilterResult", "fetchMainFilterDefaultForm"]),
-    ...mapMutations(["setMainFilterResult"]),
+    ...mapActions(["fetchMainFilterResult", "fetchMainFilterDefaultForm",
+      "fetchCountries",
+    ]),
+    ...mapMutations(["setMainFilterResult", 'setSelectedCountry']),
     async submit(e) {
       this.loading = true;
       this.country_id = this.getSelectedCountry
@@ -201,6 +206,11 @@ export default {
     toSetting() {
       this.$store.commit("setActiveFilterSection", true);
       this.$router.push(this.localePath("/settings"));
+    },
+    selectCountry(value) {
+      // this.fetchRegions(value);
+      this.setSelectedCountry(e);
+      this.country_id = value;
     },
   },
   unmounted() {
