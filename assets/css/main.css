@@ -46,3 +46,7 @@ section.enter_site
   background: transparent;
   border: 0;
 }
+
+html {
+  scroll-behavior: smooth;
+}

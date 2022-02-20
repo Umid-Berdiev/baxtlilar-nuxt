@@ -2,33 +2,33 @@
   <div class="template_main_right" id="content">
     <h1>{{ $t("Взаимности") }}</h1>
     <div class="tab_description">
-      <ul class="nav nav_descr">
-        <li>
-          <a href="#tab1" class="active" data-toggle="tab">
-            {{
-              $t("all_offers")
-            }}
-          </a>
-        </li>
-        <li>
-          <a href="#tab2" data-toggle="tab">{{ $t("recived") }}</a>
-        </li>
-        <li>
-          <a href="#tab3" data-toggle="tab">{{ $t("sent") }}</a>
-        </li>
-      </ul>
-      <br />
-      <div class="tab-content">
-        <div class="tab-pane fade show active" id="tab1">
+      <b-tabs pills fill content-class="mt-5" id="recipt-tab">
+        <b-tab
+          title-item-class="px-4"
+          title-link-class="rounded-pill py-3 h5"
+          :title="$t('all_offers')"
+          active
+        >
+          <!-- <b-text></b-text> -->
           <UsersList :users="allOffers" />
-        </div>
-        <div class="tab-pane fade" id="tab2">
+        </b-tab>
+        <b-tab
+          title-item-class="px-4"
+          title-link-class="rounded-pill py-3 h5"
+          :title="$t('recived')"
+        >
+          <!-- <b-text></b-text> -->
           <UsersList :users="receivedOffers" />
-        </div>
-        <div class="tab-pane fade" id="tab3">
+        </b-tab>
+        <b-tab
+          title-item-class="px-4"
+          title-link-class="rounded-pill py-3 h5"
+          :title="$t('sent')"
+        >
+          <!-- <b-text></b-text> -->
           <UsersList :users="sentOffers" />
-        </div>
-      </div>
+        </b-tab>
+      </b-tabs>
     </div>
   </div>
 </template>
@@ -39,6 +39,9 @@ import UsersList from "@/components/lists/UsersList.vue";
 export default {
   components: {
     UsersList,
+  },
+  async asyncData({ store }) {
+    await store.dispatch('userModule/fetchUserOffers');
   },
   computed: {
     sentOffers() {
@@ -53,3 +56,14 @@ export default {
   },
 };
 </script>
+
+<style>
+.rounded-pill {
+  border: 3px solid #337bae;
+  font-weight: 500;
+  color: #337bae;
+}
+.rounded-pill.active {
+  background: #337bae !important;
+}
+</style>

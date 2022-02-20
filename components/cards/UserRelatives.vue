@@ -2,9 +2,10 @@
   <div>
     <h1>{{ $t("family") }}</h1>
     <loader v-if="loading" />
-    <h3 v-else-if="relatives.length == 0" class="text-center">
-      {{ $t("empty_data") }}
-    </h3>
+    <h3
+      v-else-if="relatives.length == 0"
+      class="text-center"
+    >{{ $t("empty_data") }}</h3>
     <div class="pret_main" v-else>
       <div
         class="about_user_pret full"
@@ -32,6 +33,6 @@ export default {
     return {
       loading: false,
     };
-  },
+  }
 };
 </script>

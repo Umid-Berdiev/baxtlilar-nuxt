@@ -23,7 +23,7 @@
                   :value="country.id"
                 >{{ country.name }}</a-select-option>
               </a-select>
-              <span class="text-danger">{{ errorText }}</span>
+              <!-- <span class="text-danger">{{ errorText }}</span> -->
             </div>
           </div>
           <div class="col-xl-6">

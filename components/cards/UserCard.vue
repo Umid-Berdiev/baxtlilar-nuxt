@@ -1,13 +1,11 @@
 <template>
   <div class="item_user_card" v-if="!displayNone">
-    <nuxt-link :to="localePath('/users/' + user.id)" class="item_user_card_img">
-      <img :src="user.photo" alt="" />
-    </nuxt-link>
+    <NuxtLink :to="localePath('/users/' + user.id)" class="item_user_card_img">
+      <img :src="user.photo" alt />
+    </NuxtLink>
     <div class="item_user_card_text_1">
       <h3>
-        <nuxt-link :to="localePath('/users/' + user.id)">{{
-          user.username
-        }}</nuxt-link>
+        <NuxtLink :to="localePath('/users/' + user.id)">{{ user.username }}</NuxtLink>
       </h3>
       <p>{{ user.place_of_residence }}</p>
       <p>{{ user.age }}</p>
@@ -18,11 +16,9 @@
         <p>{{ $t("height") + ": " + user.height + " см" }}</p>
         <p>{{ $t("weight") + ": " + user.weight + " кг" }}</p>
       </div>
-      <p>{{ $t("citizenship") + ": " + user.citizenship.name }}</p>
+      <p>{{ user.citizenship ? $t("citizenship") + ": " + user.citizenship.name : $t("citizenship") + ": " + user.country_name }}</p>
       <p>{{ $t("religion") + ": " + user.religion.name }}</p>
-      <p>
-        {{ user.education ? $t("education") + ": " + $t(user.education) : "" }}
-      </p>
+      <p>{{ user.education ? $t("education") + ": " + $t(user.education) : "" }}</p>
       <p>
         {{
           user.family_status
@@ -32,10 +28,10 @@
       </p>
     </div>
     <div class="btn_toggle_text" @click="toggle"></div>
-    <favourite-button
-      :user_id="user.id"
-      :isFavourite="user.isFavourite"
-      @hideUser="hideUser($event)"
+    <FavouriteButton
+      :user-id="user.id"
+      :is-favourite="user.isFavourite"
+      @hide-user="hideUser($event)"
     />
   </div>
 </template>

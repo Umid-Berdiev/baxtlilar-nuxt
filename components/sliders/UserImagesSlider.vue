@@ -40,10 +40,11 @@ export default {
     SwiperSlide,
   },
   async created() {
-    this.images = await this.fetchUserImages({
+    const response = await this.$axios.$get("/api/user-images", {
       user_id: this.user_id,
       type: "both",
     });
+    this.images = response
   },
   computed: {
     swiper() {

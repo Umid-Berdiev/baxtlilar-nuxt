@@ -251,5 +251,7 @@
   "questionnaire": "So'rovnoma",
   "questions_and_answers": "Savol-javoblar",
   "thanks_fill_questionnaire": "So'rovnomani to'ldirganingiz uchun rahmat",
-  "text": "Matn"
+  "text": "Matn",
+  "fill_name": "Imini yozing",
+  "relationship": "Munosabatda"
 }

@@ -65,16 +65,11 @@ const actions = {
     }
   },
   async fetchFavourites({ commit }) {
-    commit("setFavourites", []);
-    const response = await this.$axios.$post("/api/favourites");
+    // commit("setFavourites", []);
+    const response = await this.$axios.$get("/api/favourites");
     commit("setFavourites", response.data);
   },
 
-  async fetchUserImages({ commit }, payload) {
-    const response = await this.$axios.post("/api/user-images", payload);
-    // commit("setUserImages", response.data);
-    return response.data;
-  },
   async fetchDeleteImage({ commit }, payload) {
     const response = await this.$axios.post("/api/delete-image", payload);
     // commit("setUserImages", response.data);

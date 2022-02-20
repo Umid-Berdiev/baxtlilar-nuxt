@@ -1,7 +1,7 @@
 <template>
   <div class="template_main_right" id="content">
     <h1>{{ $t("favourites") }}</h1>
-    <users-list :users="getFavourites" />
+    <users-list :users="favourites" />
   </div>
 </template>
 
@@ -11,12 +11,21 @@ import UsersList from "@/components/lists/UsersList.vue";
 
 export default {
   components: { UsersList },
-  async asyncData({ store }) {
-    store.dispatch("fetchFavourites");
+  data() {
+    return {
+      favourites: []
+    }
   },
-  computed: {
-    ...mapGetters(["getFavourites"]),
+  async asyncData({ $axios }) {
+    // store.dispatch("fetchFavourites");
+    const favourites = await $axios.$get("/api/favourites");
+    return {
+      favourites
+    }
   },
+  // computed: {
+  //   ...mapGetters(["getFavourites"]),
+  // },
 };
 </script>
 

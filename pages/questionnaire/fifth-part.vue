@@ -318,7 +318,7 @@ export default {
       }
     },
     selectParents(value) {
-      this.parents = value.value;
+      this.parents = value.key;
     },
     selectBrothersCount(value) {
       this.brothersCount = value;

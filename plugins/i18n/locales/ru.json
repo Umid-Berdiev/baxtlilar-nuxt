@@ -251,5 +251,7 @@
   "questionnaire": "Анкета",
   "questions_and_answers": "Вопросы и ответы",
   "thanks_fill_questionnaire": "Спасибо за заполнение антеты",
-  "text": "Текст"
+  "text": "Текст",
+  "fill_name": "Введите имя",
+  "relationship": "В отношениях"
 }
