@@ -458,7 +458,7 @@
           </div>
         </div>
       </div>
-      <div class="share_friend">
+      <!-- <div class="share_friend">
         <h3>{{ $t("share_happiness") }}</h3>
         <p>{{ $t("tag_friend") }}</p>
         <div class="row" v-for="item in 5" :key="item">
@@ -483,7 +483,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <div class="anc_link_bottom">
         <button type="submit" class="link_blue">
           <span

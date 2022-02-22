@@ -181,7 +181,7 @@
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for id="weight-label">{{ $t("weight") }}</label>
+            <label for="weight-label">{{ $t("weight") }}</label>
             <div class="row">
               <div class="col-6">
                 <a-select
@@ -234,12 +234,12 @@
         </div>
         <div class="col-lg-3 col-sm-6">
           <div class="form-group">
-            <label for id="eye_color-label">{{ $t("eye_color") }}</label>
+            <label for="eye_color">{{ $t("eye_color") }}</label>
             <a-select
+              id="eye_color"
               :placeholder="$t('choose')"
               :showSearch="false"
               name="eye_color"
-              v-model="selects.eye_color"
               @change="selectEyeColor"
               class="form-control"
             >
@@ -256,7 +256,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="form-group">
-            <label for id="about-label">{{ $t("about_yourself") }}</label>
+            <label for="about-label">{{ $t("about_yourself") }}</label>
             <textarea name="about" :placeholder="$t('about_yourself')"></textarea>
             <span class="text-danger">{{ aboutError }}</span>
           </div>

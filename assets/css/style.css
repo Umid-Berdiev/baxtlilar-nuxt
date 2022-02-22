@@ -5172,3 +5172,8 @@ span.datepicker.form-control.ant-calendar-picker input::placeholder {
   margin-top: 0;
   right: 20px;
 }
+
+.anceta_form .ant-select .ant-select-selection__placeholder {
+  top: 30%;
+  height: unset;
+}

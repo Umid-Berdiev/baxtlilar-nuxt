@@ -60,13 +60,13 @@ export default {
   async asyncData({ $axios, store, $auth, app }) {
     try {
       const res = await $axios.$get(`api/user-details/${$auth.user.id}`);
-      const relatives = store.dispatch("fetchRelatives", res.id);
-      const answers = store.dispatch("fetchAnswers", res.id);
+      const fetchedRelatives = await store.dispatch("fetchRelatives", res.id);
+      const fetchedAnswers = await store.dispatch("fetchAnswers", res.id);
 
       return {
         currentUser: res,
-        relatives,
-        answers,
+        relatives: [...fetchedRelatives] || [],
+        answers: [...fetchedAnswers] || [],
       };
 
 
