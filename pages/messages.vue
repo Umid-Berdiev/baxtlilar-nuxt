@@ -67,7 +67,6 @@ export default {
       return arr.length;
     },
     getOtherUser(users) {
-      console.log('auth id: ', this.$auth.user.id);
       if (users && users.length > 0) {
         const otherUser = users.find((user) => user.id != this.$auth.user.id)
         if (otherUser) {

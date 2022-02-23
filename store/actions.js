@@ -114,8 +114,8 @@ const actions = {
 
   async fetchUserById({ commit }, payload) {
     try {
-      const response = await this.$axios.post("/api/user-by-id", {
-        user_id: payload,
+      const response = await this.$axios.get("/api/user-by-id", {
+        params: { user_id: payload },
       });
       commit("setCurrentUser", response.data);
       return response.data;
