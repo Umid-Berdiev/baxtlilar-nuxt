@@ -89,6 +89,8 @@ export default {
       });
       this.isSuccess = res.status;
       this.modalText = res.message;
+      // await this.$auth.refreshTokens();
+      await this.$auth.fetchUser()
       this.modalLoading = false;
     },
     payTariff(tariff_id) {
