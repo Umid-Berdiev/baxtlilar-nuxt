@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ user.about }}</p>
+    <h1>{{ $t("about_myself") }}</h1>
     <div class="pret_main">
       <div class="about_user_pret">
         <span>{{ $t("citizenship") }}</span>
@@ -56,7 +56,7 @@
 <script>
 export default {
   props: {
-    user: { type: Object, default: {} },
+    user: Object,
   },
 };
 </script>

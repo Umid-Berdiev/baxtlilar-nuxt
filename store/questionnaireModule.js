@@ -36,7 +36,7 @@ const actions = {
   },
 
   async fetchBlistQuestions({ commit, rootState }, payload) {
-    const res = await this.$axios.post("api/questions");
+    const res = await this.$axios.get("api/questions");
     commit("setBlistQuestions", res.data);
   },
 

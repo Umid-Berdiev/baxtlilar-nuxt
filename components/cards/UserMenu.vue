@@ -6,7 +6,7 @@
     <h4 v-text="currentUser.fullname"></h4>
     <div class="status_user">
       <div class="link_svg not_link">
-        <icon-status :userStatus="currentUser.status" />
+        <icon-status :user-status="currentUser.status" />
       </div>
       <div class="link_svg not_link">
         <icon-vip />VIP

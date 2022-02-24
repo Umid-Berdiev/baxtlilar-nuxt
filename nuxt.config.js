@@ -21,6 +21,7 @@ export default {
     scripts: [
       {
         src: "https://code-ya.jivosite.com/widget/GyXBzOKWA2",
+        type: "text/javascript",
         body: true,
         // defer: true,
       },
@@ -32,7 +33,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    "~/plugins/axios.js",
+    { src: "~/plugins/axios.js", mode: "client" },
+    // "~/plugins/axios.js",
     "~/plugins/antd-ui.js",
     { src: "~/plugins/vee-validate/index.js", mode: "client" },
   ],
@@ -89,7 +91,7 @@ export default {
           property: "accessToken",
         },
         user: {
-          property: false,
+          property: "user",
           autoFetch: true,
         },
         endpoints: {

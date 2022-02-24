@@ -8,13 +8,22 @@
       <div class="tabs">
         <ul id="tabs-nav">
           <li>
-            <a href="#tab1">{{ $t("about_myself") }}</a>
+            <a
+              href="#tab1"
+              :class="{ 'text-dark': $route.hash === '#tab1' || $route.hash === '' }"
+            >{{ $t('about_myself') }}</a>
           </li>
           <li>
-            <a href="#tab2">{{ $t("family") }}</a>
+            <a
+              href="#tab2"
+              :class="{ 'text-dark': $route.hash === '#tab2' }"
+            >{{ $t('family') }}</a>
           </li>
           <li>
-            <a href="#tab3">{{ $t("answers_for") }} {{ $t("questions") }}</a>
+            <a
+              href="#tab3"
+              :class="{ 'text-dark': $route.hash === '#tab3' }"
+            >{{ $t('answers_for') }} {{ $t('questions') }}</a>
           </li>
         </ul>
         <!-- END tabs-nav -->

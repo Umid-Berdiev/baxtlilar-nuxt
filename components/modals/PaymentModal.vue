@@ -7,9 +7,9 @@
     hide-footer
     centered
   >
-    <div>
-      <h1>{{ $t("Select Payment option") }}</h1>
-      <div class="row mb-3">
+    <div class="my-lg-3">
+      <h1 class="font-weight-bold">{{ $t("Select Payment option") }}</h1>
+      <div class="row mb-3 justify-content-center">
         <img
           @click="paymentCreate('Click')"
           class="payment-option"
@@ -30,7 +30,8 @@
           v-show="loading"
           class="spinner-border spinner-border-sm text-white"
         ></span>
-        &nbsp;{{ $t("Close") }}
+        &nbsp;
+        <span class="font-weight-bold">{{ $t("Close") }}</span>
       </button>
     </div>
   </b-modal>
@@ -70,7 +71,7 @@ export default {
       if (res.status) {
         location.assign(res.url);
       } else {
-        $emit("paymentFailed", { isSuccess: res.status, text: res.message });
+        this.$emit("paymentFailed", { isSuccess: res.status, text: res.message });
       }
     },
   },

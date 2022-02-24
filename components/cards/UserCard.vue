@@ -9,7 +9,7 @@
       </h3>
       <p>{{ user.place_of_residence }}</p>
       <p>{{ user.age }}</p>
-      <icon-status :status="user.status" />
+      <icon-status :user-status="user.status" />
     </div>
     <div class="item_user_card_text_2" :id="'user-card-' + user.id">
       <div class="heigh_weight">
