@@ -3,16 +3,20 @@
     <div class="container">
       <h2 class="title">{{ $t("news") }}</h2>
       <loader v-if="loading" />
-      <div class="row" v-else>
-        <div class="col-sm-4" v-for="(item, index) in news" :key="index">
-          <news-card :item="item" />
+      <template v-else>
+        <div class="row">
+          <div class="col-sm-4" v-for="(item, index) in news" :key="index">
+            <news-card :item="item" />
+          </div>
         </div>
-        <div class="col-auto mx-auto mt-3">
-          <nuxt-link :to="localePath('/all-news')">
-            <button class="link_blue">{{ $t("all_news") }}</button>
-          </nuxt-link>
+        <div class="row justify-content-center pt-5">
+          <div class="col-auto">
+            <nuxt-link :to="localePath('/all-news')">
+              <button class="link_blue">{{ $t("all_news") }}</button>
+            </nuxt-link>
+          </div>
         </div>
-      </div>
+      </template>
     </div>
   </section>
 </template>
