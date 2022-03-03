@@ -1,7 +1,7 @@
 <template>
   <div class="template_main_right personal" id="content">
     <div class="block_top_about">
-      <UserImagesSlider :user_id="currentUser.id" />
+      <UserImagesSlider :user_id="$auth.user.id" />
       <UserMain :user="currentUser" />
     </div>
     <div class="block_tab">

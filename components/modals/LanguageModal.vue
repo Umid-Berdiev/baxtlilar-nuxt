@@ -55,7 +55,7 @@
         </label>
         <span class="text-danger" v-show="errorVisibility">
           {{
-          $t("condition_required")
+            $t("condition_required")
           }}
         </span>
       </div>
@@ -77,7 +77,7 @@ export default {
   methods: {
     async getOne(keyword) {
       const response = await this.$axios.get("api/pages/one", {
-        params: { lang, keyword },
+        params: { lang: this.lang, keyword },
       });
     },
 

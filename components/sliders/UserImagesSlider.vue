@@ -41,8 +41,10 @@ export default {
   },
   async created() {
     const response = await this.$axios.$get("/api/user-images", {
-      user_id: this.user_id,
-      type: "both",
+      params: {
+        user_id: this.user_id,
+        type: "both"
+      }
     });
     this.images = response
   },
