@@ -5,7 +5,11 @@
       <loader v-if="loading" />
       <template v-else>
         <div class="row">
-          <div class="col-sm-4" v-for="(item, index) in news" :key="index">
+          <div
+            class="col-sm-4"
+            v-for="(item, index) in news"
+            :key="index + 'news'"
+          >
             <news-card :item="item" />
           </div>
         </div>
