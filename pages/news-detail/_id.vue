@@ -1,7 +1,7 @@
 <template>
   <section class="article_section">
     <div class="container">
-      <img :src="getNewsDetail.image" />
+      <img :src="apiUrl + getNewsDetail.image" />
       <h1>{{ getNewsDetail.title }}</h1>
       <p v-html="getNewsDetail.description" />
       <nuxt-link :to="localePath('/all-news')">
@@ -20,6 +20,11 @@ export default {
   async asyncData({ params, store }) {
     const id = params.id;
     await store.dispatch("fetchNewsDetail", id);
+  },
+  data() {
+    return {
+      apiUrl: `${process.env.API_URL}`,
+    };
   },
   computed: {
     ...mapGetters(["getNewsDetail"]),
